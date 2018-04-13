@@ -21,6 +21,7 @@ import os
 import time
 
 # Third-party libraries
+import Utils
 from robot.api import logger
 
 # Custom libraries
@@ -40,6 +41,7 @@ class TBoxKeyword(object):
         """
         logger.info(self._tag + "Initialize called")
         self._tbox = TBoxCore(device, server, channel, baudrate)
+        self._tbox.check_vdlog()
         self._tbox.on_create()
 
     def uninitialize(self):
@@ -64,9 +66,10 @@ class TBoxKeyword(object):
         :return:
         """
         logger.info(self._tag + 'Collecting log for TBox')
-        timestamp = time.strftime('%Y%m%d', time.localtime(time.time()))
-        path = os.path.expandvars('$HOME') + '/Desktop/' + timestamp + '_Sherlock-TBox/' + 'dev_log'
+        timestamp = time.strftime("%m%d-%H%M%S", time.localtime(time.time()))
+        path = os.getcwd() + "\\" + timestamp
         TBoxCore.on_collect_log(path)
+        logger.info(self._tag + 'Collecte log finish.Path: ' + path)
 
     def wait_until_ready(self):
         """ 等待 TBox 成功连接 MQTT Broker

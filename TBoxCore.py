@@ -18,6 +18,7 @@
 
 # Builtin libraries
 import os
+import re
 import time
 
 # Third-party libraries
@@ -56,7 +57,7 @@ class TBoxCore(Singleton):
     @staticmethod
     def on_clean_log():
         if TBoxCore.is_connected():
-            Utils.getstatusoutput('adb logcat -c -b mcu -b mpu -b system -b tsp')
+            Utils.getstatusoutput("adb shell rm mpulog tsplog systemlog mculog")
 
     @staticmethod
     def is_connected():
@@ -67,10 +68,9 @@ class TBoxCore(Singleton):
 
     @staticmethod
     def get_special_log(path, obj):
-        (status, output) = Utils.getstatusoutput('adb logcat -d -b ' + obj)
+        (status, output) = Utils.getstatusoutput("adb shell logcat -v time -d -b " + obj + " -f " + obj + "log")
         if not status:
-            with open(path + '/' + obj + '.log', 'w') as f:
-                f.write(output)
+            Utils.getstatusoutput("adb pull " + obj + "log " + path)
 
     @staticmethod
     def on_collect_log(path):
@@ -135,6 +135,19 @@ class TBoxCore(Singleton):
         """
         logger.info(self._tag + "on_request_remote_ota called")
         return self._mqttc.on_request_remote_ota(version, addr, timeout)
+
+    def check_vdlog(self):
+        try:
+            (status, output) = Utils.getstatusoutput("adb shell ls /data")
+            if not status:
+                vdlog = re.findall('vdlog', output)[0]
+                logger.info(self._tag + "find " + vdlog + " in /data")
+        except IndexError:
+            logger.info(self._tag + "Do not find vdlog!")
+            logger.info(self._tag + "Create vdlog now...")
+            Utils.getstatusoutput('adb shell touch /data/vdlog')
+            if not status:
+                logger.info(self._tag + "Create Success")
 
 
 class TBoxCoreError(Exception):
