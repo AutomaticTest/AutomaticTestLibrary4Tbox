@@ -82,7 +82,7 @@ class TBoxCore(Singleton):
             #     shutil.rmtree(path)
             #     os.mkdir(path)
         if not TBoxCore.is_connected():
-            raise TBoxCore("Exception on collect log")
+            raise TBoxCoreError("Exception on collect log")
         TBoxCore.get_special_log(path, 'mcu')
         TBoxCore.get_special_log(path, 'mpu')
         TBoxCore.get_special_log(path, 'system')
