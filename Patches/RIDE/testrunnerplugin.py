@@ -549,6 +549,7 @@ class TestRunnerPlugin(Plugin):
         self.pause_after_failure_cb = wx.CheckBox(toolbar, ID_PAUSE_ON_FAILURE, " Pause on failure  ")
         self.pause_after_failure_cb.SetToolTip(wx.ToolTip("Automatically pause after failing keyword"))
         self.pause_after_failure_cb.SetValue(False)
+        self.pause_after_failure_cb.Disable()
         toolbar.AddControl(self.pause_after_failure_cb)
 
         self.show_log_messages_checkbox = wx.CheckBox(toolbar, ID_SHOW_MESSAGE_LOG, ' Show message log  ')
