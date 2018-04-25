@@ -20,12 +20,39 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='tbox.proto',
   package='',
   syntax='proto3',
-  serialized_pb=_b('\n\ntbox.proto\"\xd2\t\n\x06MsgTop\x12!\n\x0cmessage_head\x18\x01 \x01(\x0b\x32\x0b.CommonHead\x12-\n\x10register_request\x18\x02 \x01(\x0b\x32\x13.MsgRegisterRequest\x12/\n\x11register_response\x18\x03 \x01(\x0b\x32\x14.MsgRegisterResponse\x12\x18\n\x05login\x18\x04 \x01(\x0b\x32\t.MsgLogIn\x12)\n\x0elogin_response\x18\x05 \x01(\x0b\x32\x11.MsgLogInResponse\x12\x32\n\x13heart_beat_response\x18\x06 \x01(\x0b\x32\x15.MsgHeartBeatResponse\x12\x38\n\x16remote_config_response\x18\x07 \x01(\x0b\x32\x18.MsgRemoteConfigResponse\x12\x36\n\x15remote_config_request\x18\x08 \x01(\x0b\x32\x17.MsgRemoteConfigRequest\x12\x34\n\x14remote_config_result\x18\t \x01(\x0b\x32\x16.MsgRemoteConfigResult\x12\x30\n\x12remote_control_cmd\x18\n \x01(\x0b\x32\x14.MsgRemoteControlCmd\x12:\n\x17remote_control_response\x18\x0b \x01(\x0b\x32\x19.MsgRemoteControlResponse\x12\x1d\n\tMsgOtaCmd\x18\x0c \x01(\x0b\x32\n.MsgOtaCmd\x12,\n\x10ota_cmd_response\x18\r \x01(\x0b\x32\x12.MsgOtaCmdResponse\x12\x38\n\x15ota_cmd_check_request\x18\x0e \x01(\x0b\x32\x19.MsgOtaCmdCheckSumRequest\x12:\n\x16ota_cmd_check_response\x18\x0f \x01(\x0b\x32\x1a.MsgOtaCmdCheckSumResponse\x12!\n\nota_result\x18\x10 \x01(\x0b\x32\r.MsgOtaResult\x12\x32\n\x13ota_result_response\x18\x11 \x01(\x0b\x32\x15.MsgOtaResultResponse\x12>\n\x19remote_diagnosis_response\x18\x12 \x01(\x0b\x32\x1b.MsgRemoteDiagnosisResponse\x12:\n\x17remote_diagnosis_result\x18\x13 \x01(\x0b\x32\x19.MsgRemoteDiagnosisResult\x12\"\n\ndatamining\x18\x14 \x01(\x0b\x32\x0e.MsgDatamining\x12)\n\x0evehicle_status\x18\x15 \x01(\x0b\x32\x11.MsgVehicleStatus\x12%\n\x0c\x61larm_signal\x18\x16 \x01(\x0b\x32\x0f.MsgAlarmSignal\x12\x36\n\x15\x61larm_signal_response\x18\x17 \x01(\x0b\x32\x17.MsgAlarmSignalResponse\x12%\n\x0cpush_message\x18\x18 \x01(\x0b\x32\x0f.MsgPushMessage\x12+\n\x11motor_fire_signal\x18\x19 \x01(\x0b\x32\x10.MotorFireSignal\x12\x1e\n\ncommon_ack\x18\x1a \x01(\x0b\x32\n.CommonAck\"\xd3\x01\n\nCommonHead\x12\x18\n\x10protocol_version\x18\x01 \x01(\r\x12+\n\x11\x65quipment_id_type\x18\x02 \x01(\x0e\x32\x10.EquipmentIdType\x12\x14\n\x0c\x65quipment_id\x18\x03 \x01(\t\x12\x12\n\nmessage_id\x18\x04 \x01(\r\x12\x1a\n\x08msg_type\x18\x05 \x01(\x0e\x32\x08.MsgType\x12\x1b\n\x13message_create_time\x18\x06 \x01(\r\x12\r\n\x05token\x18\x07 \x01(\t\x12\x0c\n\x04\x66lag\x18\x08 \x01(\x08\"@\n\tCommonAck\x12 \n\x08\x61\x63k_code\x18\x01 \x01(\x0e\x32\x0e.CommonAckCode\x12\x11\n\tcode_desp\x18\x02 \x01(\t\"\x92\x01\n\x07GpsInfo\x12\x12\n\nlongtitude\x18\x01 \x01(\x05\x12\x10\n\x08latitude\x18\x02 \x01(\x05\x12\x10\n\x08\x61ltitude\x18\x03 \x01(\x05\x12\x13\n\x0bgps_heading\x18\x04 \x01(\x05\x12\x11\n\tgps_speed\x18\x05 \x01(\x05\x12\x18\n\x10satellite_number\x18\x06 \x01(\x05\x12\r\n\x05valid\x18\x07 \x01(\x08\"G\n\x12MsgRegisterRequest\x12\x0c\n\x04pdid\x18\x01 \x01(\t\x12\r\n\x05iccid\x18\x02 \x01(\t\x12\x14\n\x0ctbox_version\x18\x03 \x01(\t\"Y\n\x13MsgRegisterResponse\x12\x10\n\x08res_code\x18\x01 \x01(\r\x12\x0c\n\x04\x61\x64\x64r\x18\x02 \x01(\t\x12\x0e\n\x06\x63\x61_cer\x18\x03 \x01(\t\x12\x12\n\ncustom_cer\x18\x04 \x01(\t\"Z\n\x08MsgLogIn\x12\x0c\n\x04pdid\x18\x01 \x01(\t\x12\r\n\x05iccid\x18\x02 \x01(\t\x12\x0b\n\x03vin\x18\x03 \x01(\t\x12\x0f\n\x07version\x18\x04 \x01(\t\x12\x13\n\x0brelease_tag\x18\x05 \x01(\t\"?\n\x10MsgLogInResponse\x12\x1c\n\x08\x61\x63k_code\x18\x01 \x01(\x0b\x32\n.CommonAck\x12\r\n\x05token\x18\x02 \x01(\t\"4\n\x14MsgHeartBeatResponse\x12\x1c\n\x08\x61\x63k_code\x18\x01 \x01(\x0b\x32\n.CommonAck\"\xe7\x04\n\x10RemoteConfigData\x12\x18\n\x10mqtt_server_addr\x18\x01 \x01(\t\x12\x19\n\x11mqtt_server_topic\x18\x02 \x01(\t\x12%\n\x1dmqtt_key_business_server_addr\x18\x03 \x01(\t\x12&\n\x1emqtt_key_business_server_topic\x18\x04 \x01(\t\x12\x14\n\x0c\x65\x63\x61ll_number\x18\x05 \x01(\t\x12\x14\n\x0c\x62\x63\x61ll_number\x18\x06 \x01(\t\x12\x14\n\x0cicall_number\x18\x07 \x01(\t\x12\x14\n\x0c\x65\x63\x61ll_enable\x18\x08 \x01(\x08\x12\x14\n\x0c\x62\x63\x61ll_enable\x18\t \x01(\x08\x12\x14\n\x0cicall_enable\x18\n \x01(\x08\x12\x1e\n\x16sms_gate_number_upload\x18\x0b \x01(\t\x12 \n\x18sms_gate_number_download\x18\x0c \x01(\t\x12#\n\x1b\x64\x61tamining_upload_frequency\x18\r \x01(\r\x12\'\n\x1fvehicle_status_upload_frequency\x18\x0e \x01(\r\x12&\n\x1eignition_blowout_upload_enable\x18\x0f \x01(\x08\x12\x1b\n\x13upload_alert_enable\x18\x10 \x01(\x08\x12\x19\n\x11\x64\x61tamining_enable\x18\x11 \x01(\x08\x12\x12\n\nsvt_enable\x18\x12 \x01(\x08\x12 \n\x18\x65letronic_defense_enable\x18\x13 \x01(\x08\x12%\n\x1d\x61\x62normal_move_threshold_value\x18\x14 \x01(\r\"f\n\x17MsgRemoteConfigResponse\x12\x1c\n\x08\x61\x63k_code\x18\x01 \x01(\x0b\x32\n.CommonAck\x12-\n\x12remote_config_data\x18\x02 \x01(\x0b\x32\x11.RemoteConfigData\"i\n\x16MsgRemoteConfigRequest\x12\'\n\x0c\x63onfig_items\x18\x01 \x03(\x0e\x32\x11.RemoteConfigItem\x12&\n\x0b\x63onfig_data\x18\x02 \x01(\x0b\x32\x11.RemoteConfigData\"x\n\x12RemoteConfigResult\x12&\n\x0b\x63onfig_item\x18\x02 \x01(\x0e\x32\x11.RemoteConfigItem\x12\x0e\n\x06result\x18\x03 \x01(\x08\x12*\n\nerror_code\x18\x04 \x01(\x0e\x32\x16.RemoteConfigErrorCode\"\xb0\x01\n\x15MsgRemoteConfigResult\x12\x1c\n\x08\x61\x63k_code\x18\x01 \x01(\x0b\x32\n.CommonAck\x12+\n\x0e\x63onfig_results\x18\x02 \x03(\x0b\x32\x13.RemoteConfigResult\x12%\n\nconfig_old\x18\x03 \x01(\x0b\x32\x11.RemoteConfigData\x12%\n\nconfig_new\x18\x04 \x01(\x0b\x32\x11.RemoteConfigData\"|\n\x1c\x41irConditionControlParameter\x12\x11\n\tac_switch\x18\x01 \x01(\x08\x12\x16\n\x0e\x61\x63_temperature\x18\x02 \x01(\x02\x12\x18\n\x10\x61\x63_front_defrost\x18\x03 \x01(\x08\x12\x17\n\x0f\x61\x63_rear_defrost\x18\x04 \x01(\x08\"\xa0\x01\n\x13MsgRemoteControlCmd\x12\"\n\x03\x63md\x18\x01 \x01(\x0e\x32\x15.RemoteControlCmdType\x12\x33\n\x0c\x61\x63_parameter\x18\x02 \x01(\x0b\x32\x1d.AirConditionControlParameter\x12\x18\n\x10\x65ngine_parameter\x18\x03 \x01(\x08\x12\x16\n\x0elock_parameter\x18\x04 \x01(\x08\"\x98\x03\n\x1fRemoteControlResponseVehiceInfo\x12)\n\x14\x61ir_condition_status\x18\x01 \x01(\x0e\x32\x0b.OnOffState\x12\x31\n\x1c\x61ir_condition_defrost_status\x18\x02 \x01(\x0e\x32\x0b.OnOffState\x12\x36\n!air_condition_rear_defrost_status\x18\x03 \x01(\x0e\x32\x0b.OnOffState\x12!\n\x19\x61ir_condition_temperature\x18\x04 \x01(\x02\x12 \n\x0block_status\x18\x05 \x01(\x0e\x32\x0b.OnOffState\x12#\n\rengine_status\x18\x06 \x01(\x0e\x32\x0c.EngineState\x12&\n\x11hand_break_status\x18\x07 \x01(\x0e\x32\x0b.OnOffState\x12\'\n\x0fpeps_power_mode\x18\t \x01(\x0e\x32\x0e.PepsPowerMode\x12$\n\rgear_position\x18\n \x01(\x0e\x32\r.GearPosition\"\xd3\x01\n\x18MsgRemoteControlResponse\x12\x1c\n\x08\x61\x63k_code\x18\x01 \x01(\x0b\x32\n.CommonAck\x12\x31\n\rexcute_result\x18\x02 \x01(\x0e\x32\x1a.RemoteControlExcuteResult\x12\x12\n\nerror_code\x18\x03 \x01(\t\x12\x1a\n\x08gps_info\x18\x04 \x01(\x0b\x32\x08.GpsInfo\x12\x36\n\x0cvehicle_info\x18\x05 \x01(\x0b\x32 .RemoteControlResponseVehiceInfo\"c\n\tMsgOtaCmd\x12\x1d\n\x15update_target_version\x18\x01 \x01(\t\x12\"\n\x1aupgrade_file_download_addr\x18\x02 \x01(\t\x12\x13\n\x0bota_task_id\x18\x03 \x01(\t\"F\n\x11MsgOtaCmdResponse\x12\x1c\n\x08\x61\x63k_code\x18\x01 \x01(\x0b\x32\n.CommonAck\x12\x13\n\x0bota_task_id\x18\x02 \x01(\t\"k\n\x18MsgOtaCmdCheckSumRequest\x12\x16\n\x0e\x63heck_sum_code\x18\x01 \x01(\t\x12\"\n\x1aupgrade_file_download_addr\x18\x02 \x01(\t\x12\x13\n\x0bota_task_id\x18\x03 \x01(\t\"h\n\x19MsgOtaCmdCheckSumResponse\x12\x1c\n\x08\x61\x63k_code\x18\x01 \x01(\x0b\x32\n.CommonAck\x12\x18\n\x10\x63heck_sum_result\x18\x02 \x01(\x08\x12\x13\n\x0bota_task_id\x18\x03 \x01(\t\"\x9b\x01\n\x0cMsgOtaResult\x12\x1e\n\x16\x62\x65\x66ore_upgrade_version\x18\x01 \x01(\t\x12\x1d\n\x15\x61\x66ter_upgread_version\x18\x02 \x01(\t\x12!\n\x06result\x18\x03 \x01(\x0e\x32\x11.OtaCmdResultCode\x12\x14\n\x0cupgrade_time\x18\x04 \x01(\r\x12\x13\n\x0bota_task_id\x18\x05 \x01(\t\"I\n\x14MsgOtaResultResponse\x12\x1c\n\x08\x61\x63k_code\x18\x01 \x01(\x0b\x32\n.CommonAck\x12\x13\n\x0bota_task_id\x18\x02 \x01(\t\":\n\x1aMsgRemoteDiagnosisResponse\x12\x1c\n\x08\x61\x63k_code\x18\x01 \x01(\x0b\x32\n.CommonAck\"\x90\x01\n\x18MsgRemoteDiagnosisResult\x12\x43\n\x10\x64iagnosis_result\x18\x01 \x03(\x0b\x32).MsgRemoteDiagnosisResult.DiagnosisResult\x1a/\n\x0f\x44iagnosisResult\x12\x0e\n\x06\x65\x63u_id\x18\x01 \x01(\x05\x12\x0c\n\x04\x64tcs\x18\x02 \x01(\x0c\"\x83\x02\n\rMsgDatamining\x12 \n\x18\x63urrent_fuel_consumption\x18\x01 \x01(\x02\x12\x1c\n\ncoordinate\x18\x02 \x01(\x0b\x32\x08.GpsInfo\x12\x15\n\rtotal_mileage\x18\x03 \x01(\x02\x12\x15\n\rcurrent_speed\x18\x04 \x01(\x02\x12\x14\n\x0c\x65ngine_speed\x18\x05 \x01(\x05\x12\x16\n\x0esteering_angle\x18\x06 \x01(\x02\x12\x1f\n\x17\x61\x63\x63\x65lerator_pedal_angle\x18\x07 \x01(\x02\x12\x19\n\x11\x62rake_pedal_angle\x18\x08 \x01(\x02\x12\x1a\n\x12\x63lutch_pedal_angle\x18\t \x01(\x02\"\xd0\x06\n\x10MsgVehicleStatus\x12#\n\x0elf_door_status\x18\x01 \x01(\x0e\x32\x0b.OnOffState\x12#\n\x0elr_door_status\x18\x02 \x01(\x0e\x32\x0b.OnOffState\x12#\n\x0erf_door_status\x18\x03 \x01(\x0e\x32\x0b.OnOffState\x12#\n\x0err_door_status\x18\x04 \x01(\x0e\x32\x0b.OnOffState\x12&\n\x11trunk_door_status\x18\x05 \x01(\x0e\x32\x0b.OnOffState\x12%\n\x10lf_window_status\x18\x06 \x01(\x0e\x32\x0b.OnOffState\x12%\n\x10lr_window_status\x18\x07 \x01(\x0e\x32\x0b.OnOffState\x12%\n\x10rf_window_status\x18\x08 \x01(\x0e\x32\x0b.OnOffState\x12%\n\x10rr_window_status\x18\t \x01(\x0e\x32\x0b.OnOffState\x12\'\n\x12roof_window_status\x18\n \x01(\x0e\x32\x0b.OnOffState\x12)\n\x14\x61ir_condition_status\x18\x0b \x01(\x0e\x32\x0b.OnOffState\x12\x31\n\x1c\x61ir_condition_defrost_status\x18\x0c \x01(\x0e\x32\x0b.OnOffState\x12\x36\n!air_condition_rear_defrost_status\x18\r \x01(\x0e\x32\x0b.OnOffState\x12!\n\x19\x61ir_condition_temperature\x18\x0e \x01(\x02\x12 \n\x0block_status\x18\x0f \x01(\x0e\x32\x0b.OnOffState\x12#\n\rengine_status\x18\x10 \x01(\x0e\x32\x0c.EngineState\x12!\n\x0cwiper_Status\x18\x11 \x01(\x0e\x32\x0b.OnOffState\x12&\n\x11hand_break_status\x18\x12 \x01(\x0e\x32\x0b.OnOffState\x12!\n\x0c\x64\x65\x66rost_mode\x18\x13 \x01(\x0e\x32\x0b.OnOffState\x12\'\n\x0fpeps_power_mode\x18\x14 \x01(\x0e\x32\x0e.PepsPowerMode\x12$\n\rgear_position\x18\x15 \x01(\x0e\x32\r.GearPosition\"/\n\x0cGSensorValue\x12\t\n\x01x\x18\x01 \x01(\x05\x12\t\n\x01y\x18\x02 \x01(\x05\x12\t\n\x01z\x18\x03 \x01(\x05\"\xf0\x02\n\x0eMsgAlarmSignal\x12+\n\x11\x61larm_signal_type\x18\x01 \x01(\x0e\x32\x10.AlarmSignalType\x12\x1a\n\x08gps_info\x18\x02 \x01(\x0b\x32\x08.GpsInfo\x12/\n\x0eside_turn_flag\x18\x03 \x01(\x0e\x32\x17.CommonTrueFalseUnknown\x12\x31\n\x10\x61ir_bag_exploded\x18\x04 \x01(\x0e\x32\x17.CommonTrueFalseUnknown\x12\x32\n\x11unusual_move_flag\x18\x05 \x01(\x0e\x32\x17.CommonTrueFalseUnknown\x12\x36\n\x15\x61nti_theft_alarm_flag\x18\x06 \x01(\x0e\x32\x17.CommonTrueFalseUnknown\x12\x1e\n\ncrash_info\x18\x07 \x01(\x0e\x32\n.CrashInfo\x12%\n\x0eg_sensor_value\x18\x08 \x01(\x0b\x32\r.GSensorValue\":\n\x16MsgAlarmSignalResponse\x12 \n\x08\x61\x63k_code\x18\x01 \x01(\x0e\x32\x0e.CommonAckCode\"7\n\x0eMsgPushMessage\x12\x10\n\x08msg_type\x18\x01 \x01(\r\x12\x13\n\x0bmsg_content\x18\x02 \x01(\x0c\"\x80\x01\n\x0fMotorFireSignal\x12#\n\x0b\x66ire_signal\x18\x01 \x01(\x0e\x32\x0e.MotorFireMode\x12\x15\n\rtotal_mileage\x18\x02 \x01(\x02\x12\x1a\n\x08gps_info\x18\x03 \x01(\x0b\x32\x08.GpsInfo\x12\x15\n\rmoter_fire_no\x18\x04 \x01(\r*9\n\x0f\x45quipmentIdType\x12\x08\n\x04PDID\x10\x00\x12\x07\n\x03VIN\x10\x01\x12\x08\n\x04IMEI\x10\x02\x12\t\n\x05ICCID\x10\x03*\xca\x05\n\x07MsgType\x12\t\n\x05TYPE0\x10\x00\x12\t\n\x05TYPE1\x10\x01\x12\x14\n\x10REGISTER_REQUEST\x10\x02\x12\x15\n\x11REGISTER_RESPONSE\x10\x03\x12\t\n\x05LOGIN\x10\x04\x12\x12\n\x0eLOGIN_RESPONSE\x10\x05\x12\x17\n\x13HEART_BEAT_RESPONSE\x10\x06\x12\x1a\n\x16REMOTE_CONFIG_RESPONSE\x10\x07\x12\x19\n\x15REMOTE_CONFIG_REQUEST\x10\x08\x12\x18\n\x14REMOTE_CONFIG_RESULT\x10\t\x12\x16\n\x12REMOTE_CONTROL_CMD\x10\n\x12\x1b\n\x17REMOTE_CONTROL_RESPONSE\x10\x0b\x12\x0b\n\x07OTA_CMD\x10\x0c\x12\x14\n\x10OTA_CMD_RESPONSE\x10\r\x12\x19\n\x15OTA_CMD_CHECK_REQUEST\x10\x0e\x12\x1a\n\x16OTA_CMD_CHECK_RESPONSE\x10\x0f\x12\x0e\n\nOTA_RESULT\x10\x10\x12\x17\n\x13OTA_RESULT_RESPONSE\x10\x11\x12\x1d\n\x19REMOTE_DIAGNOSIS_RESPONSE\x10\x12\x12\x1b\n\x17REMOTE_DIAGNOSIS_RESULT\x10\x13\x12\x0e\n\nDATAMINING\x10\x14\x12\x12\n\x0eVEHICLE_STATUS\x10\x15\x12\x10\n\x0c\x41LARM_SIGNAL\x10\x16\x12\x19\n\x15\x41LARM_SIGNAL_RESPONSE\x10\x17\x12\x10\n\x0cPUSH_MESSAGE\x10\x18\x12\x15\n\x11MOTOR_FIRE_SIGNAL\x10\x19\x12\x0e\n\nCOMMON_ACK\x10\x1a\x12\x0e\n\nHEART_BEAT\x10\x65\x12\n\n\x06LOGOUT\x10\x66\x12\x1f\n\x1bREMOTE_CONFIG_QUERY_REQUEST\x10g\x12\x1c\n\x18REMOTE_DIAGNOSIS_REQUEST\x10h\x12\x1a\n\x16VEHICLE_STATUS_REQUEST\x10i*P\n\rCommonAckCode\x12\x0b\n\x07SUCCESS\x10\x00\x12\n\n\x06\x46\x41ILED\x10\x01\x12\r\n\tNOT_LOGIN\x10\x02\x12\x17\n\x13MESSAGE_PARSE_ERROR\x10\x03*\x95\x04\n\x10RemoteConfigItem\x12\x14\n\x10MQTT_SERVER_ADDR\x10\x00\x12\x15\n\x11MQTT_SERVER_TOPIC\x10\x01\x12!\n\x1dMQTT_KEY_BUSINESS_SERVER_ADDR\x10\x02\x12\"\n\x1eMQTT_KEY_BUSINESS_SERVER_TOPIC\x10\x03\x12\x10\n\x0c\x45\x43\x41LL_NUMBER\x10\x04\x12\x10\n\x0c\x42\x43\x41LL_NUMBER\x10\x05\x12\x10\n\x0cICALL_NUMBER\x10\x06\x12\x10\n\x0c\x45\x43\x41LL_ENABLE\x10\x07\x12\x10\n\x0c\x42\x43\x41LL_ENABLE\x10\x08\x12\x10\n\x0cICALL_ENABLE\x10\t\x12\x1a\n\x16SMS_GATE_NUMBER_UPLOAD\x10\n\x12\x1c\n\x18SMS_GATE_NUMBER_DOWNLOAD\x10\x0b\x12\x1f\n\x1b\x44\x41TAMINING_UPLOAD_FREQUENCY\x10\x0c\x12#\n\x1fVEHICLE_STATUS_UPLOAD_FREQUENCY\x10\r\x12\"\n\x1eIGNITION_BLOWOUT_UPLOAD_ENABLE\x10\x0e\x12\x17\n\x13UPLOAD_ALERT_ENABLE\x10\x0f\x12\x13\n\x0f\x44\x41TAMING_ENABLE\x10\x10\x12\x0e\n\nSVT_ENABLE\x10\x11\x12\x1c\n\x18\x45LETRONIC_DEFENSE_ENABLE\x10\x12\x12!\n\x1d\x41\x42NORMAL_MOVE_THRESHOLD_VALUE\x10\x13*#\n\x15RemoteConfigErrorCode\x12\n\n\x06UNKNOW\x10\x00*V\n\x14RemoteControlCmdType\x12\n\n\x06\x45NGINE\x10\x00\x12\x16\n\x12\x41IR_CONDITION_CTRL\x10\x01\x12\x08\n\x04LOCK\x10\x02\x12\x10\n\x0c\x46IND_VEHICLE\x10\x03*R\n\x19RemoteControlExcuteResult\x12\x19\n\x15REMOTE_CONTROL_FAILED\x10\x00\x12\x1a\n\x16REMOTE_CONTROL_SUCCESS\x10\x01*k\n\x10OtaCmdResultCode\x12\x12\n\x0eUPGRADE_FAILED\x10\x00\x12\x15\n\x11UPGRADE_SUCCESSED\x10\x01\x12\x18\n\x14\x44OWNLOAD_FILE_FAILED\x10\x02\x12\x12\n\x0eOTA_IN_PROCESS\x10\x03*l\n\rPepsPowerMode\x12\x10\n\x0cPEPS_DEFAULT\x10\x00\x12\x0c\n\x08PEPS_OFF\x10\x01\x12\x0c\n\x08PEPS_ACC\x10\x02\x12\x0b\n\x07PEPS_ON\x10\x03\x12\x0e\n\nPEPS_START\x10\x04\x12\x10\n\x0cPEPS_INVALID\x10\x05*\x99\x01\n\tCrashInfo\x12\x0e\n\nNONE_CRASH\x10\x00\x12\x11\n\rUNKNOWN_CRASH\x10\x01\x12\x0e\n\nHEAD_CRASH\x10\x02\x12\x13\n\x0fLEFT_SIDE_CRASH\x10\x03\x12\x14\n\x10RIGHT_SIDE_CRASH\x10\x04\x12\x0e\n\nTAIL_CRASH\x10\x05\x12\x0e\n\nPEDESTRIAN\x10\x06\x12\x0e\n\nMUTI_CRASH\x10\x07*M\n\x16\x43ommonTrueFalseUnknown\x12\x10\n\x0c\x43OMMON_FALSE\x10\x00\x12\x0f\n\x0b\x43OMMON_TRUE\x10\x01\x12\x10\n\x0c\x43OMMON_KNOWN\x10\x02*b\n\x0f\x41larmSignalType\x12\x0b\n\x07\x41IR_BAG\x10\x00\x12\r\n\tSIDE_TURN\x10\x01\x12\x10\n\x0cUNUSUAL_MOVE\x10\x02\x12\x0e\n\nANTI_THEFT\x10\x03\x12\x11\n\rVEHICLE_CRASH\x10\x04*U\n\x0b\x45ngineState\x12\x17\n\x13\x45NGINESTATE_UNKNOWN\x10\x00\x12\n\n\x06KEYOFF\x10\x01\x12\t\n\x05KEYON\x10\x02\x12\t\n\x05\x43RANK\x10\x03\x12\x0b\n\x07RUNNING\x10\x04*N\n\nOnOffState\x12\x17\n\x13ONOFF_STATE_UNKNOWN\x10\x00\x12\x13\n\x0fONOFF_STATE_OFF\x10\x01\x12\x12\n\x0eONOFF_STATE_ON\x10\x02*\xac\x02\n\x0cGearPosition\x12\n\n\x06GEAR_P\x10\x00\x12\n\n\x06GEAR_R\x10\x01\x12\n\n\x06GEAR_N\x10\x02\x12\n\n\x06GEAR_D\x10\x03\x12\x11\n\rGEAR_MANUAL_1\x10\x04\x12\x11\n\rGEAR_MANUAL_2\x10\x05\x12\x11\n\rGEAR_MANUAL_3\x10\x06\x12\x11\n\rGEAR_MANUAL_4\x10\x07\x12\x11\n\rGEAR_MANUAL_5\x10\x08\x12\x11\n\rGEAR_MANUAL_6\x10\t\x12\x11\n\rGEAR_MANUAL_7\x10\n\x12\x11\n\rGEAR_MANUAL_8\x10\x0b\x12\n\n\x06GEAR_S\x10\x0c\x12\x0f\n\x0bGEAR_UNKNOW\x10\r\x12\x0b\n\x07GEAR_Z1\x10\x0e\x12\x0b\n\x07GEAR_Z2\x10\x0f\x12\x0b\n\x07GEAR_Z3\x10\x10\x12\x10\n\x0cGEAR_Invalid\x10\x11*+\n\rMotorFireMode\x12\x0c\n\x08IGNITION\x10\x00\x12\x0c\n\x08\x46LAMEOUT\x10\x01\x42\x0e\x42\x0cTboxProtocalb\x06proto3')
+  serialized_pb=_b('\n\ntbox.proto\"&\n\x06MsgAck\x12\x0e\n\x06status\x18\x01 \x01(\x08\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t\"\xdf\x07\n\x06MsgTop\x12\x1e\n\x0cmessage_head\x18\x01 \x01(\x0b\x32\x08.MsgHead\x12\x14\n\x03\x61\x63k\x18\x02 \x01(\x0b\x32\x07.MsgAck\x12$\n\x10register_request\x18\x03 \x01(\x0b\x32\n.MsgRegReq\x12&\n\x11register_response\x18\x04 \x01(\x0b\x32\x0b.MsgRegResp\x12#\n\rlogin_request\x18\x05 \x01(\x0b\x32\x0c.MsgLoginReq\x12%\n\x0elogin_response\x18\x06 \x01(\x0b\x32\r.MsgLoginResp\x12.\n\x13heart_beat_response\x18\x07 \x01(\x0b\x32\x11.MsgHeartBeatResp\x12\x30\n\x15\x63onfig_query_response\x18\x08 \x01(\x0b\x32\x11.MsgConfQueryResp\x12#\n\x0e\x63onfig_request\x18\t \x01(\x0b\x32\x0b.MsgConfReq\x12%\n\x0f\x63onfig_response\x18\n \x01(\x0b\x32\x0c.MsgConfResp\x12#\n\x0b\x63ontrol_cmd\x18\x0b \x01(\x0b\x32\x0e.MsgControlReq\x12)\n\x10\x63ontrol_response\x18\x0c \x01(\x0b\x32\x0f.MsgControlResp\x12\x1b\n\x07ota_cmd\x18\r \x01(\x0b\x32\n.MsgOtaCmd\x12,\n\x10ota_cmd_response\x18\x0e \x01(\x0b\x32\x12.MsgOtaCmdResponse\x12\x38\n\x15ota_cmd_check_request\x18\x0f \x01(\x0b\x32\x19.MsgOtaCmdCheckSumRequest\x12:\n\x16ota_cmd_check_response\x18\x10 \x01(\x0b\x32\x1a.MsgOtaCmdCheckSumResponse\x12!\n\nota_result\x18\x11 \x01(\x0b\x32\r.MsgOtaResult\x12-\n\x12\x64iagnosis_response\x18\x12 \x01(\x0b\x32\x11.MsgDiagnosisResp\x12\"\n\ndatamining\x18\x13 \x01(\x0b\x32\x0e.MsgDatamining\x12)\n\x0evehicle_status\x18\x14 \x01(\x0b\x32\x11.MsgVehicleStatus\x12%\n\x0c\x61larm_signal\x18\x15 \x01(\x0b\x32\x0f.MsgAlarmReport\x12%\n\x0cpush_message\x18\x16 \x01(\x0b\x32\x0f.MsgPushMessage\x12.\n\x11motor_fire_signal\x18\x17 \x01(\x0b\x32\x13.MsgMotorFireSignal\x12\'\n\rtracking_data\x18\x18 \x01(\x0b\x32\x10.MsgTrackingData\"\xd1\x01\n\x07MsgHead\x12\x18\n\x10protocol_version\x18\x01 \x01(\r\x12#\n\x08\x64id_type\x18\x02 \x01(\x0e\x32\x11.EnumDeviceIdType\x12\x11\n\tdevice_id\x18\x03 \x01(\t\x12\x12\n\nmessage_id\x18\x04 \x01(\r\x12\x1e\n\x08msg_type\x18\x05 \x01(\x0e\x32\x0c.EnumMsgType\x12\x12\n\nmsg_c_time\x18\x06 \x01(\r\x12\r\n\x05token\x18\x07 \x01(\t\x12\x0c\n\x04\x66lag\x18\x08 \x01(\x08\x12\x0f\n\x07task_id\x18\t \x01(\t\"\xa7\x01\n\nMsgGpsInfo\x12\x12\n\nlongtitude\x18\x01 \x01(\x05\x12\x10\n\x08latitude\x18\x02 \x01(\x05\x12\x10\n\x08\x61ltitude\x18\x03 \x01(\x05\x12\x13\n\x0bgps_heading\x18\x04 \x01(\x05\x12\x11\n\tgps_speed\x18\x05 \x01(\x05\x12\x18\n\x10satellite_number\x18\x06 \x01(\x05\x12\r\n\x05valid\x18\x07 \x01(\x08\x12\x10\n\x08gps_time\x18\x08 \x01(\r\">\n\tMsgRegReq\x12\x0c\n\x04pdid\x18\x01 \x01(\t\x12\r\n\x05iccid\x18\x02 \x01(\t\x12\x14\n\x0ctbox_version\x18\x03 \x01(\t\"P\n\nMsgRegResp\x12\x10\n\x08res_code\x18\x01 \x01(\r\x12\x0c\n\x04\x61\x64\x64r\x18\x02 \x01(\t\x12\x0e\n\x06\x63\x61_cer\x18\x03 \x01(\t\x12\x12\n\ncustom_cer\x18\x04 \x01(\t\"]\n\x0bMsgLoginReq\x12\x0c\n\x04pdid\x18\x01 \x01(\t\x12\r\n\x05iccid\x18\x02 \x01(\t\x12\x0b\n\x03vin\x18\x03 \x01(\t\x12\x0f\n\x07version\x18\x04 \x01(\t\x12\x13\n\x0brelease_tag\x18\x05 \x01(\t\"3\n\x0cMsgLoginResp\x12\x14\n\x03\x61\x63k\x18\x01 \x01(\x0b\x32\x07.MsgAck\x12\r\n\x05token\x18\x02 \x01(\t\"(\n\x10MsgHeartBeatResp\x12\x14\n\x03\x61\x63k\x18\x01 \x01(\x0b\x32\x07.MsgAck\"\x83\x05\n\x0bMsgConfData\x12\x18\n\x10mqtt_server_addr\x18\x01 \x01(\t\x12\x19\n\x11mqtt_server_topic\x18\x02 \x01(\t\x12%\n\x1dmqtt_key_business_server_addr\x18\x03 \x01(\t\x12&\n\x1emqtt_key_business_server_topic\x18\x04 \x01(\t\x12\x14\n\x0c\x65\x63\x61ll_number\x18\x05 \x01(\t\x12\x14\n\x0c\x62\x63\x61ll_number\x18\x06 \x01(\t\x12\x14\n\x0cicall_number\x18\x07 \x01(\t\x12\x14\n\x0c\x65\x63\x61ll_enable\x18\x08 \x01(\x08\x12\x14\n\x0c\x62\x63\x61ll_enable\x18\t \x01(\x08\x12\x14\n\x0cicall_enable\x18\n \x01(\x08\x12\x1e\n\x16sms_gate_number_upload\x18\x0b \x01(\t\x12 \n\x18sms_gate_number_download\x18\x0c \x01(\t\x12#\n\x1b\x64\x61tamining_upload_frequency\x18\r \x01(\r\x12\'\n\x1fvehicle_status_upload_frequency\x18\x0e \x01(\r\x12&\n\x1eignition_blowout_upload_enable\x18\x0f \x01(\x08\x12\x1b\n\x13upload_alert_enable\x18\x10 \x01(\x08\x12\x19\n\x11\x64\x61tamining_enable\x18\x11 \x01(\x08\x12\x12\n\nsvt_enable\x18\x12 \x01(\x08\x12 \n\x18\x65letronic_defense_enable\x18\x13 \x01(\x08\x12%\n\x1d\x61\x62normal_move_threshold_value\x18\x14 \x01(\r\x12\x1f\n\x17tracking_data_frequency\x18\x15 \x01(\r\"L\n\x10MsgConfQueryResp\x12\x14\n\x03\x61\x63k\x18\x01 \x01(\x0b\x32\x07.MsgAck\x12\"\n\x0cqconfig_data\x18\x02 \x01(\x0b\x32\x0c.MsgConfData\"U\n\nMsgConfReq\x12#\n\x0c\x63onfig_items\x18\x01 \x03(\x0e\x32\r.EnumConfItem\x12\"\n\x0crconfig_data\x18\x02 \x01(\x0b\x32\x0c.MsgConfData\"\xe0\x01\n\x0bMsgConfResp\x12\x14\n\x03\x61\x63k\x18\x01 \x01(\x0b\x32\x07.MsgAck\x12\x32\n\x0e\x63onfig_results\x18\x02 \x03(\x0b\x32\x1a.MsgConfResp.MsgConfResult\x12 \n\nconfig_old\x18\x03 \x01(\x0b\x32\x0c.MsgConfData\x12 \n\nconfig_new\x18\x04 \x01(\x0b\x32\x0c.MsgConfData\x1a\x43\n\rMsgConfResult\x12\"\n\x0b\x63onfig_item\x18\x01 \x01(\x0e\x32\r.EnumConfItem\x12\x0e\n\x06result\x18\x02 \x01(\x08\"\xbe\x04\n\rMsgControlReq\x12\x1e\n\x08\x63md_type\x18\x01 \x01(\x0e\x32\x0c.EnumCmdType\x12-\n\tair_param\x18\x02 \x01(\x0b\x32\x1a.MsgControlReq.MsgAirParam\x12\x14\n\x0c\x65ngine_param\x18\x03 \x01(\x08\x12\x12\n\nlock_param\x18\x04 \x01(\x08\x12\x34\n\x0cwindow_param\x18\x05 \x01(\x0b\x32\x1e.MsgControlReq.MsgWindowsParam\x12/\n\nseat_param\x18\x06 \x01(\x0b\x32\x1b.MsgControlReq.MsgSeatParam\x12\x14\n\x0ctrack_signal\x18\x07 \x01(\x08\x1ak\n\x0bMsgAirParam\x12\x11\n\tac_switch\x18\x01 \x01(\x08\x12\x16\n\x0e\x61\x63_temperature\x18\x02 \x01(\x02\x12\x18\n\x10\x61\x63_front_defrost\x18\x03 \x01(\x08\x12\x17\n\x0f\x61\x63_rear_defrost\x18\x04 \x01(\x08\x1a{\n\x0fMsgWindowsParam\x12\x1d\n\x04type\x18\x01 \x01(\x0e\x32\x0f.EnumWindowType\x12%\n\x0bwindw_param\x18\x02 \x01(\x0e\x32\x10.EnumWindowParam\x12\"\n\nroof_param\x18\x03 \x01(\x0e\x32\x0e.EnumRoofParam\x1aM\n\x0cMsgSeatParam\x12\x1e\n\x06master\x18\x01 \x01(\x0e\x32\x0e.EnumSeatLevel\x12\x1d\n\x05slave\x18\x02 \x01(\x0e\x32\x0e.EnumSeatLevel\"Q\n\x0eMsgControlResp\x12\x14\n\x03\x61\x63k\x18\x01 \x01(\x0b\x32\x07.MsgAck\x12)\n\x0evehicle_status\x18\x02 \x01(\x0b\x32\x11.MsgVehicleStatus\"c\n\tMsgOtaCmd\x12\x1d\n\x15update_target_version\x18\x01 \x01(\t\x12\"\n\x1aupgrade_file_download_addr\x18\x02 \x01(\t\x12\x13\n\x0bota_task_id\x18\x03 \x01(\t\">\n\x11MsgOtaCmdResponse\x12\x14\n\x03\x61\x63k\x18\x01 \x01(\x0b\x32\x07.MsgAck\x12\x13\n\x0bota_task_id\x18\x02 \x01(\t\"k\n\x18MsgOtaCmdCheckSumRequest\x12\x16\n\x0e\x63heck_sum_code\x18\x01 \x01(\t\x12\"\n\x1aupgrade_file_download_addr\x18\x02 \x01(\t\x12\x13\n\x0bota_task_id\x18\x03 \x01(\t\"`\n\x19MsgOtaCmdCheckSumResponse\x12\x14\n\x03\x61\x63k\x18\x01 \x01(\x0b\x32\x07.MsgAck\x12\x18\n\x10\x63heck_sum_result\x18\x02 \x01(\x08\x12\x13\n\x0bota_task_id\x18\x03 \x01(\t\"\x9b\x01\n\x0cMsgOtaResult\x12\x1e\n\x16\x62\x65\x66ore_upgrade_version\x18\x01 \x01(\t\x12\x1d\n\x15\x61\x66ter_upgread_version\x18\x02 \x01(\t\x12!\n\x06result\x18\x03 \x01(\x0e\x32\x11.OtaCmdResultCode\x12\x14\n\x0cupgrade_time\x18\x04 \x01(\r\x12\x13\n\x0bota_task_id\x18\x05 \x01(\t\"\x96\x01\n\x10MsgDiagnosisResp\x12\x14\n\x03\x61\x63k\x18\x01 \x01(\x0b\x32\x07.MsgAck\x12;\n\x10\x64iagnosis_result\x18\x02 \x03(\x0b\x32!.MsgDiagnosisResp.DiagnosisResult\x1a/\n\x0f\x44iagnosisResult\x12\x0e\n\x06\x65\x63u_id\x18\x01 \x01(\x05\x12\x0c\n\x04\x64tcs\x18\x02 \x01(\x0c\"\x0f\n\rMsgDatamining\"\xf6\x0c\n\x10MsgVehicleStatus\x12#\n\x0elf_door_status\x18\x01 \x01(\x0e\x32\x0b.OnOffState\x12#\n\x0elr_door_status\x18\x02 \x01(\x0e\x32\x0b.OnOffState\x12#\n\x0erf_door_status\x18\x03 \x01(\x0e\x32\x0b.OnOffState\x12#\n\x0err_door_status\x18\x04 \x01(\x0e\x32\x0b.OnOffState\x12&\n\x11trunk_door_status\x18\x05 \x01(\x0e\x32\x0b.OnOffState\x12%\n\x10lf_window_status\x18\x06 \x01(\x0e\x32\x0b.OnOffState\x12%\n\x10lr_window_status\x18\x07 \x01(\x0e\x32\x0b.OnOffState\x12%\n\x10rf_window_status\x18\x08 \x01(\x0e\x32\x0b.OnOffState\x12%\n\x10rr_window_status\x18\t \x01(\x0e\x32\x0b.OnOffState\x12\'\n\x12roof_window_status\x18\n \x01(\x0e\x32\x0b.OnOffState\x12)\n\x14\x61ir_condition_status\x18\x0b \x01(\x0e\x32\x0b.OnOffState\x12\x31\n\x1c\x61ir_condition_defrost_status\x18\x0c \x01(\x0e\x32\x0b.OnOffState\x12\x36\n!air_condition_rear_defrost_status\x18\r \x01(\x0e\x32\x0b.OnOffState\x12!\n\x19\x61ir_condition_temperature\x18\x0e \x01(\x02\x12 \n\x0block_status\x18\x0f \x01(\x0e\x32\x0b.OnOffState\x12\'\n\rengine_status\x18\x10 \x01(\x0e\x32\x10.EnumEngineState\x12!\n\x0cwiper_Status\x18\x11 \x01(\x0e\x32\x0b.OnOffState\x12&\n\x11hand_break_status\x18\x12 \x01(\x0e\x32\x0b.OnOffState\x12!\n\x0c\x64\x65\x66rost_mode\x18\x13 \x01(\x0e\x32\x0b.OnOffState\x12\'\n\x0fpeps_power_mode\x18\x14 \x01(\x0e\x32\x0e.PepsPowerMode\x12$\n\rgear_position\x18\x15 \x01(\x0e\x32\r.GearPosition\x12\x18\n\x10lf_tire_pressure\x18\x16 \x01(\x02\x12\x18\n\x10lr_tire_pressure\x18\x17 \x01(\x02\x12\x18\n\x10rf_tire_pressure\x18\x18 \x01(\x02\x12\x18\n\x10rr_tire_pressure\x18\x19 \x01(\x02\x12\x17\n\x0f\x62\x61ttery_voltage\x18\x1a \x01(\x02\x12\x12\n\nfuel_level\x18\x1b \x01(\r\x12\x16\n\x0eremain_mileage\x18\x1c \x01(\x02\x12\x19\n\x04\x62\x65lt\x18\x1d \x01(\x0e\x32\x0b.OnOffState\x12 \n\x0b\x66ront_light\x18\x1e \x01(\x0e\x32\x0b.OnOffState\x12 \n\x0bhight_light\x18\x1f \x01(\x0e\x32\x0b.OnOffState\x12,\n\x07g_value\x18  \x03(\x0b\x32\x1b.MsgVehicleStatus.MsgGValue\x12\x17\n\x0flight_intensity\x18! \x01(\r\x12 \n\x18\x63urrent_fuel_consumption\x18\" \x01(\x02\x12\x15\n\rcurrent_speed\x18# \x01(\x02\x12\x14\n\x0c\x65ngine_speed\x18$ \x01(\x05\x12\x16\n\x0esteering_angle\x18% \x01(\x02\x12\x1f\n\x17\x61\x63\x63\x65lerator_pedal_angle\x18& \x01(\x02\x12\x19\n\x11\x62rake_pedal_angle\x18\' \x01(\x02\x12\x1a\n\x12\x63lutch_pedal_angle\x18( \x01(\x02\x12\x15\n\rtotal_mileage\x18) \x01(\x02\x12\x1d\n\x08gps_info\x18* \x01(\x0b\x32\x0b.MsgGpsInfo\x12!\n\x0ctrack_status\x18+ \x01(\x0e\x32\x0b.OnOffState\x12 \n\x18\x61verage_fuel_consumption\x18, \x01(\x02\x1a\x92\x01\n\tMsgGValue\x12\x0e\n\x06gvalue\x18\x01 \x01(\x02\x12\x15\n\rcurrent_speed\x18\x02 \x01(\x02\x12\x14\n\x0c\x65ngine_speed\x18\x03 \x01(\x05\x12\x13\n\x0bgvalue_time\x18\x04 \x01(\r\x12\x1d\n\x08gps_info\x18\x05 \x01(\x0b\x32\x0b.MsgGpsInfo\x12\x14\n\x0cgvalue_valid\x18\x06 \x01(\x08\"\xd5\x05\n\x0eMsgAlarmReport\x12\"\n\nalarm_type\x18\x01 \x01(\x0e\x32\x0e.EnumAlarmType\x12\x1d\n\x08gps_info\x18\x02 \x01(\x0b\x32\x0b.MsgGpsInfo\x12$\n\x0eside_turn_flag\x18\x03 \x01(\x0e\x32\x0c.EnumBoolean\x12&\n\x10\x61ir_bag_exploded\x18\x04 \x01(\x0e\x32\x0c.EnumBoolean\x12\'\n\x11unusual_move_flag\x18\x05 \x01(\x0e\x32\x0c.EnumBoolean\x12+\n\x15\x61nti_theft_alarm_flag\x18\x06 \x01(\x0e\x32\x0c.EnumBoolean\x12\"\n\ncrash_info\x18\x07 \x01(\x0e\x32\x0e.EnumCrashInfo\x12\x32\n\x0eg_sensor_value\x18\x08 \x01(\x0b\x32\x1a.MsgAlarmReport.MsgGSensor\x12\x32\n\x0bwindow_info\x18\t \x01(\x0b\x32\x1d.MsgAlarmReport.MsgWindowInfo\x12\'\n\rengine_status\x18\n \x01(\x0e\x32\x10.EnumEngineState\x12(\n\x12\x62rake_pedal_status\x18\x0b \x01(\x0e\x32\x0c.EnumBoolean\x12\x15\n\rcurrent_speed\x18\x0c \x01(\x02\x1a-\n\nMsgGSensor\x12\t\n\x01x\x18\x01 \x01(\x05\x12\t\n\x01y\x18\x02 \x01(\x05\x12\t\n\x01z\x18\x03 \x01(\x05\x1a\xb6\x01\n\rMsgWindowInfo\x12!\n\x0broof_window\x18\x01 \x01(\x0e\x32\x0c.EnumBoolean\x12\x1f\n\tlf_window\x18\x02 \x01(\x0e\x32\x0c.EnumBoolean\x12\x1f\n\tlr_window\x18\x03 \x01(\x0e\x32\x0c.EnumBoolean\x12\x1f\n\trf_window\x18\x04 \x01(\x0e\x32\x0c.EnumBoolean\x12\x1f\n\trr_window\x18\x05 \x01(\x0e\x32\x0c.EnumBoolean\"\x83\x01\n\x12MsgMotorFireSignal\x12 \n\x04mode\x18\x01 \x01(\x0e\x32\x12.EnumMotorFireMode\x12\x15\n\rtotal_mileage\x18\x02 \x01(\x02\x12\x1d\n\x08gps_info\x18\x03 \x01(\x0b\x32\x0b.MsgGpsInfo\x12\x15\n\rmoter_fire_no\x18\x04 \x01(\r\"+\n\x0fMsgTrackingData\x12\x18\n\x03gps\x18\x01 \x01(\x0b\x32\x0b.MsgGpsInfo\"Q\n\x0eMsgPushMessage\x12\x1f\n\x08msg_type\x18\x01 \x01(\x0e\x32\r.EnumPushType\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x03 \x01(\t*N\n\nOnOffState\x12\x17\n\x13ONOFF_STATE_UNKNOWN\x10\x00\x12\x13\n\x0fONOFF_STATE_OFF\x10\x01\x12\x12\n\x0eONOFF_STATE_ON\x10\x02*:\n\x10\x45numDeviceIdType\x12\x08\n\x04PDID\x10\x00\x12\x07\n\x03VIN\x10\x01\x12\x08\n\x04IMEI\x10\x02\x12\t\n\x05ICCID\x10\x03*\xb2\x04\n\x0b\x45numMsgType\x12\t\n\x05TYPE0\x10\x00\x12\t\n\x05TYPE1\x10\x01\x12\x07\n\x03\x41\x43K\x10\x02\x12\x0b\n\x07REG_REQ\x10\x03\x12\x0c\n\x08REG_RESP\x10\x04\x12\r\n\tLOGIN_REQ\x10\x05\x12\x0e\n\nLOGIN_RESP\x10\x06\x12\x12\n\x0eHEARTBEAT_RESP\x10\x07\x12\x15\n\x11\x43ONFIG_QUERY_RESP\x10\x08\x12\x0e\n\nCONFIG_REQ\x10\t\x12\x0f\n\x0b\x43ONFIG_RESP\x10\n\x12\x0f\n\x0b\x43ONTROL_CMD\x10\x0b\x12\x10\n\x0c\x43ONTROL_RESP\x10\x0c\x12\x0f\n\x0bOTA_CMD_REQ\x10\r\x12\x10\n\x0cOTA_CMD_RESP\x10\x0e\x12\x14\n\x10OTA_CHECKSUM_REQ\x10\x0f\x12\x15\n\x11OTA_CHECKSUM_RESP\x10\x10\x12\x15\n\x11OTA_RESULT_REPORT\x10\x11\x12\x16\n\x12\x44IAGNOSIS_RESPONSE\x10\x12\x12\x0e\n\nDATAMINING\x10\x13\x12\x12\n\x0eVEHICLE_STATUS\x10\x14\x12\x10\n\x0c\x41LARM_REPORT\x10\x15\x12\x10\n\x0cPUSH_MESSAGE\x10\x16\x12\x15\n\x11MOTOR_FIRE_REPORT\x10\x17\x12\x18\n\x14TRACKING_DATA_REPORT\x10\x18\x12\x12\n\x0eHEART_BEAT_REQ\x10\x65\x12\x0e\n\nLOGOUT_REQ\x10\x66\x12\x14\n\x10\x43ONFIG_QUERY_REQ\x10g\x12\x11\n\rDIAGNOSIS_REQ\x10h\x12\x16\n\x12VEHICLE_STATUS_REQ\x10i*\xae\x04\n\x0c\x45numConfItem\x12\x14\n\x10MQTT_SERVER_ADDR\x10\x00\x12\x15\n\x11MQTT_SERVER_TOPIC\x10\x01\x12!\n\x1dMQTT_KEY_BUSINESS_SERVER_ADDR\x10\x02\x12\"\n\x1eMQTT_KEY_BUSINESS_SERVER_TOPIC\x10\x03\x12\x10\n\x0c\x45\x43\x41LL_NUMBER\x10\x04\x12\x10\n\x0c\x42\x43\x41LL_NUMBER\x10\x05\x12\x10\n\x0cICALL_NUMBER\x10\x06\x12\x10\n\x0c\x45\x43\x41LL_ENABLE\x10\x07\x12\x10\n\x0c\x42\x43\x41LL_ENABLE\x10\x08\x12\x10\n\x0cICALL_ENABLE\x10\t\x12\x1a\n\x16SMS_GATE_NUMBER_UPLOAD\x10\n\x12\x1c\n\x18SMS_GATE_NUMBER_DOWNLOAD\x10\x0b\x12\x1f\n\x1b\x44\x41TAMINING_UPLOAD_FREQUENCY\x10\x0c\x12#\n\x1fVEHICLE_STATUS_UPLOAD_FREQUENCY\x10\r\x12\"\n\x1eIGNITION_BLOWOUT_UPLOAD_ENABLE\x10\x0e\x12\x17\n\x13UPLOAD_ALERT_ENABLE\x10\x0f\x12\x13\n\x0f\x44\x41TAMING_ENABLE\x10\x10\x12\x0e\n\nSVT_ENABLE\x10\x11\x12\x1c\n\x18\x45LETRONIC_DEFENSE_ENABLE\x10\x12\x12!\n\x1d\x41\x42NORMAL_MOVE_THRESHOLD_VALUE\x10\x13\x12\x1b\n\x17TRACKING_DATA_FREQUENCY\x10\x14*o\n\x0b\x45numCmdType\x12\n\n\x06\x45NGINE\x10\x00\x12\x16\n\x12\x41IR_CONDITION_CTRL\x10\x01\x12\x08\n\x04LOCK\x10\x02\x12\x10\n\x0c\x46IND_VEHICLE\x10\x03\x12\x0b\n\x07WINDOWS\x10\x04\x12\x08\n\x04SEAT\x10\x05\x12\t\n\x05TRACK\x10\x06*&\n\x0e\x45numWindowType\x12\n\n\x06WINDOW\x10\x00\x12\x08\n\x04ROOF\x10\x01*=\n\x0f\x45numWindowParam\x12\x0b\n\x07WUNKNOW\x10\x00\x12\t\n\x05WSTOP\x10\x01\x12\x08\n\x04RISE\x10\x02\x12\x08\n\x04\x46\x41LL\x10\x03*D\n\rEnumRoofParam\x12\x0b\n\x07RUNKNOW\x10\x00\x12\x08\n\x04OPEN\x10\x01\x12\t\n\x05\x43LOSE\x10\x02\x12\t\n\x05RSTOP\x10\x03\x12\x06\n\x02UP\x10\x04*R\n\rEnumSeatLevel\x12\n\n\x06SCLOSE\x10\x00\x12\n\n\x06LEVEL1\x10\x01\x12\n\n\x06LEVEL2\x10\x02\x12\n\n\x06LEVEL3\x10\x03\x12\x11\n\rLEVEL_INVALID\x10\x04*k\n\x10OtaCmdResultCode\x12\x12\n\x0eUPGRADE_FAILED\x10\x00\x12\x15\n\x11UPGRADE_SUCCESSED\x10\x01\x12\x18\n\x14\x44OWNLOAD_FILE_FAILED\x10\x02\x12\x12\n\x0eOTA_IN_PROCESS\x10\x03*l\n\rPepsPowerMode\x12\x10\n\x0cPEPS_DEFAULT\x10\x00\x12\x0c\n\x08PEPS_OFF\x10\x01\x12\x0c\n\x08PEPS_ACC\x10\x02\x12\x0b\n\x07PEPS_ON\x10\x03\x12\x0e\n\nPEPS_START\x10\x04\x12\x10\n\x0cPEPS_INVALID\x10\x05*Y\n\x0f\x45numEngineState\x12\x17\n\x13\x45NGINESTATE_UNKNOWN\x10\x00\x12\n\n\x06KEYOFF\x10\x01\x12\t\n\x05KEYON\x10\x02\x12\t\n\x05\x43RANK\x10\x03\x12\x0b\n\x07RUNNING\x10\x04*\xac\x02\n\x0cGearPosition\x12\n\n\x06GEAR_P\x10\x00\x12\n\n\x06GEAR_R\x10\x01\x12\n\n\x06GEAR_N\x10\x02\x12\n\n\x06GEAR_D\x10\x03\x12\x11\n\rGEAR_MANUAL_1\x10\x04\x12\x11\n\rGEAR_MANUAL_2\x10\x05\x12\x11\n\rGEAR_MANUAL_3\x10\x06\x12\x11\n\rGEAR_MANUAL_4\x10\x07\x12\x11\n\rGEAR_MANUAL_5\x10\x08\x12\x11\n\rGEAR_MANUAL_6\x10\t\x12\x11\n\rGEAR_MANUAL_7\x10\n\x12\x11\n\rGEAR_MANUAL_8\x10\x0b\x12\n\n\x06GEAR_S\x10\x0c\x12\x0f\n\x0bGEAR_UNKNOW\x10\r\x12\x0b\n\x07GEAR_Z1\x10\x0e\x12\x0b\n\x07GEAR_Z2\x10\x0f\x12\x0b\n\x07GEAR_Z3\x10\x10\x12\x10\n\x0cGEAR_Invalid\x10\x11*\x9d\x01\n\rEnumCrashInfo\x12\x0e\n\nNONE_CRASH\x10\x00\x12\x11\n\rUNKNOWN_CRASH\x10\x01\x12\x0e\n\nHEAD_CRASH\x10\x02\x12\x13\n\x0fLEFT_SIDE_CRASH\x10\x03\x12\x14\n\x10RIGHT_SIDE_CRASH\x10\x04\x12\x0e\n\nTAIL_CRASH\x10\x05\x12\x0e\n\nPEDESTRIAN\x10\x06\x12\x0e\n\nMUTI_CRASH\x10\x07*B\n\x0b\x45numBoolean\x12\x10\n\x0c\x43OMMON_FALSE\x10\x00\x12\x0f\n\x0b\x43OMMON_TRUE\x10\x01\x12\x10\n\x0c\x43OMMON_KNOWN\x10\x02*u\n\rEnumAlarmType\x12\x0b\n\x07\x41IR_BAG\x10\x00\x12\r\n\tSIDE_TURN\x10\x01\x12\x10\n\x0cUNUSUAL_MOVE\x10\x02\x12\x0e\n\nANTI_THEFT\x10\x03\x12\x11\n\rVEHICLE_CRASH\x10\x04\x12\x13\n\x0fWINDOW_ABNORMAL\x10\x05*/\n\x11\x45numMotorFireMode\x12\x0c\n\x08IGNITION\x10\x00\x12\x0c\n\x08\x46LAMEOUT\x10\x01*#\n\x0c\x45numPushType\x12\x13\n\x0fMSGTYPE_UNKNOWN\x10\x00\x42\x0e\x42\x0cTboxProtocalb\x06proto3')
 )
 
-_EQUIPMENTIDTYPE = _descriptor.EnumDescriptor(
-  name='EquipmentIdType',
-  full_name='EquipmentIdType',
+_ONOFFSTATE = _descriptor.EnumDescriptor(
+  name='OnOffState',
+  full_name='OnOffState',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='ONOFF_STATE_UNKNOWN', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ONOFF_STATE_OFF', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ONOFF_STATE_ON', index=2, number=2,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=6811,
+  serialized_end=6889,
+)
+_sym_db.RegisterEnumDescriptor(_ONOFFSTATE)
+
+OnOffState = enum_type_wrapper.EnumTypeWrapper(_ONOFFSTATE)
+_ENUMDEVICEIDTYPE = _descriptor.EnumDescriptor(
+  name='EnumDeviceIdType',
+  full_name='EnumDeviceIdType',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -48,15 +75,15 @@ _EQUIPMENTIDTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=6708,
-  serialized_end=6765,
+  serialized_start=6891,
+  serialized_end=6949,
 )
-_sym_db.RegisterEnumDescriptor(_EQUIPMENTIDTYPE)
+_sym_db.RegisterEnumDescriptor(_ENUMDEVICEIDTYPE)
 
-EquipmentIdType = enum_type_wrapper.EnumTypeWrapper(_EQUIPMENTIDTYPE)
-_MSGTYPE = _descriptor.EnumDescriptor(
-  name='MsgType',
-  full_name='MsgType',
+EnumDeviceIdType = enum_type_wrapper.EnumTypeWrapper(_ENUMDEVICEIDTYPE)
+_ENUMMSGTYPE = _descriptor.EnumDescriptor(
+  name='EnumMsgType',
+  full_name='EnumMsgType',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -69,168 +96,129 @@ _MSGTYPE = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='REGISTER_REQUEST', index=2, number=2,
+      name='ACK', index=2, number=2,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='REGISTER_RESPONSE', index=3, number=3,
+      name='REG_REQ', index=3, number=3,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='LOGIN', index=4, number=4,
+      name='REG_RESP', index=4, number=4,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='LOGIN_RESPONSE', index=5, number=5,
+      name='LOGIN_REQ', index=5, number=5,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='HEART_BEAT_RESPONSE', index=6, number=6,
+      name='LOGIN_RESP', index=6, number=6,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='REMOTE_CONFIG_RESPONSE', index=7, number=7,
+      name='HEARTBEAT_RESP', index=7, number=7,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='REMOTE_CONFIG_REQUEST', index=8, number=8,
+      name='CONFIG_QUERY_RESP', index=8, number=8,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='REMOTE_CONFIG_RESULT', index=9, number=9,
+      name='CONFIG_REQ', index=9, number=9,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='REMOTE_CONTROL_CMD', index=10, number=10,
+      name='CONFIG_RESP', index=10, number=10,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='REMOTE_CONTROL_RESPONSE', index=11, number=11,
+      name='CONTROL_CMD', index=11, number=11,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='OTA_CMD', index=12, number=12,
+      name='CONTROL_RESP', index=12, number=12,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='OTA_CMD_RESPONSE', index=13, number=13,
+      name='OTA_CMD_REQ', index=13, number=13,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='OTA_CMD_CHECK_REQUEST', index=14, number=14,
+      name='OTA_CMD_RESP', index=14, number=14,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='OTA_CMD_CHECK_RESPONSE', index=15, number=15,
+      name='OTA_CHECKSUM_REQ', index=15, number=15,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='OTA_RESULT', index=16, number=16,
+      name='OTA_CHECKSUM_RESP', index=16, number=16,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='OTA_RESULT_RESPONSE', index=17, number=17,
+      name='OTA_RESULT_REPORT', index=17, number=17,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='REMOTE_DIAGNOSIS_RESPONSE', index=18, number=18,
+      name='DIAGNOSIS_RESPONSE', index=18, number=18,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='REMOTE_DIAGNOSIS_RESULT', index=19, number=19,
+      name='DATAMINING', index=19, number=19,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='DATAMINING', index=20, number=20,
+      name='VEHICLE_STATUS', index=20, number=20,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='VEHICLE_STATUS', index=21, number=21,
+      name='ALARM_REPORT', index=21, number=21,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ALARM_SIGNAL', index=22, number=22,
+      name='PUSH_MESSAGE', index=22, number=22,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ALARM_SIGNAL_RESPONSE', index=23, number=23,
+      name='MOTOR_FIRE_REPORT', index=23, number=23,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PUSH_MESSAGE', index=24, number=24,
+      name='TRACKING_DATA_REPORT', index=24, number=24,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='MOTOR_FIRE_SIGNAL', index=25, number=25,
+      name='HEART_BEAT_REQ', index=25, number=101,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='COMMON_ACK', index=26, number=26,
+      name='LOGOUT_REQ', index=26, number=102,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='HEART_BEAT', index=27, number=101,
+      name='CONFIG_QUERY_REQ', index=27, number=103,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='LOGOUT', index=28, number=102,
+      name='DIAGNOSIS_REQ', index=28, number=104,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='REMOTE_CONFIG_QUERY_REQUEST', index=29, number=103,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='REMOTE_DIAGNOSIS_REQUEST', index=30, number=104,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='VEHICLE_STATUS_REQUEST', index=31, number=105,
+      name='VEHICLE_STATUS_REQ', index=29, number=105,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=6768,
-  serialized_end=7482,
+  serialized_start=6952,
+  serialized_end=7514,
 )
-_sym_db.RegisterEnumDescriptor(_MSGTYPE)
+_sym_db.RegisterEnumDescriptor(_ENUMMSGTYPE)
 
-MsgType = enum_type_wrapper.EnumTypeWrapper(_MSGTYPE)
-_COMMONACKCODE = _descriptor.EnumDescriptor(
-  name='CommonAckCode',
-  full_name='CommonAckCode',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='SUCCESS', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='FAILED', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_LOGIN', index=2, number=2,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='MESSAGE_PARSE_ERROR', index=3, number=3,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=7484,
-  serialized_end=7564,
-)
-_sym_db.RegisterEnumDescriptor(_COMMONACKCODE)
-
-CommonAckCode = enum_type_wrapper.EnumTypeWrapper(_COMMONACKCODE)
-_REMOTECONFIGITEM = _descriptor.EnumDescriptor(
-  name='RemoteConfigItem',
-  full_name='RemoteConfigItem',
+EnumMsgType = enum_type_wrapper.EnumTypeWrapper(_ENUMMSGTYPE)
+_ENUMCONFITEM = _descriptor.EnumDescriptor(
+  name='EnumConfItem',
+  full_name='EnumConfItem',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -314,37 +302,22 @@ _REMOTECONFIGITEM = _descriptor.EnumDescriptor(
       name='ABNORMAL_MOVE_THRESHOLD_VALUE', index=19, number=19,
       options=None,
       type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=7567,
-  serialized_end=8100,
-)
-_sym_db.RegisterEnumDescriptor(_REMOTECONFIGITEM)
-
-RemoteConfigItem = enum_type_wrapper.EnumTypeWrapper(_REMOTECONFIGITEM)
-_REMOTECONFIGERRORCODE = _descriptor.EnumDescriptor(
-  name='RemoteConfigErrorCode',
-  full_name='RemoteConfigErrorCode',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
     _descriptor.EnumValueDescriptor(
-      name='UNKNOW', index=0, number=0,
+      name='TRACKING_DATA_FREQUENCY', index=20, number=20,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=8102,
-  serialized_end=8137,
+  serialized_start=7517,
+  serialized_end=8075,
 )
-_sym_db.RegisterEnumDescriptor(_REMOTECONFIGERRORCODE)
+_sym_db.RegisterEnumDescriptor(_ENUMCONFITEM)
 
-RemoteConfigErrorCode = enum_type_wrapper.EnumTypeWrapper(_REMOTECONFIGERRORCODE)
-_REMOTECONTROLCMDTYPE = _descriptor.EnumDescriptor(
-  name='RemoteControlCmdType',
-  full_name='RemoteControlCmdType',
+EnumConfItem = enum_type_wrapper.EnumTypeWrapper(_ENUMCONFITEM)
+_ENUMCMDTYPE = _descriptor.EnumDescriptor(
+  name='EnumCmdType',
+  full_name='EnumCmdType',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -364,38 +337,151 @@ _REMOTECONTROLCMDTYPE = _descriptor.EnumDescriptor(
       name='FIND_VEHICLE', index=3, number=3,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='WINDOWS', index=4, number=4,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SEAT', index=5, number=5,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='TRACK', index=6, number=6,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=8139,
-  serialized_end=8225,
+  serialized_start=8077,
+  serialized_end=8188,
 )
-_sym_db.RegisterEnumDescriptor(_REMOTECONTROLCMDTYPE)
+_sym_db.RegisterEnumDescriptor(_ENUMCMDTYPE)
 
-RemoteControlCmdType = enum_type_wrapper.EnumTypeWrapper(_REMOTECONTROLCMDTYPE)
-_REMOTECONTROLEXCUTERESULT = _descriptor.EnumDescriptor(
-  name='RemoteControlExcuteResult',
-  full_name='RemoteControlExcuteResult',
+EnumCmdType = enum_type_wrapper.EnumTypeWrapper(_ENUMCMDTYPE)
+_ENUMWINDOWTYPE = _descriptor.EnumDescriptor(
+  name='EnumWindowType',
+  full_name='EnumWindowType',
   filename=None,
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='REMOTE_CONTROL_FAILED', index=0, number=0,
+      name='WINDOW', index=0, number=0,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='REMOTE_CONTROL_SUCCESS', index=1, number=1,
+      name='ROOF', index=1, number=1,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=8227,
-  serialized_end=8309,
+  serialized_start=8190,
+  serialized_end=8228,
 )
-_sym_db.RegisterEnumDescriptor(_REMOTECONTROLEXCUTERESULT)
+_sym_db.RegisterEnumDescriptor(_ENUMWINDOWTYPE)
 
-RemoteControlExcuteResult = enum_type_wrapper.EnumTypeWrapper(_REMOTECONTROLEXCUTERESULT)
+EnumWindowType = enum_type_wrapper.EnumTypeWrapper(_ENUMWINDOWTYPE)
+_ENUMWINDOWPARAM = _descriptor.EnumDescriptor(
+  name='EnumWindowParam',
+  full_name='EnumWindowParam',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='WUNKNOW', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='WSTOP', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='RISE', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FALL', index=3, number=3,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=8230,
+  serialized_end=8291,
+)
+_sym_db.RegisterEnumDescriptor(_ENUMWINDOWPARAM)
+
+EnumWindowParam = enum_type_wrapper.EnumTypeWrapper(_ENUMWINDOWPARAM)
+_ENUMROOFPARAM = _descriptor.EnumDescriptor(
+  name='EnumRoofParam',
+  full_name='EnumRoofParam',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='RUNKNOW', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='OPEN', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CLOSE', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='RSTOP', index=3, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UP', index=4, number=4,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=8293,
+  serialized_end=8361,
+)
+_sym_db.RegisterEnumDescriptor(_ENUMROOFPARAM)
+
+EnumRoofParam = enum_type_wrapper.EnumTypeWrapper(_ENUMROOFPARAM)
+_ENUMSEATLEVEL = _descriptor.EnumDescriptor(
+  name='EnumSeatLevel',
+  full_name='EnumSeatLevel',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='SCLOSE', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='LEVEL1', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='LEVEL2', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='LEVEL3', index=3, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='LEVEL_INVALID', index=4, number=4,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=8363,
+  serialized_end=8445,
+)
+_sym_db.RegisterEnumDescriptor(_ENUMSEATLEVEL)
+
+EnumSeatLevel = enum_type_wrapper.EnumTypeWrapper(_ENUMSEATLEVEL)
 _OTACMDRESULTCODE = _descriptor.EnumDescriptor(
   name='OtaCmdResultCode',
   full_name='OtaCmdResultCode',
@@ -421,8 +507,8 @@ _OTACMDRESULTCODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=8311,
-  serialized_end=8418,
+  serialized_start=8447,
+  serialized_end=8554,
 )
 _sym_db.RegisterEnumDescriptor(_OTACMDRESULTCODE)
 
@@ -460,124 +546,15 @@ _PEPSPOWERMODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=8420,
-  serialized_end=8528,
+  serialized_start=8556,
+  serialized_end=8664,
 )
 _sym_db.RegisterEnumDescriptor(_PEPSPOWERMODE)
 
 PepsPowerMode = enum_type_wrapper.EnumTypeWrapper(_PEPSPOWERMODE)
-_CRASHINFO = _descriptor.EnumDescriptor(
-  name='CrashInfo',
-  full_name='CrashInfo',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='NONE_CRASH', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='UNKNOWN_CRASH', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='HEAD_CRASH', index=2, number=2,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='LEFT_SIDE_CRASH', index=3, number=3,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='RIGHT_SIDE_CRASH', index=4, number=4,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='TAIL_CRASH', index=5, number=5,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='PEDESTRIAN', index=6, number=6,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='MUTI_CRASH', index=7, number=7,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=8531,
-  serialized_end=8684,
-)
-_sym_db.RegisterEnumDescriptor(_CRASHINFO)
-
-CrashInfo = enum_type_wrapper.EnumTypeWrapper(_CRASHINFO)
-_COMMONTRUEFALSEUNKNOWN = _descriptor.EnumDescriptor(
-  name='CommonTrueFalseUnknown',
-  full_name='CommonTrueFalseUnknown',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='COMMON_FALSE', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='COMMON_TRUE', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='COMMON_KNOWN', index=2, number=2,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=8686,
-  serialized_end=8763,
-)
-_sym_db.RegisterEnumDescriptor(_COMMONTRUEFALSEUNKNOWN)
-
-CommonTrueFalseUnknown = enum_type_wrapper.EnumTypeWrapper(_COMMONTRUEFALSEUNKNOWN)
-_ALARMSIGNALTYPE = _descriptor.EnumDescriptor(
-  name='AlarmSignalType',
-  full_name='AlarmSignalType',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='AIR_BAG', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='SIDE_TURN', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='UNUSUAL_MOVE', index=2, number=2,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='ANTI_THEFT', index=3, number=3,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='VEHICLE_CRASH', index=4, number=4,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=8765,
-  serialized_end=8863,
-)
-_sym_db.RegisterEnumDescriptor(_ALARMSIGNALTYPE)
-
-AlarmSignalType = enum_type_wrapper.EnumTypeWrapper(_ALARMSIGNALTYPE)
-_ENGINESTATE = _descriptor.EnumDescriptor(
-  name='EngineState',
-  full_name='EngineState',
+_ENUMENGINESTATE = _descriptor.EnumDescriptor(
+  name='EnumEngineState',
+  full_name='EnumEngineState',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -604,39 +581,12 @@ _ENGINESTATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=8865,
-  serialized_end=8950,
+  serialized_start=8666,
+  serialized_end=8755,
 )
-_sym_db.RegisterEnumDescriptor(_ENGINESTATE)
+_sym_db.RegisterEnumDescriptor(_ENUMENGINESTATE)
 
-EngineState = enum_type_wrapper.EnumTypeWrapper(_ENGINESTATE)
-_ONOFFSTATE = _descriptor.EnumDescriptor(
-  name='OnOffState',
-  full_name='OnOffState',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='ONOFF_STATE_UNKNOWN', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='ONOFF_STATE_OFF', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='ONOFF_STATE_ON', index=2, number=2,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=8952,
-  serialized_end=9030,
-)
-_sym_db.RegisterEnumDescriptor(_ONOFFSTATE)
-
-OnOffState = enum_type_wrapper.EnumTypeWrapper(_ONOFFSTATE)
+EnumEngineState = enum_type_wrapper.EnumTypeWrapper(_ENUMENGINESTATE)
 _GEARPOSITION = _descriptor.EnumDescriptor(
   name='GearPosition',
   full_name='GearPosition',
@@ -718,15 +668,128 @@ _GEARPOSITION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=9033,
-  serialized_end=9333,
+  serialized_start=8758,
+  serialized_end=9058,
 )
 _sym_db.RegisterEnumDescriptor(_GEARPOSITION)
 
 GearPosition = enum_type_wrapper.EnumTypeWrapper(_GEARPOSITION)
-_MOTORFIREMODE = _descriptor.EnumDescriptor(
-  name='MotorFireMode',
-  full_name='MotorFireMode',
+_ENUMCRASHINFO = _descriptor.EnumDescriptor(
+  name='EnumCrashInfo',
+  full_name='EnumCrashInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='NONE_CRASH', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UNKNOWN_CRASH', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='HEAD_CRASH', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='LEFT_SIDE_CRASH', index=3, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='RIGHT_SIDE_CRASH', index=4, number=4,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='TAIL_CRASH', index=5, number=5,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='PEDESTRIAN', index=6, number=6,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MUTI_CRASH', index=7, number=7,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=9061,
+  serialized_end=9218,
+)
+_sym_db.RegisterEnumDescriptor(_ENUMCRASHINFO)
+
+EnumCrashInfo = enum_type_wrapper.EnumTypeWrapper(_ENUMCRASHINFO)
+_ENUMBOOLEAN = _descriptor.EnumDescriptor(
+  name='EnumBoolean',
+  full_name='EnumBoolean',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='COMMON_FALSE', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='COMMON_TRUE', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='COMMON_KNOWN', index=2, number=2,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=9220,
+  serialized_end=9286,
+)
+_sym_db.RegisterEnumDescriptor(_ENUMBOOLEAN)
+
+EnumBoolean = enum_type_wrapper.EnumTypeWrapper(_ENUMBOOLEAN)
+_ENUMALARMTYPE = _descriptor.EnumDescriptor(
+  name='EnumAlarmType',
+  full_name='EnumAlarmType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='AIR_BAG', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SIDE_TURN', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UNUSUAL_MOVE', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ANTI_THEFT', index=3, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='VEHICLE_CRASH', index=4, number=4,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='WINDOW_ABNORMAL', index=5, number=5,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=9288,
+  serialized_end=9405,
+)
+_sym_db.RegisterEnumDescriptor(_ENUMALARMTYPE)
+
+EnumAlarmType = enum_type_wrapper.EnumTypeWrapper(_ENUMALARMTYPE)
+_ENUMMOTORFIREMODE = _descriptor.EnumDescriptor(
+  name='EnumMotorFireMode',
+  full_name='EnumMotorFireMode',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -741,52 +804,68 @@ _MOTORFIREMODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=9335,
-  serialized_end=9378,
+  serialized_start=9407,
+  serialized_end=9454,
 )
-_sym_db.RegisterEnumDescriptor(_MOTORFIREMODE)
+_sym_db.RegisterEnumDescriptor(_ENUMMOTORFIREMODE)
 
-MotorFireMode = enum_type_wrapper.EnumTypeWrapper(_MOTORFIREMODE)
+EnumMotorFireMode = enum_type_wrapper.EnumTypeWrapper(_ENUMMOTORFIREMODE)
+_ENUMPUSHTYPE = _descriptor.EnumDescriptor(
+  name='EnumPushType',
+  full_name='EnumPushType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='MSGTYPE_UNKNOWN', index=0, number=0,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=9456,
+  serialized_end=9491,
+)
+_sym_db.RegisterEnumDescriptor(_ENUMPUSHTYPE)
+
+EnumPushType = enum_type_wrapper.EnumTypeWrapper(_ENUMPUSHTYPE)
+ONOFF_STATE_UNKNOWN = 0
+ONOFF_STATE_OFF = 1
+ONOFF_STATE_ON = 2
 PDID = 0
 VIN = 1
 IMEI = 2
 ICCID = 3
 TYPE0 = 0
 TYPE1 = 1
-REGISTER_REQUEST = 2
-REGISTER_RESPONSE = 3
-LOGIN = 4
-LOGIN_RESPONSE = 5
-HEART_BEAT_RESPONSE = 6
-REMOTE_CONFIG_RESPONSE = 7
-REMOTE_CONFIG_REQUEST = 8
-REMOTE_CONFIG_RESULT = 9
-REMOTE_CONTROL_CMD = 10
-REMOTE_CONTROL_RESPONSE = 11
-OTA_CMD = 12
-OTA_CMD_RESPONSE = 13
-OTA_CMD_CHECK_REQUEST = 14
-OTA_CMD_CHECK_RESPONSE = 15
-OTA_RESULT = 16
-OTA_RESULT_RESPONSE = 17
-REMOTE_DIAGNOSIS_RESPONSE = 18
-REMOTE_DIAGNOSIS_RESULT = 19
-DATAMINING = 20
-VEHICLE_STATUS = 21
-ALARM_SIGNAL = 22
-ALARM_SIGNAL_RESPONSE = 23
-PUSH_MESSAGE = 24
-MOTOR_FIRE_SIGNAL = 25
-COMMON_ACK = 26
-HEART_BEAT = 101
-LOGOUT = 102
-REMOTE_CONFIG_QUERY_REQUEST = 103
-REMOTE_DIAGNOSIS_REQUEST = 104
-VEHICLE_STATUS_REQUEST = 105
-SUCCESS = 0
-FAILED = 1
-NOT_LOGIN = 2
-MESSAGE_PARSE_ERROR = 3
+ACK = 2
+REG_REQ = 3
+REG_RESP = 4
+LOGIN_REQ = 5
+LOGIN_RESP = 6
+HEARTBEAT_RESP = 7
+CONFIG_QUERY_RESP = 8
+CONFIG_REQ = 9
+CONFIG_RESP = 10
+CONTROL_CMD = 11
+CONTROL_RESP = 12
+OTA_CMD_REQ = 13
+OTA_CMD_RESP = 14
+OTA_CHECKSUM_REQ = 15
+OTA_CHECKSUM_RESP = 16
+OTA_RESULT_REPORT = 17
+DIAGNOSIS_RESPONSE = 18
+DATAMINING = 19
+VEHICLE_STATUS = 20
+ALARM_REPORT = 21
+PUSH_MESSAGE = 22
+MOTOR_FIRE_REPORT = 23
+TRACKING_DATA_REPORT = 24
+HEART_BEAT_REQ = 101
+LOGOUT_REQ = 102
+CONFIG_QUERY_REQ = 103
+DIAGNOSIS_REQ = 104
+VEHICLE_STATUS_REQ = 105
 MQTT_SERVER_ADDR = 0
 MQTT_SERVER_TOPIC = 1
 MQTT_KEY_BUSINESS_SERVER_ADDR = 2
@@ -807,13 +886,30 @@ DATAMING_ENABLE = 16
 SVT_ENABLE = 17
 ELETRONIC_DEFENSE_ENABLE = 18
 ABNORMAL_MOVE_THRESHOLD_VALUE = 19
-UNKNOW = 0
+TRACKING_DATA_FREQUENCY = 20
 ENGINE = 0
 AIR_CONDITION_CTRL = 1
 LOCK = 2
 FIND_VEHICLE = 3
-REMOTE_CONTROL_FAILED = 0
-REMOTE_CONTROL_SUCCESS = 1
+WINDOWS = 4
+SEAT = 5
+TRACK = 6
+WINDOW = 0
+ROOF = 1
+WUNKNOW = 0
+WSTOP = 1
+RISE = 2
+FALL = 3
+RUNKNOW = 0
+OPEN = 1
+CLOSE = 2
+RSTOP = 3
+UP = 4
+SCLOSE = 0
+LEVEL1 = 1
+LEVEL2 = 2
+LEVEL3 = 3
+LEVEL_INVALID = 4
 UPGRADE_FAILED = 0
 UPGRADE_SUCCESSED = 1
 DOWNLOAD_FILE_FAILED = 2
@@ -824,30 +920,11 @@ PEPS_ACC = 2
 PEPS_ON = 3
 PEPS_START = 4
 PEPS_INVALID = 5
-NONE_CRASH = 0
-UNKNOWN_CRASH = 1
-HEAD_CRASH = 2
-LEFT_SIDE_CRASH = 3
-RIGHT_SIDE_CRASH = 4
-TAIL_CRASH = 5
-PEDESTRIAN = 6
-MUTI_CRASH = 7
-COMMON_FALSE = 0
-COMMON_TRUE = 1
-COMMON_KNOWN = 2
-AIR_BAG = 0
-SIDE_TURN = 1
-UNUSUAL_MOVE = 2
-ANTI_THEFT = 3
-VEHICLE_CRASH = 4
 ENGINESTATE_UNKNOWN = 0
 KEYOFF = 1
 KEYON = 2
 CRANK = 3
 RUNNING = 4
-ONOFF_STATE_UNKNOWN = 0
-ONOFF_STATE_OFF = 1
-ONOFF_STATE_ON = 2
 GEAR_P = 0
 GEAR_R = 1
 GEAR_N = 2
@@ -866,9 +943,65 @@ GEAR_Z1 = 14
 GEAR_Z2 = 15
 GEAR_Z3 = 16
 GEAR_Invalid = 17
+NONE_CRASH = 0
+UNKNOWN_CRASH = 1
+HEAD_CRASH = 2
+LEFT_SIDE_CRASH = 3
+RIGHT_SIDE_CRASH = 4
+TAIL_CRASH = 5
+PEDESTRIAN = 6
+MUTI_CRASH = 7
+COMMON_FALSE = 0
+COMMON_TRUE = 1
+COMMON_KNOWN = 2
+AIR_BAG = 0
+SIDE_TURN = 1
+UNUSUAL_MOVE = 2
+ANTI_THEFT = 3
+VEHICLE_CRASH = 4
+WINDOW_ABNORMAL = 5
 IGNITION = 0
 FLAMEOUT = 1
+MSGTYPE_UNKNOWN = 0
 
+
+
+_MSGACK = _descriptor.Descriptor(
+  name='MsgAck',
+  full_name='MsgAck',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='status', full_name='MsgAck.status', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='code', full_name='MsgAck.code', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14,
+  serialized_end=52,
+)
 
 
 _MSGTOP = _descriptor.Descriptor(
@@ -886,176 +1019,162 @@ _MSGTOP = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='register_request', full_name='MsgTop.register_request', index=1,
+      name='ack', full_name='MsgTop.ack', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='register_response', full_name='MsgTop.register_response', index=2,
+      name='register_request', full_name='MsgTop.register_request', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='login', full_name='MsgTop.login', index=3,
+      name='register_response', full_name='MsgTop.register_response', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='login_response', full_name='MsgTop.login_response', index=4,
+      name='login_request', full_name='MsgTop.login_request', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='heart_beat_response', full_name='MsgTop.heart_beat_response', index=5,
+      name='login_response', full_name='MsgTop.login_response', index=5,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='remote_config_response', full_name='MsgTop.remote_config_response', index=6,
+      name='heart_beat_response', full_name='MsgTop.heart_beat_response', index=6,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='remote_config_request', full_name='MsgTop.remote_config_request', index=7,
+      name='config_query_response', full_name='MsgTop.config_query_response', index=7,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='remote_config_result', full_name='MsgTop.remote_config_result', index=8,
+      name='config_request', full_name='MsgTop.config_request', index=8,
       number=9, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='remote_control_cmd', full_name='MsgTop.remote_control_cmd', index=9,
+      name='config_response', full_name='MsgTop.config_response', index=9,
       number=10, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='remote_control_response', full_name='MsgTop.remote_control_response', index=10,
+      name='control_cmd', full_name='MsgTop.control_cmd', index=10,
       number=11, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='MsgOtaCmd', full_name='MsgTop.MsgOtaCmd', index=11,
+      name='control_response', full_name='MsgTop.control_response', index=11,
       number=12, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='ota_cmd_response', full_name='MsgTop.ota_cmd_response', index=12,
+      name='ota_cmd', full_name='MsgTop.ota_cmd', index=12,
       number=13, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='ota_cmd_check_request', full_name='MsgTop.ota_cmd_check_request', index=13,
+      name='ota_cmd_response', full_name='MsgTop.ota_cmd_response', index=13,
       number=14, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='ota_cmd_check_response', full_name='MsgTop.ota_cmd_check_response', index=14,
+      name='ota_cmd_check_request', full_name='MsgTop.ota_cmd_check_request', index=14,
       number=15, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='ota_result', full_name='MsgTop.ota_result', index=15,
+      name='ota_cmd_check_response', full_name='MsgTop.ota_cmd_check_response', index=15,
       number=16, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='ota_result_response', full_name='MsgTop.ota_result_response', index=16,
+      name='ota_result', full_name='MsgTop.ota_result', index=16,
       number=17, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='remote_diagnosis_response', full_name='MsgTop.remote_diagnosis_response', index=17,
+      name='diagnosis_response', full_name='MsgTop.diagnosis_response', index=17,
       number=18, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='remote_diagnosis_result', full_name='MsgTop.remote_diagnosis_result', index=18,
+      name='datamining', full_name='MsgTop.datamining', index=18,
       number=19, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='datamining', full_name='MsgTop.datamining', index=19,
+      name='vehicle_status', full_name='MsgTop.vehicle_status', index=19,
       number=20, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='vehicle_status', full_name='MsgTop.vehicle_status', index=20,
+      name='alarm_signal', full_name='MsgTop.alarm_signal', index=20,
       number=21, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='alarm_signal', full_name='MsgTop.alarm_signal', index=21,
+      name='push_message', full_name='MsgTop.push_message', index=21,
       number=22, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='alarm_signal_response', full_name='MsgTop.alarm_signal_response', index=22,
+      name='motor_fire_signal', full_name='MsgTop.motor_fire_signal', index=22,
       number=23, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='push_message', full_name='MsgTop.push_message', index=23,
+      name='tracking_data', full_name='MsgTop.tracking_data', index=23,
       number=24, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='motor_fire_signal', full_name='MsgTop.motor_fire_signal', index=24,
-      number=25, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='common_ack', full_name='MsgTop.common_ack', index=25,
-      number=26, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -1072,71 +1191,78 @@ _MSGTOP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15,
-  serialized_end=1249,
+  serialized_start=55,
+  serialized_end=1046,
 )
 
 
-_COMMONHEAD = _descriptor.Descriptor(
-  name='CommonHead',
-  full_name='CommonHead',
+_MSGHEAD = _descriptor.Descriptor(
+  name='MsgHead',
+  full_name='MsgHead',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='protocol_version', full_name='CommonHead.protocol_version', index=0,
+      name='protocol_version', full_name='MsgHead.protocol_version', index=0,
       number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='equipment_id_type', full_name='CommonHead.equipment_id_type', index=1,
+      name='did_type', full_name='MsgHead.did_type', index=1,
       number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='equipment_id', full_name='CommonHead.equipment_id', index=2,
+      name='device_id', full_name='MsgHead.device_id', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='message_id', full_name='CommonHead.message_id', index=3,
+      name='message_id', full_name='MsgHead.message_id', index=3,
       number=4, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='msg_type', full_name='CommonHead.msg_type', index=4,
+      name='msg_type', full_name='MsgHead.msg_type', index=4,
       number=5, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='message_create_time', full_name='CommonHead.message_create_time', index=5,
+      name='msg_c_time', full_name='MsgHead.msg_c_time', index=5,
       number=6, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='token', full_name='CommonHead.token', index=6,
+      name='token', full_name='MsgHead.token', index=6,
       number=7, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='flag', full_name='CommonHead.flag', index=7,
+      name='flag', full_name='MsgHead.flag', index=7,
       number=8, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='task_id', full_name='MsgHead.task_id', index=8,
+      number=9, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
@@ -1152,27 +1278,263 @@ _COMMONHEAD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1252,
-  serialized_end=1463,
+  serialized_start=1049,
+  serialized_end=1258,
 )
 
 
-_COMMONACK = _descriptor.Descriptor(
-  name='CommonAck',
-  full_name='CommonAck',
+_MSGGPSINFO = _descriptor.Descriptor(
+  name='MsgGpsInfo',
+  full_name='MsgGpsInfo',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ack_code', full_name='CommonAck.ack_code', index=0,
-      number=1, type=14, cpp_type=8, label=1,
+      name='longtitude', full_name='MsgGpsInfo.longtitude', index=0,
+      number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='code_desp', full_name='CommonAck.code_desp', index=1,
+      name='latitude', full_name='MsgGpsInfo.latitude', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='altitude', full_name='MsgGpsInfo.altitude', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gps_heading', full_name='MsgGpsInfo.gps_heading', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gps_speed', full_name='MsgGpsInfo.gps_speed', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='satellite_number', full_name='MsgGpsInfo.satellite_number', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='valid', full_name='MsgGpsInfo.valid', index=6,
+      number=7, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gps_time', full_name='MsgGpsInfo.gps_time', index=7,
+      number=8, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1261,
+  serialized_end=1428,
+)
+
+
+_MSGREGREQ = _descriptor.Descriptor(
+  name='MsgRegReq',
+  full_name='MsgRegReq',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='pdid', full_name='MsgRegReq.pdid', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='iccid', full_name='MsgRegReq.iccid', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tbox_version', full_name='MsgRegReq.tbox_version', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1430,
+  serialized_end=1492,
+)
+
+
+_MSGREGRESP = _descriptor.Descriptor(
+  name='MsgRegResp',
+  full_name='MsgRegResp',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='res_code', full_name='MsgRegResp.res_code', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='addr', full_name='MsgRegResp.addr', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ca_cer', full_name='MsgRegResp.ca_cer', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='custom_cer', full_name='MsgRegResp.custom_cer', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1494,
+  serialized_end=1574,
+)
+
+
+_MSGLOGINREQ = _descriptor.Descriptor(
+  name='MsgLoginReq',
+  full_name='MsgLoginReq',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='pdid', full_name='MsgLoginReq.pdid', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='iccid', full_name='MsgLoginReq.iccid', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='vin', full_name='MsgLoginReq.vin', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='version', full_name='MsgLoginReq.version', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='release_tag', full_name='MsgLoginReq.release_tag', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1576,
+  serialized_end=1669,
+)
+
+
+_MSGLOGINRESP = _descriptor.Descriptor(
+  name='MsgLoginResp',
+  full_name='MsgLoginResp',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ack', full_name='MsgLoginResp.ack', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='token', full_name='MsgLoginResp.token', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1190,62 +1552,561 @@ _COMMONACK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1465,
-  serialized_end=1529,
+  serialized_start=1671,
+  serialized_end=1722,
 )
 
 
-_GPSINFO = _descriptor.Descriptor(
-  name='GpsInfo',
-  full_name='GpsInfo',
+_MSGHEARTBEATRESP = _descriptor.Descriptor(
+  name='MsgHeartBeatResp',
+  full_name='MsgHeartBeatResp',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='longtitude', full_name='GpsInfo.longtitude', index=0,
-      number=1, type=5, cpp_type=1, label=1,
+      name='ack', full_name='MsgHeartBeatResp.ack', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1724,
+  serialized_end=1764,
+)
+
+
+_MSGCONFDATA = _descriptor.Descriptor(
+  name='MsgConfData',
+  full_name='MsgConfData',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mqtt_server_addr', full_name='MsgConfData.mqtt_server_addr', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='mqtt_server_topic', full_name='MsgConfData.mqtt_server_topic', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='mqtt_key_business_server_addr', full_name='MsgConfData.mqtt_key_business_server_addr', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='mqtt_key_business_server_topic', full_name='MsgConfData.mqtt_key_business_server_topic', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ecall_number', full_name='MsgConfData.ecall_number', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='bcall_number', full_name='MsgConfData.bcall_number', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='icall_number', full_name='MsgConfData.icall_number', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ecall_enable', full_name='MsgConfData.ecall_enable', index=7,
+      number=8, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='bcall_enable', full_name='MsgConfData.bcall_enable', index=8,
+      number=9, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='icall_enable', full_name='MsgConfData.icall_enable', index=9,
+      number=10, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='sms_gate_number_upload', full_name='MsgConfData.sms_gate_number_upload', index=10,
+      number=11, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='sms_gate_number_download', full_name='MsgConfData.sms_gate_number_download', index=11,
+      number=12, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='datamining_upload_frequency', full_name='MsgConfData.datamining_upload_frequency', index=12,
+      number=13, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='latitude', full_name='GpsInfo.latitude', index=1,
-      number=2, type=5, cpp_type=1, label=1,
+      name='vehicle_status_upload_frequency', full_name='MsgConfData.vehicle_status_upload_frequency', index=13,
+      number=14, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='altitude', full_name='GpsInfo.altitude', index=2,
-      number=3, type=5, cpp_type=1, label=1,
+      name='ignition_blowout_upload_enable', full_name='MsgConfData.ignition_blowout_upload_enable', index=14,
+      number=15, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='upload_alert_enable', full_name='MsgConfData.upload_alert_enable', index=15,
+      number=16, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='datamining_enable', full_name='MsgConfData.datamining_enable', index=16,
+      number=17, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='svt_enable', full_name='MsgConfData.svt_enable', index=17,
+      number=18, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='eletronic_defense_enable', full_name='MsgConfData.eletronic_defense_enable', index=18,
+      number=19, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='abnormal_move_threshold_value', full_name='MsgConfData.abnormal_move_threshold_value', index=19,
+      number=20, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='gps_heading', full_name='GpsInfo.gps_heading', index=3,
-      number=4, type=5, cpp_type=1, label=1,
+      name='tracking_data_frequency', full_name='MsgConfData.tracking_data_frequency', index=20,
+      number=21, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1767,
+  serialized_end=2410,
+)
+
+
+_MSGCONFQUERYRESP = _descriptor.Descriptor(
+  name='MsgConfQueryResp',
+  full_name='MsgConfQueryResp',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ack', full_name='MsgConfQueryResp.ack', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='qconfig_data', full_name='MsgConfQueryResp.qconfig_data', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2412,
+  serialized_end=2488,
+)
+
+
+_MSGCONFREQ = _descriptor.Descriptor(
+  name='MsgConfReq',
+  full_name='MsgConfReq',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='config_items', full_name='MsgConfReq.config_items', index=0,
+      number=1, type=14, cpp_type=8, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rconfig_data', full_name='MsgConfReq.rconfig_data', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2490,
+  serialized_end=2575,
+)
+
+
+_MSGCONFRESP_MSGCONFRESULT = _descriptor.Descriptor(
+  name='MsgConfResult',
+  full_name='MsgConfResp.MsgConfResult',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='config_item', full_name='MsgConfResp.MsgConfResult.config_item', index=0,
+      number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='gps_speed', full_name='GpsInfo.gps_speed', index=4,
-      number=5, type=5, cpp_type=1, label=1,
+      name='result', full_name='MsgConfResp.MsgConfResult.result', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2735,
+  serialized_end=2802,
+)
+
+_MSGCONFRESP = _descriptor.Descriptor(
+  name='MsgConfResp',
+  full_name='MsgConfResp',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ack', full_name='MsgConfResp.ack', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='config_results', full_name='MsgConfResp.config_results', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='config_old', full_name='MsgConfResp.config_old', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='config_new', full_name='MsgConfResp.config_new', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_MSGCONFRESP_MSGCONFRESULT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2578,
+  serialized_end=2802,
+)
+
+
+_MSGCONTROLREQ_MSGAIRPARAM = _descriptor.Descriptor(
+  name='MsgAirParam',
+  full_name='MsgControlReq.MsgAirParam',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ac_switch', full_name='MsgControlReq.MsgAirParam.ac_switch', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ac_temperature', full_name='MsgControlReq.MsgAirParam.ac_temperature', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ac_front_defrost', full_name='MsgControlReq.MsgAirParam.ac_front_defrost', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ac_rear_defrost', full_name='MsgControlReq.MsgAirParam.ac_rear_defrost', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3068,
+  serialized_end=3175,
+)
+
+_MSGCONTROLREQ_MSGWINDOWSPARAM = _descriptor.Descriptor(
+  name='MsgWindowsParam',
+  full_name='MsgControlReq.MsgWindowsParam',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='MsgControlReq.MsgWindowsParam.type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='satellite_number', full_name='GpsInfo.satellite_number', index=5,
-      number=6, type=5, cpp_type=1, label=1,
+      name='windw_param', full_name='MsgControlReq.MsgWindowsParam.windw_param', index=1,
+      number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='valid', full_name='GpsInfo.valid', index=6,
+      name='roof_param', full_name='MsgControlReq.MsgWindowsParam.roof_param', index=2,
+      number=3, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3177,
+  serialized_end=3300,
+)
+
+_MSGCONTROLREQ_MSGSEATPARAM = _descriptor.Descriptor(
+  name='MsgSeatParam',
+  full_name='MsgControlReq.MsgSeatParam',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='master', full_name='MsgControlReq.MsgSeatParam.master', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='slave', full_name='MsgControlReq.MsgSeatParam.slave', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3302,
+  serialized_end=3379,
+)
+
+_MSGCONTROLREQ = _descriptor.Descriptor(
+  name='MsgControlReq',
+  full_name='MsgControlReq',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='cmd_type', full_name='MsgControlReq.cmd_type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='air_param', full_name='MsgControlReq.air_param', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='engine_param', full_name='MsgControlReq.engine_param', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='lock_param', full_name='MsgControlReq.lock_param', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='window_param', full_name='MsgControlReq.window_param', index=4,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='seat_param', full_name='MsgControlReq.seat_param', index=5,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='track_signal', full_name='MsgControlReq.track_signal', index=6,
       number=7, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -1254,7 +2115,7 @@ _GPSINFO = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[],
+  nested_types=[_MSGCONTROLREQ_MSGAIRPARAM, _MSGCONTROLREQ_MSGWINDOWSPARAM, _MSGCONTROLREQ_MSGSEATPARAM, ],
   enum_types=[
   ],
   options=None,
@@ -1263,416 +2124,27 @@ _GPSINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1532,
-  serialized_end=1678,
+  serialized_start=2805,
+  serialized_end=3379,
 )
 
 
-_MSGREGISTERREQUEST = _descriptor.Descriptor(
-  name='MsgRegisterRequest',
-  full_name='MsgRegisterRequest',
+_MSGCONTROLRESP = _descriptor.Descriptor(
+  name='MsgControlResp',
+  full_name='MsgControlResp',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='pdid', full_name='MsgRegisterRequest.pdid', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='iccid', full_name='MsgRegisterRequest.iccid', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='tbox_version', full_name='MsgRegisterRequest.tbox_version', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1680,
-  serialized_end=1751,
-)
-
-
-_MSGREGISTERRESPONSE = _descriptor.Descriptor(
-  name='MsgRegisterResponse',
-  full_name='MsgRegisterResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='res_code', full_name='MsgRegisterResponse.res_code', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='addr', full_name='MsgRegisterResponse.addr', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='ca_cer', full_name='MsgRegisterResponse.ca_cer', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='custom_cer', full_name='MsgRegisterResponse.custom_cer', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1753,
-  serialized_end=1842,
-)
-
-
-_MSGLOGIN = _descriptor.Descriptor(
-  name='MsgLogIn',
-  full_name='MsgLogIn',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='pdid', full_name='MsgLogIn.pdid', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='iccid', full_name='MsgLogIn.iccid', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='vin', full_name='MsgLogIn.vin', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='version', full_name='MsgLogIn.version', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='release_tag', full_name='MsgLogIn.release_tag', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1844,
-  serialized_end=1934,
-)
-
-
-_MSGLOGINRESPONSE = _descriptor.Descriptor(
-  name='MsgLogInResponse',
-  full_name='MsgLogInResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ack_code', full_name='MsgLogInResponse.ack_code', index=0,
+      name='ack', full_name='MsgControlResp.ack', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='token', full_name='MsgLogInResponse.token', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1936,
-  serialized_end=1999,
-)
-
-
-_MSGHEARTBEATRESPONSE = _descriptor.Descriptor(
-  name='MsgHeartBeatResponse',
-  full_name='MsgHeartBeatResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ack_code', full_name='MsgHeartBeatResponse.ack_code', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2001,
-  serialized_end=2053,
-)
-
-
-_REMOTECONFIGDATA = _descriptor.Descriptor(
-  name='RemoteConfigData',
-  full_name='RemoteConfigData',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='mqtt_server_addr', full_name='RemoteConfigData.mqtt_server_addr', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='mqtt_server_topic', full_name='RemoteConfigData.mqtt_server_topic', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='mqtt_key_business_server_addr', full_name='RemoteConfigData.mqtt_key_business_server_addr', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='mqtt_key_business_server_topic', full_name='RemoteConfigData.mqtt_key_business_server_topic', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='ecall_number', full_name='RemoteConfigData.ecall_number', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='bcall_number', full_name='RemoteConfigData.bcall_number', index=5,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='icall_number', full_name='RemoteConfigData.icall_number', index=6,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='ecall_enable', full_name='RemoteConfigData.ecall_enable', index=7,
-      number=8, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='bcall_enable', full_name='RemoteConfigData.bcall_enable', index=8,
-      number=9, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='icall_enable', full_name='RemoteConfigData.icall_enable', index=9,
-      number=10, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='sms_gate_number_upload', full_name='RemoteConfigData.sms_gate_number_upload', index=10,
-      number=11, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='sms_gate_number_download', full_name='RemoteConfigData.sms_gate_number_download', index=11,
-      number=12, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='datamining_upload_frequency', full_name='RemoteConfigData.datamining_upload_frequency', index=12,
-      number=13, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='vehicle_status_upload_frequency', full_name='RemoteConfigData.vehicle_status_upload_frequency', index=13,
-      number=14, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='ignition_blowout_upload_enable', full_name='RemoteConfigData.ignition_blowout_upload_enable', index=14,
-      number=15, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='upload_alert_enable', full_name='RemoteConfigData.upload_alert_enable', index=15,
-      number=16, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='datamining_enable', full_name='RemoteConfigData.datamining_enable', index=16,
-      number=17, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='svt_enable', full_name='RemoteConfigData.svt_enable', index=17,
-      number=18, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='eletronic_defense_enable', full_name='RemoteConfigData.eletronic_defense_enable', index=18,
-      number=19, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='abnormal_move_threshold_value', full_name='RemoteConfigData.abnormal_move_threshold_value', index=19,
-      number=20, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2056,
-  serialized_end=2671,
-)
-
-
-_MSGREMOTECONFIGRESPONSE = _descriptor.Descriptor(
-  name='MsgRemoteConfigResponse',
-  full_name='MsgRemoteConfigResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ack_code', full_name='MsgRemoteConfigResponse.ack_code', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='remote_config_data', full_name='MsgRemoteConfigResponse.remote_config_data', index=1,
+      name='vehicle_status', full_name='MsgControlResp.vehicle_status', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -1690,393 +2162,8 @@ _MSGREMOTECONFIGRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2673,
-  serialized_end=2775,
-)
-
-
-_MSGREMOTECONFIGREQUEST = _descriptor.Descriptor(
-  name='MsgRemoteConfigRequest',
-  full_name='MsgRemoteConfigRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='config_items', full_name='MsgRemoteConfigRequest.config_items', index=0,
-      number=1, type=14, cpp_type=8, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='config_data', full_name='MsgRemoteConfigRequest.config_data', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2777,
-  serialized_end=2882,
-)
-
-
-_REMOTECONFIGRESULT = _descriptor.Descriptor(
-  name='RemoteConfigResult',
-  full_name='RemoteConfigResult',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='config_item', full_name='RemoteConfigResult.config_item', index=0,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='result', full_name='RemoteConfigResult.result', index=1,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='error_code', full_name='RemoteConfigResult.error_code', index=2,
-      number=4, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2884,
-  serialized_end=3004,
-)
-
-
-_MSGREMOTECONFIGRESULT = _descriptor.Descriptor(
-  name='MsgRemoteConfigResult',
-  full_name='MsgRemoteConfigResult',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ack_code', full_name='MsgRemoteConfigResult.ack_code', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='config_results', full_name='MsgRemoteConfigResult.config_results', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='config_old', full_name='MsgRemoteConfigResult.config_old', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='config_new', full_name='MsgRemoteConfigResult.config_new', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3007,
-  serialized_end=3183,
-)
-
-
-_AIRCONDITIONCONTROLPARAMETER = _descriptor.Descriptor(
-  name='AirConditionControlParameter',
-  full_name='AirConditionControlParameter',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ac_switch', full_name='AirConditionControlParameter.ac_switch', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='ac_temperature', full_name='AirConditionControlParameter.ac_temperature', index=1,
-      number=2, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='ac_front_defrost', full_name='AirConditionControlParameter.ac_front_defrost', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='ac_rear_defrost', full_name='AirConditionControlParameter.ac_rear_defrost', index=3,
-      number=4, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3185,
-  serialized_end=3309,
-)
-
-
-_MSGREMOTECONTROLCMD = _descriptor.Descriptor(
-  name='MsgRemoteControlCmd',
-  full_name='MsgRemoteControlCmd',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='cmd', full_name='MsgRemoteControlCmd.cmd', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='ac_parameter', full_name='MsgRemoteControlCmd.ac_parameter', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='engine_parameter', full_name='MsgRemoteControlCmd.engine_parameter', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='lock_parameter', full_name='MsgRemoteControlCmd.lock_parameter', index=3,
-      number=4, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3312,
-  serialized_end=3472,
-)
-
-
-_REMOTECONTROLRESPONSEVEHICEINFO = _descriptor.Descriptor(
-  name='RemoteControlResponseVehiceInfo',
-  full_name='RemoteControlResponseVehiceInfo',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='air_condition_status', full_name='RemoteControlResponseVehiceInfo.air_condition_status', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='air_condition_defrost_status', full_name='RemoteControlResponseVehiceInfo.air_condition_defrost_status', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='air_condition_rear_defrost_status', full_name='RemoteControlResponseVehiceInfo.air_condition_rear_defrost_status', index=2,
-      number=3, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='air_condition_temperature', full_name='RemoteControlResponseVehiceInfo.air_condition_temperature', index=3,
-      number=4, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='lock_status', full_name='RemoteControlResponseVehiceInfo.lock_status', index=4,
-      number=5, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='engine_status', full_name='RemoteControlResponseVehiceInfo.engine_status', index=5,
-      number=6, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='hand_break_status', full_name='RemoteControlResponseVehiceInfo.hand_break_status', index=6,
-      number=7, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='peps_power_mode', full_name='RemoteControlResponseVehiceInfo.peps_power_mode', index=7,
-      number=9, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='gear_position', full_name='RemoteControlResponseVehiceInfo.gear_position', index=8,
-      number=10, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3475,
-  serialized_end=3883,
-)
-
-
-_MSGREMOTECONTROLRESPONSE = _descriptor.Descriptor(
-  name='MsgRemoteControlResponse',
-  full_name='MsgRemoteControlResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ack_code', full_name='MsgRemoteControlResponse.ack_code', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='excute_result', full_name='MsgRemoteControlResponse.excute_result', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='error_code', full_name='MsgRemoteControlResponse.error_code', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='gps_info', full_name='MsgRemoteControlResponse.gps_info', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='vehicle_info', full_name='MsgRemoteControlResponse.vehicle_info', index=4,
-      number=5, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3886,
-  serialized_end=4097,
+  serialized_start=3381,
+  serialized_end=3462,
 )
 
 
@@ -2120,8 +2207,8 @@ _MSGOTACMD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4099,
-  serialized_end=4198,
+  serialized_start=3464,
+  serialized_end=3563,
 )
 
 
@@ -2133,7 +2220,7 @@ _MSGOTACMDRESPONSE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ack_code', full_name='MsgOtaCmdResponse.ack_code', index=0,
+      name='ack', full_name='MsgOtaCmdResponse.ack', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -2158,8 +2245,8 @@ _MSGOTACMDRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4200,
-  serialized_end=4270,
+  serialized_start=3565,
+  serialized_end=3627,
 )
 
 
@@ -2203,8 +2290,8 @@ _MSGOTACMDCHECKSUMREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4272,
-  serialized_end=4379,
+  serialized_start=3629,
+  serialized_end=3736,
 )
 
 
@@ -2216,7 +2303,7 @@ _MSGOTACMDCHECKSUMRESPONSE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ack_code', full_name='MsgOtaCmdCheckSumResponse.ack_code', index=0,
+      name='ack', full_name='MsgOtaCmdCheckSumResponse.ack', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -2248,8 +2335,8 @@ _MSGOTACMDCHECKSUMRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4381,
-  serialized_end=4485,
+  serialized_start=3738,
+  serialized_end=3834,
 )
 
 
@@ -2307,96 +2394,27 @@ _MSGOTARESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4488,
-  serialized_end=4643,
+  serialized_start=3837,
+  serialized_end=3992,
 )
 
 
-_MSGOTARESULTRESPONSE = _descriptor.Descriptor(
-  name='MsgOtaResultResponse',
-  full_name='MsgOtaResultResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ack_code', full_name='MsgOtaResultResponse.ack_code', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='ota_task_id', full_name='MsgOtaResultResponse.ota_task_id', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=4645,
-  serialized_end=4718,
-)
-
-
-_MSGREMOTEDIAGNOSISRESPONSE = _descriptor.Descriptor(
-  name='MsgRemoteDiagnosisResponse',
-  full_name='MsgRemoteDiagnosisResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ack_code', full_name='MsgRemoteDiagnosisResponse.ack_code', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=4720,
-  serialized_end=4778,
-)
-
-
-_MSGREMOTEDIAGNOSISRESULT_DIAGNOSISRESULT = _descriptor.Descriptor(
+_MSGDIAGNOSISRESP_DIAGNOSISRESULT = _descriptor.Descriptor(
   name='DiagnosisResult',
-  full_name='MsgRemoteDiagnosisResult.DiagnosisResult',
+  full_name='MsgDiagnosisResp.DiagnosisResult',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ecu_id', full_name='MsgRemoteDiagnosisResult.DiagnosisResult.ecu_id', index=0,
+      name='ecu_id', full_name='MsgDiagnosisResp.DiagnosisResult.ecu_id', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='dtcs', full_name='MsgRemoteDiagnosisResult.DiagnosisResult.dtcs', index=1,
+      name='dtcs', full_name='MsgDiagnosisResp.DiagnosisResult.dtcs', index=1,
       number=2, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
@@ -2414,20 +2432,27 @@ _MSGREMOTEDIAGNOSISRESULT_DIAGNOSISRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4878,
-  serialized_end=4925,
+  serialized_start=4098,
+  serialized_end=4145,
 )
 
-_MSGREMOTEDIAGNOSISRESULT = _descriptor.Descriptor(
-  name='MsgRemoteDiagnosisResult',
-  full_name='MsgRemoteDiagnosisResult',
+_MSGDIAGNOSISRESP = _descriptor.Descriptor(
+  name='MsgDiagnosisResp',
+  full_name='MsgDiagnosisResp',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='diagnosis_result', full_name='MsgRemoteDiagnosisResult.diagnosis_result', index=0,
-      number=1, type=11, cpp_type=10, label=3,
+      name='ack', full_name='MsgDiagnosisResp.ack', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='diagnosis_result', full_name='MsgDiagnosisResp.diagnosis_result', index=1,
+      number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -2435,7 +2460,7 @@ _MSGREMOTEDIAGNOSISRESULT = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_MSGREMOTEDIAGNOSISRESULT_DIAGNOSISRESULT, ],
+  nested_types=[_MSGDIAGNOSISRESP_DIAGNOSISRESULT, ],
   enum_types=[
   ],
   options=None,
@@ -2444,8 +2469,8 @@ _MSGREMOTEDIAGNOSISRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4781,
-  serialized_end=4925,
+  serialized_start=3995,
+  serialized_end=4145,
 )
 
 
@@ -2456,66 +2481,69 @@ _MSGDATAMINING = _descriptor.Descriptor(
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=4147,
+  serialized_end=4162,
+)
+
+
+_MSGVEHICLESTATUS_MSGGVALUE = _descriptor.Descriptor(
+  name='MsgGValue',
+  full_name='MsgVehicleStatus.MsgGValue',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
     _descriptor.FieldDescriptor(
-      name='current_fuel_consumption', full_name='MsgDatamining.current_fuel_consumption', index=0,
+      name='gvalue', full_name='MsgVehicleStatus.MsgGValue.gvalue', index=0,
       number=1, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='coordinate', full_name='MsgDatamining.coordinate', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='total_mileage', full_name='MsgDatamining.total_mileage', index=2,
-      number=3, type=2, cpp_type=6, label=1,
+      name='current_speed', full_name='MsgVehicleStatus.MsgGValue.current_speed', index=1,
+      number=2, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='current_speed', full_name='MsgDatamining.current_speed', index=3,
-      number=4, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='engine_speed', full_name='MsgDatamining.engine_speed', index=4,
-      number=5, type=5, cpp_type=1, label=1,
+      name='engine_speed', full_name='MsgVehicleStatus.MsgGValue.engine_speed', index=2,
+      number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='steering_angle', full_name='MsgDatamining.steering_angle', index=5,
-      number=6, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      name='gvalue_time', full_name='MsgVehicleStatus.MsgGValue.gvalue_time', index=3,
+      number=4, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='accelerator_pedal_angle', full_name='MsgDatamining.accelerator_pedal_angle', index=6,
-      number=7, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      name='gps_info', full_name='MsgVehicleStatus.MsgGValue.gps_info', index=4,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='brake_pedal_angle', full_name='MsgDatamining.brake_pedal_angle', index=7,
-      number=8, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='clutch_pedal_angle', full_name='MsgDatamining.clutch_pedal_angle', index=8,
-      number=9, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      name='gvalue_valid', full_name='MsgVehicleStatus.MsgGValue.gvalue_valid', index=5,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
@@ -2531,10 +2559,9 @@ _MSGDATAMINING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4928,
-  serialized_end=5187,
+  serialized_start=5673,
+  serialized_end=5819,
 )
-
 
 _MSGVEHICLESTATUS = _descriptor.Descriptor(
   name='MsgVehicleStatus',
@@ -2690,10 +2717,171 @@ _MSGVEHICLESTATUS = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='lf_tire_pressure', full_name='MsgVehicleStatus.lf_tire_pressure', index=21,
+      number=22, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='lr_tire_pressure', full_name='MsgVehicleStatus.lr_tire_pressure', index=22,
+      number=23, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rf_tire_pressure', full_name='MsgVehicleStatus.rf_tire_pressure', index=23,
+      number=24, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rr_tire_pressure', full_name='MsgVehicleStatus.rr_tire_pressure', index=24,
+      number=25, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='battery_voltage', full_name='MsgVehicleStatus.battery_voltage', index=25,
+      number=26, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='fuel_level', full_name='MsgVehicleStatus.fuel_level', index=26,
+      number=27, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='remain_mileage', full_name='MsgVehicleStatus.remain_mileage', index=27,
+      number=28, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='belt', full_name='MsgVehicleStatus.belt', index=28,
+      number=29, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='front_light', full_name='MsgVehicleStatus.front_light', index=29,
+      number=30, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='hight_light', full_name='MsgVehicleStatus.hight_light', index=30,
+      number=31, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='g_value', full_name='MsgVehicleStatus.g_value', index=31,
+      number=32, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='light_intensity', full_name='MsgVehicleStatus.light_intensity', index=32,
+      number=33, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='current_fuel_consumption', full_name='MsgVehicleStatus.current_fuel_consumption', index=33,
+      number=34, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='current_speed', full_name='MsgVehicleStatus.current_speed', index=34,
+      number=35, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='engine_speed', full_name='MsgVehicleStatus.engine_speed', index=35,
+      number=36, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='steering_angle', full_name='MsgVehicleStatus.steering_angle', index=36,
+      number=37, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='accelerator_pedal_angle', full_name='MsgVehicleStatus.accelerator_pedal_angle', index=37,
+      number=38, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='brake_pedal_angle', full_name='MsgVehicleStatus.brake_pedal_angle', index=38,
+      number=39, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='clutch_pedal_angle', full_name='MsgVehicleStatus.clutch_pedal_angle', index=39,
+      number=40, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='total_mileage', full_name='MsgVehicleStatus.total_mileage', index=40,
+      number=41, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gps_info', full_name='MsgVehicleStatus.gps_info', index=41,
+      number=42, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='track_status', full_name='MsgVehicleStatus.track_status', index=42,
+      number=43, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='average_fuel_consumption', full_name='MsgVehicleStatus.average_fuel_consumption', index=43,
+      number=44, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
-  nested_types=[],
+  nested_types=[_MSGVEHICLESTATUS_MSGGVALUE, ],
   enum_types=[
   ],
   options=None,
@@ -2702,34 +2890,34 @@ _MSGVEHICLESTATUS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5190,
-  serialized_end=6038,
+  serialized_start=4165,
+  serialized_end=5819,
 )
 
 
-_GSENSORVALUE = _descriptor.Descriptor(
-  name='GSensorValue',
-  full_name='GSensorValue',
+_MSGALARMREPORT_MSGGSENSOR = _descriptor.Descriptor(
+  name='MsgGSensor',
+  full_name='MsgAlarmReport.MsgGSensor',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='x', full_name='GSensorValue.x', index=0,
+      name='x', full_name='MsgAlarmReport.MsgGSensor.x', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='y', full_name='GSensorValue.y', index=1,
+      name='y', full_name='MsgAlarmReport.MsgGSensor.y', index=1,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='z', full_name='GSensorValue.z', index=2,
+      name='z', full_name='MsgAlarmReport.MsgGSensor.z', index=2,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -2747,147 +2935,163 @@ _GSENSORVALUE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6040,
-  serialized_end=6087,
+  serialized_start=6317,
+  serialized_end=6362,
 )
 
-
-_MSGALARMSIGNAL = _descriptor.Descriptor(
-  name='MsgAlarmSignal',
-  full_name='MsgAlarmSignal',
+_MSGALARMREPORT_MSGWINDOWINFO = _descriptor.Descriptor(
+  name='MsgWindowInfo',
+  full_name='MsgAlarmReport.MsgWindowInfo',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='alarm_signal_type', full_name='MsgAlarmSignal.alarm_signal_type', index=0,
+      name='roof_window', full_name='MsgAlarmReport.MsgWindowInfo.roof_window', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='gps_info', full_name='MsgAlarmSignal.gps_info', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='lf_window', full_name='MsgAlarmReport.MsgWindowInfo.lf_window', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='side_turn_flag', full_name='MsgAlarmSignal.side_turn_flag', index=2,
+      name='lr_window', full_name='MsgAlarmReport.MsgWindowInfo.lr_window', index=2,
       number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='air_bag_exploded', full_name='MsgAlarmSignal.air_bag_exploded', index=3,
+      name='rf_window', full_name='MsgAlarmReport.MsgWindowInfo.rf_window', index=3,
       number=4, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='unusual_move_flag', full_name='MsgAlarmSignal.unusual_move_flag', index=4,
+      name='rr_window', full_name='MsgAlarmReport.MsgWindowInfo.rr_window', index=4,
+      number=5, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6365,
+  serialized_end=6547,
+)
+
+_MSGALARMREPORT = _descriptor.Descriptor(
+  name='MsgAlarmReport',
+  full_name='MsgAlarmReport',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='alarm_type', full_name='MsgAlarmReport.alarm_type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gps_info', full_name='MsgAlarmReport.gps_info', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='side_turn_flag', full_name='MsgAlarmReport.side_turn_flag', index=2,
+      number=3, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='air_bag_exploded', full_name='MsgAlarmReport.air_bag_exploded', index=3,
+      number=4, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='unusual_move_flag', full_name='MsgAlarmReport.unusual_move_flag', index=4,
       number=5, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='anti_theft_alarm_flag', full_name='MsgAlarmSignal.anti_theft_alarm_flag', index=5,
+      name='anti_theft_alarm_flag', full_name='MsgAlarmReport.anti_theft_alarm_flag', index=5,
       number=6, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='crash_info', full_name='MsgAlarmSignal.crash_info', index=6,
+      name='crash_info', full_name='MsgAlarmReport.crash_info', index=6,
       number=7, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='g_sensor_value', full_name='MsgAlarmSignal.g_sensor_value', index=7,
+      name='g_sensor_value', full_name='MsgAlarmReport.g_sensor_value', index=7,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=6090,
-  serialized_end=6458,
-)
-
-
-_MSGALARMSIGNALRESPONSE = _descriptor.Descriptor(
-  name='MsgAlarmSignalResponse',
-  full_name='MsgAlarmSignalResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
     _descriptor.FieldDescriptor(
-      name='ack_code', full_name='MsgAlarmSignalResponse.ack_code', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
+      name='window_info', full_name='MsgAlarmReport.window_info', index=8,
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=6460,
-  serialized_end=6518,
-)
-
-
-_MSGPUSHMESSAGE = _descriptor.Descriptor(
-  name='MsgPushMessage',
-  full_name='MsgPushMessage',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
     _descriptor.FieldDescriptor(
-      name='msg_type', full_name='MsgPushMessage.msg_type', index=0,
-      number=1, type=13, cpp_type=3, label=1,
+      name='engine_status', full_name='MsgAlarmReport.engine_status', index=9,
+      number=10, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='msg_content', full_name='MsgPushMessage.msg_content', index=1,
-      number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
+      name='brake_pedal_status', full_name='MsgAlarmReport.brake_pedal_status', index=10,
+      number=11, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='current_speed', full_name='MsgAlarmReport.current_speed', index=11,
+      number=12, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
-  nested_types=[],
+  nested_types=[_MSGALARMREPORT_MSGGSENSOR, _MSGALARMREPORT_MSGWINDOWINFO, ],
   enum_types=[
   ],
   options=None,
@@ -2896,41 +3100,41 @@ _MSGPUSHMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6520,
-  serialized_end=6575,
+  serialized_start=5822,
+  serialized_end=6547,
 )
 
 
-_MOTORFIRESIGNAL = _descriptor.Descriptor(
-  name='MotorFireSignal',
-  full_name='MotorFireSignal',
+_MSGMOTORFIRESIGNAL = _descriptor.Descriptor(
+  name='MsgMotorFireSignal',
+  full_name='MsgMotorFireSignal',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='fire_signal', full_name='MotorFireSignal.fire_signal', index=0,
+      name='mode', full_name='MsgMotorFireSignal.mode', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='total_mileage', full_name='MotorFireSignal.total_mileage', index=1,
+      name='total_mileage', full_name='MsgMotorFireSignal.total_mileage', index=1,
       number=2, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='gps_info', full_name='MotorFireSignal.gps_info', index=2,
+      name='gps_info', full_name='MsgMotorFireSignal.gps_info', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='moter_fire_no', full_name='MotorFireSignal.moter_fire_no', index=3,
+      name='moter_fire_no', full_name='MsgMotorFireSignal.moter_fire_no', index=3,
       number=4, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -2948,73 +3152,146 @@ _MOTORFIRESIGNAL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6578,
-  serialized_end=6706,
+  serialized_start=6550,
+  serialized_end=6681,
 )
 
-_MSGTOP.fields_by_name['message_head'].message_type = _COMMONHEAD
-_MSGTOP.fields_by_name['register_request'].message_type = _MSGREGISTERREQUEST
-_MSGTOP.fields_by_name['register_response'].message_type = _MSGREGISTERRESPONSE
-_MSGTOP.fields_by_name['login'].message_type = _MSGLOGIN
-_MSGTOP.fields_by_name['login_response'].message_type = _MSGLOGINRESPONSE
-_MSGTOP.fields_by_name['heart_beat_response'].message_type = _MSGHEARTBEATRESPONSE
-_MSGTOP.fields_by_name['remote_config_response'].message_type = _MSGREMOTECONFIGRESPONSE
-_MSGTOP.fields_by_name['remote_config_request'].message_type = _MSGREMOTECONFIGREQUEST
-_MSGTOP.fields_by_name['remote_config_result'].message_type = _MSGREMOTECONFIGRESULT
-_MSGTOP.fields_by_name['remote_control_cmd'].message_type = _MSGREMOTECONTROLCMD
-_MSGTOP.fields_by_name['remote_control_response'].message_type = _MSGREMOTECONTROLRESPONSE
-_MSGTOP.fields_by_name['MsgOtaCmd'].message_type = _MSGOTACMD
+
+_MSGTRACKINGDATA = _descriptor.Descriptor(
+  name='MsgTrackingData',
+  full_name='MsgTrackingData',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='gps', full_name='MsgTrackingData.gps', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6683,
+  serialized_end=6726,
+)
+
+
+_MSGPUSHMESSAGE = _descriptor.Descriptor(
+  name='MsgPushMessage',
+  full_name='MsgPushMessage',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='msg_type', full_name='MsgPushMessage.msg_type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='title', full_name='MsgPushMessage.title', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='content', full_name='MsgPushMessage.content', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6728,
+  serialized_end=6809,
+)
+
+_MSGTOP.fields_by_name['message_head'].message_type = _MSGHEAD
+_MSGTOP.fields_by_name['ack'].message_type = _MSGACK
+_MSGTOP.fields_by_name['register_request'].message_type = _MSGREGREQ
+_MSGTOP.fields_by_name['register_response'].message_type = _MSGREGRESP
+_MSGTOP.fields_by_name['login_request'].message_type = _MSGLOGINREQ
+_MSGTOP.fields_by_name['login_response'].message_type = _MSGLOGINRESP
+_MSGTOP.fields_by_name['heart_beat_response'].message_type = _MSGHEARTBEATRESP
+_MSGTOP.fields_by_name['config_query_response'].message_type = _MSGCONFQUERYRESP
+_MSGTOP.fields_by_name['config_request'].message_type = _MSGCONFREQ
+_MSGTOP.fields_by_name['config_response'].message_type = _MSGCONFRESP
+_MSGTOP.fields_by_name['control_cmd'].message_type = _MSGCONTROLREQ
+_MSGTOP.fields_by_name['control_response'].message_type = _MSGCONTROLRESP
+_MSGTOP.fields_by_name['ota_cmd'].message_type = _MSGOTACMD
 _MSGTOP.fields_by_name['ota_cmd_response'].message_type = _MSGOTACMDRESPONSE
 _MSGTOP.fields_by_name['ota_cmd_check_request'].message_type = _MSGOTACMDCHECKSUMREQUEST
 _MSGTOP.fields_by_name['ota_cmd_check_response'].message_type = _MSGOTACMDCHECKSUMRESPONSE
 _MSGTOP.fields_by_name['ota_result'].message_type = _MSGOTARESULT
-_MSGTOP.fields_by_name['ota_result_response'].message_type = _MSGOTARESULTRESPONSE
-_MSGTOP.fields_by_name['remote_diagnosis_response'].message_type = _MSGREMOTEDIAGNOSISRESPONSE
-_MSGTOP.fields_by_name['remote_diagnosis_result'].message_type = _MSGREMOTEDIAGNOSISRESULT
+_MSGTOP.fields_by_name['diagnosis_response'].message_type = _MSGDIAGNOSISRESP
 _MSGTOP.fields_by_name['datamining'].message_type = _MSGDATAMINING
 _MSGTOP.fields_by_name['vehicle_status'].message_type = _MSGVEHICLESTATUS
-_MSGTOP.fields_by_name['alarm_signal'].message_type = _MSGALARMSIGNAL
-_MSGTOP.fields_by_name['alarm_signal_response'].message_type = _MSGALARMSIGNALRESPONSE
+_MSGTOP.fields_by_name['alarm_signal'].message_type = _MSGALARMREPORT
 _MSGTOP.fields_by_name['push_message'].message_type = _MSGPUSHMESSAGE
-_MSGTOP.fields_by_name['motor_fire_signal'].message_type = _MOTORFIRESIGNAL
-_MSGTOP.fields_by_name['common_ack'].message_type = _COMMONACK
-_COMMONHEAD.fields_by_name['equipment_id_type'].enum_type = _EQUIPMENTIDTYPE
-_COMMONHEAD.fields_by_name['msg_type'].enum_type = _MSGTYPE
-_COMMONACK.fields_by_name['ack_code'].enum_type = _COMMONACKCODE
-_MSGLOGINRESPONSE.fields_by_name['ack_code'].message_type = _COMMONACK
-_MSGHEARTBEATRESPONSE.fields_by_name['ack_code'].message_type = _COMMONACK
-_MSGREMOTECONFIGRESPONSE.fields_by_name['ack_code'].message_type = _COMMONACK
-_MSGREMOTECONFIGRESPONSE.fields_by_name['remote_config_data'].message_type = _REMOTECONFIGDATA
-_MSGREMOTECONFIGREQUEST.fields_by_name['config_items'].enum_type = _REMOTECONFIGITEM
-_MSGREMOTECONFIGREQUEST.fields_by_name['config_data'].message_type = _REMOTECONFIGDATA
-_REMOTECONFIGRESULT.fields_by_name['config_item'].enum_type = _REMOTECONFIGITEM
-_REMOTECONFIGRESULT.fields_by_name['error_code'].enum_type = _REMOTECONFIGERRORCODE
-_MSGREMOTECONFIGRESULT.fields_by_name['ack_code'].message_type = _COMMONACK
-_MSGREMOTECONFIGRESULT.fields_by_name['config_results'].message_type = _REMOTECONFIGRESULT
-_MSGREMOTECONFIGRESULT.fields_by_name['config_old'].message_type = _REMOTECONFIGDATA
-_MSGREMOTECONFIGRESULT.fields_by_name['config_new'].message_type = _REMOTECONFIGDATA
-_MSGREMOTECONTROLCMD.fields_by_name['cmd'].enum_type = _REMOTECONTROLCMDTYPE
-_MSGREMOTECONTROLCMD.fields_by_name['ac_parameter'].message_type = _AIRCONDITIONCONTROLPARAMETER
-_REMOTECONTROLRESPONSEVEHICEINFO.fields_by_name['air_condition_status'].enum_type = _ONOFFSTATE
-_REMOTECONTROLRESPONSEVEHICEINFO.fields_by_name['air_condition_defrost_status'].enum_type = _ONOFFSTATE
-_REMOTECONTROLRESPONSEVEHICEINFO.fields_by_name['air_condition_rear_defrost_status'].enum_type = _ONOFFSTATE
-_REMOTECONTROLRESPONSEVEHICEINFO.fields_by_name['lock_status'].enum_type = _ONOFFSTATE
-_REMOTECONTROLRESPONSEVEHICEINFO.fields_by_name['engine_status'].enum_type = _ENGINESTATE
-_REMOTECONTROLRESPONSEVEHICEINFO.fields_by_name['hand_break_status'].enum_type = _ONOFFSTATE
-_REMOTECONTROLRESPONSEVEHICEINFO.fields_by_name['peps_power_mode'].enum_type = _PEPSPOWERMODE
-_REMOTECONTROLRESPONSEVEHICEINFO.fields_by_name['gear_position'].enum_type = _GEARPOSITION
-_MSGREMOTECONTROLRESPONSE.fields_by_name['ack_code'].message_type = _COMMONACK
-_MSGREMOTECONTROLRESPONSE.fields_by_name['excute_result'].enum_type = _REMOTECONTROLEXCUTERESULT
-_MSGREMOTECONTROLRESPONSE.fields_by_name['gps_info'].message_type = _GPSINFO
-_MSGREMOTECONTROLRESPONSE.fields_by_name['vehicle_info'].message_type = _REMOTECONTROLRESPONSEVEHICEINFO
-_MSGOTACMDRESPONSE.fields_by_name['ack_code'].message_type = _COMMONACK
-_MSGOTACMDCHECKSUMRESPONSE.fields_by_name['ack_code'].message_type = _COMMONACK
+_MSGTOP.fields_by_name['motor_fire_signal'].message_type = _MSGMOTORFIRESIGNAL
+_MSGTOP.fields_by_name['tracking_data'].message_type = _MSGTRACKINGDATA
+_MSGHEAD.fields_by_name['did_type'].enum_type = _ENUMDEVICEIDTYPE
+_MSGHEAD.fields_by_name['msg_type'].enum_type = _ENUMMSGTYPE
+_MSGLOGINRESP.fields_by_name['ack'].message_type = _MSGACK
+_MSGHEARTBEATRESP.fields_by_name['ack'].message_type = _MSGACK
+_MSGCONFQUERYRESP.fields_by_name['ack'].message_type = _MSGACK
+_MSGCONFQUERYRESP.fields_by_name['qconfig_data'].message_type = _MSGCONFDATA
+_MSGCONFREQ.fields_by_name['config_items'].enum_type = _ENUMCONFITEM
+_MSGCONFREQ.fields_by_name['rconfig_data'].message_type = _MSGCONFDATA
+_MSGCONFRESP_MSGCONFRESULT.fields_by_name['config_item'].enum_type = _ENUMCONFITEM
+_MSGCONFRESP_MSGCONFRESULT.containing_type = _MSGCONFRESP
+_MSGCONFRESP.fields_by_name['ack'].message_type = _MSGACK
+_MSGCONFRESP.fields_by_name['config_results'].message_type = _MSGCONFRESP_MSGCONFRESULT
+_MSGCONFRESP.fields_by_name['config_old'].message_type = _MSGCONFDATA
+_MSGCONFRESP.fields_by_name['config_new'].message_type = _MSGCONFDATA
+_MSGCONTROLREQ_MSGAIRPARAM.containing_type = _MSGCONTROLREQ
+_MSGCONTROLREQ_MSGWINDOWSPARAM.fields_by_name['type'].enum_type = _ENUMWINDOWTYPE
+_MSGCONTROLREQ_MSGWINDOWSPARAM.fields_by_name['windw_param'].enum_type = _ENUMWINDOWPARAM
+_MSGCONTROLREQ_MSGWINDOWSPARAM.fields_by_name['roof_param'].enum_type = _ENUMROOFPARAM
+_MSGCONTROLREQ_MSGWINDOWSPARAM.containing_type = _MSGCONTROLREQ
+_MSGCONTROLREQ_MSGSEATPARAM.fields_by_name['master'].enum_type = _ENUMSEATLEVEL
+_MSGCONTROLREQ_MSGSEATPARAM.fields_by_name['slave'].enum_type = _ENUMSEATLEVEL
+_MSGCONTROLREQ_MSGSEATPARAM.containing_type = _MSGCONTROLREQ
+_MSGCONTROLREQ.fields_by_name['cmd_type'].enum_type = _ENUMCMDTYPE
+_MSGCONTROLREQ.fields_by_name['air_param'].message_type = _MSGCONTROLREQ_MSGAIRPARAM
+_MSGCONTROLREQ.fields_by_name['window_param'].message_type = _MSGCONTROLREQ_MSGWINDOWSPARAM
+_MSGCONTROLREQ.fields_by_name['seat_param'].message_type = _MSGCONTROLREQ_MSGSEATPARAM
+_MSGCONTROLRESP.fields_by_name['ack'].message_type = _MSGACK
+_MSGCONTROLRESP.fields_by_name['vehicle_status'].message_type = _MSGVEHICLESTATUS
+_MSGOTACMDRESPONSE.fields_by_name['ack'].message_type = _MSGACK
+_MSGOTACMDCHECKSUMRESPONSE.fields_by_name['ack'].message_type = _MSGACK
 _MSGOTARESULT.fields_by_name['result'].enum_type = _OTACMDRESULTCODE
-_MSGOTARESULTRESPONSE.fields_by_name['ack_code'].message_type = _COMMONACK
-_MSGREMOTEDIAGNOSISRESPONSE.fields_by_name['ack_code'].message_type = _COMMONACK
-_MSGREMOTEDIAGNOSISRESULT_DIAGNOSISRESULT.containing_type = _MSGREMOTEDIAGNOSISRESULT
-_MSGREMOTEDIAGNOSISRESULT.fields_by_name['diagnosis_result'].message_type = _MSGREMOTEDIAGNOSISRESULT_DIAGNOSISRESULT
-_MSGDATAMINING.fields_by_name['coordinate'].message_type = _GPSINFO
+_MSGDIAGNOSISRESP_DIAGNOSISRESULT.containing_type = _MSGDIAGNOSISRESP
+_MSGDIAGNOSISRESP.fields_by_name['ack'].message_type = _MSGACK
+_MSGDIAGNOSISRESP.fields_by_name['diagnosis_result'].message_type = _MSGDIAGNOSISRESP_DIAGNOSISRESULT
+_MSGVEHICLESTATUS_MSGGVALUE.fields_by_name['gps_info'].message_type = _MSGGPSINFO
+_MSGVEHICLESTATUS_MSGGVALUE.containing_type = _MSGVEHICLESTATUS
 _MSGVEHICLESTATUS.fields_by_name['lf_door_status'].enum_type = _ONOFFSTATE
 _MSGVEHICLESTATUS.fields_by_name['lr_door_status'].enum_type = _ONOFFSTATE
 _MSGVEHICLESTATUS.fields_by_name['rf_door_status'].enum_type = _ONOFFSTATE
@@ -3029,73 +3306,93 @@ _MSGVEHICLESTATUS.fields_by_name['air_condition_status'].enum_type = _ONOFFSTATE
 _MSGVEHICLESTATUS.fields_by_name['air_condition_defrost_status'].enum_type = _ONOFFSTATE
 _MSGVEHICLESTATUS.fields_by_name['air_condition_rear_defrost_status'].enum_type = _ONOFFSTATE
 _MSGVEHICLESTATUS.fields_by_name['lock_status'].enum_type = _ONOFFSTATE
-_MSGVEHICLESTATUS.fields_by_name['engine_status'].enum_type = _ENGINESTATE
+_MSGVEHICLESTATUS.fields_by_name['engine_status'].enum_type = _ENUMENGINESTATE
 _MSGVEHICLESTATUS.fields_by_name['wiper_Status'].enum_type = _ONOFFSTATE
 _MSGVEHICLESTATUS.fields_by_name['hand_break_status'].enum_type = _ONOFFSTATE
 _MSGVEHICLESTATUS.fields_by_name['defrost_mode'].enum_type = _ONOFFSTATE
 _MSGVEHICLESTATUS.fields_by_name['peps_power_mode'].enum_type = _PEPSPOWERMODE
 _MSGVEHICLESTATUS.fields_by_name['gear_position'].enum_type = _GEARPOSITION
-_MSGALARMSIGNAL.fields_by_name['alarm_signal_type'].enum_type = _ALARMSIGNALTYPE
-_MSGALARMSIGNAL.fields_by_name['gps_info'].message_type = _GPSINFO
-_MSGALARMSIGNAL.fields_by_name['side_turn_flag'].enum_type = _COMMONTRUEFALSEUNKNOWN
-_MSGALARMSIGNAL.fields_by_name['air_bag_exploded'].enum_type = _COMMONTRUEFALSEUNKNOWN
-_MSGALARMSIGNAL.fields_by_name['unusual_move_flag'].enum_type = _COMMONTRUEFALSEUNKNOWN
-_MSGALARMSIGNAL.fields_by_name['anti_theft_alarm_flag'].enum_type = _COMMONTRUEFALSEUNKNOWN
-_MSGALARMSIGNAL.fields_by_name['crash_info'].enum_type = _CRASHINFO
-_MSGALARMSIGNAL.fields_by_name['g_sensor_value'].message_type = _GSENSORVALUE
-_MSGALARMSIGNALRESPONSE.fields_by_name['ack_code'].enum_type = _COMMONACKCODE
-_MOTORFIRESIGNAL.fields_by_name['fire_signal'].enum_type = _MOTORFIREMODE
-_MOTORFIRESIGNAL.fields_by_name['gps_info'].message_type = _GPSINFO
+_MSGVEHICLESTATUS.fields_by_name['belt'].enum_type = _ONOFFSTATE
+_MSGVEHICLESTATUS.fields_by_name['front_light'].enum_type = _ONOFFSTATE
+_MSGVEHICLESTATUS.fields_by_name['hight_light'].enum_type = _ONOFFSTATE
+_MSGVEHICLESTATUS.fields_by_name['g_value'].message_type = _MSGVEHICLESTATUS_MSGGVALUE
+_MSGVEHICLESTATUS.fields_by_name['gps_info'].message_type = _MSGGPSINFO
+_MSGVEHICLESTATUS.fields_by_name['track_status'].enum_type = _ONOFFSTATE
+_MSGALARMREPORT_MSGGSENSOR.containing_type = _MSGALARMREPORT
+_MSGALARMREPORT_MSGWINDOWINFO.fields_by_name['roof_window'].enum_type = _ENUMBOOLEAN
+_MSGALARMREPORT_MSGWINDOWINFO.fields_by_name['lf_window'].enum_type = _ENUMBOOLEAN
+_MSGALARMREPORT_MSGWINDOWINFO.fields_by_name['lr_window'].enum_type = _ENUMBOOLEAN
+_MSGALARMREPORT_MSGWINDOWINFO.fields_by_name['rf_window'].enum_type = _ENUMBOOLEAN
+_MSGALARMREPORT_MSGWINDOWINFO.fields_by_name['rr_window'].enum_type = _ENUMBOOLEAN
+_MSGALARMREPORT_MSGWINDOWINFO.containing_type = _MSGALARMREPORT
+_MSGALARMREPORT.fields_by_name['alarm_type'].enum_type = _ENUMALARMTYPE
+_MSGALARMREPORT.fields_by_name['gps_info'].message_type = _MSGGPSINFO
+_MSGALARMREPORT.fields_by_name['side_turn_flag'].enum_type = _ENUMBOOLEAN
+_MSGALARMREPORT.fields_by_name['air_bag_exploded'].enum_type = _ENUMBOOLEAN
+_MSGALARMREPORT.fields_by_name['unusual_move_flag'].enum_type = _ENUMBOOLEAN
+_MSGALARMREPORT.fields_by_name['anti_theft_alarm_flag'].enum_type = _ENUMBOOLEAN
+_MSGALARMREPORT.fields_by_name['crash_info'].enum_type = _ENUMCRASHINFO
+_MSGALARMREPORT.fields_by_name['g_sensor_value'].message_type = _MSGALARMREPORT_MSGGSENSOR
+_MSGALARMREPORT.fields_by_name['window_info'].message_type = _MSGALARMREPORT_MSGWINDOWINFO
+_MSGALARMREPORT.fields_by_name['engine_status'].enum_type = _ENUMENGINESTATE
+_MSGALARMREPORT.fields_by_name['brake_pedal_status'].enum_type = _ENUMBOOLEAN
+_MSGMOTORFIRESIGNAL.fields_by_name['mode'].enum_type = _ENUMMOTORFIREMODE
+_MSGMOTORFIRESIGNAL.fields_by_name['gps_info'].message_type = _MSGGPSINFO
+_MSGTRACKINGDATA.fields_by_name['gps'].message_type = _MSGGPSINFO
+_MSGPUSHMESSAGE.fields_by_name['msg_type'].enum_type = _ENUMPUSHTYPE
+DESCRIPTOR.message_types_by_name['MsgAck'] = _MSGACK
 DESCRIPTOR.message_types_by_name['MsgTop'] = _MSGTOP
-DESCRIPTOR.message_types_by_name['CommonHead'] = _COMMONHEAD
-DESCRIPTOR.message_types_by_name['CommonAck'] = _COMMONACK
-DESCRIPTOR.message_types_by_name['GpsInfo'] = _GPSINFO
-DESCRIPTOR.message_types_by_name['MsgRegisterRequest'] = _MSGREGISTERREQUEST
-DESCRIPTOR.message_types_by_name['MsgRegisterResponse'] = _MSGREGISTERRESPONSE
-DESCRIPTOR.message_types_by_name['MsgLogIn'] = _MSGLOGIN
-DESCRIPTOR.message_types_by_name['MsgLogInResponse'] = _MSGLOGINRESPONSE
-DESCRIPTOR.message_types_by_name['MsgHeartBeatResponse'] = _MSGHEARTBEATRESPONSE
-DESCRIPTOR.message_types_by_name['RemoteConfigData'] = _REMOTECONFIGDATA
-DESCRIPTOR.message_types_by_name['MsgRemoteConfigResponse'] = _MSGREMOTECONFIGRESPONSE
-DESCRIPTOR.message_types_by_name['MsgRemoteConfigRequest'] = _MSGREMOTECONFIGREQUEST
-DESCRIPTOR.message_types_by_name['RemoteConfigResult'] = _REMOTECONFIGRESULT
-DESCRIPTOR.message_types_by_name['MsgRemoteConfigResult'] = _MSGREMOTECONFIGRESULT
-DESCRIPTOR.message_types_by_name['AirConditionControlParameter'] = _AIRCONDITIONCONTROLPARAMETER
-DESCRIPTOR.message_types_by_name['MsgRemoteControlCmd'] = _MSGREMOTECONTROLCMD
-DESCRIPTOR.message_types_by_name['RemoteControlResponseVehiceInfo'] = _REMOTECONTROLRESPONSEVEHICEINFO
-DESCRIPTOR.message_types_by_name['MsgRemoteControlResponse'] = _MSGREMOTECONTROLRESPONSE
+DESCRIPTOR.message_types_by_name['MsgHead'] = _MSGHEAD
+DESCRIPTOR.message_types_by_name['MsgGpsInfo'] = _MSGGPSINFO
+DESCRIPTOR.message_types_by_name['MsgRegReq'] = _MSGREGREQ
+DESCRIPTOR.message_types_by_name['MsgRegResp'] = _MSGREGRESP
+DESCRIPTOR.message_types_by_name['MsgLoginReq'] = _MSGLOGINREQ
+DESCRIPTOR.message_types_by_name['MsgLoginResp'] = _MSGLOGINRESP
+DESCRIPTOR.message_types_by_name['MsgHeartBeatResp'] = _MSGHEARTBEATRESP
+DESCRIPTOR.message_types_by_name['MsgConfData'] = _MSGCONFDATA
+DESCRIPTOR.message_types_by_name['MsgConfQueryResp'] = _MSGCONFQUERYRESP
+DESCRIPTOR.message_types_by_name['MsgConfReq'] = _MSGCONFREQ
+DESCRIPTOR.message_types_by_name['MsgConfResp'] = _MSGCONFRESP
+DESCRIPTOR.message_types_by_name['MsgControlReq'] = _MSGCONTROLREQ
+DESCRIPTOR.message_types_by_name['MsgControlResp'] = _MSGCONTROLRESP
 DESCRIPTOR.message_types_by_name['MsgOtaCmd'] = _MSGOTACMD
 DESCRIPTOR.message_types_by_name['MsgOtaCmdResponse'] = _MSGOTACMDRESPONSE
 DESCRIPTOR.message_types_by_name['MsgOtaCmdCheckSumRequest'] = _MSGOTACMDCHECKSUMREQUEST
 DESCRIPTOR.message_types_by_name['MsgOtaCmdCheckSumResponse'] = _MSGOTACMDCHECKSUMRESPONSE
 DESCRIPTOR.message_types_by_name['MsgOtaResult'] = _MSGOTARESULT
-DESCRIPTOR.message_types_by_name['MsgOtaResultResponse'] = _MSGOTARESULTRESPONSE
-DESCRIPTOR.message_types_by_name['MsgRemoteDiagnosisResponse'] = _MSGREMOTEDIAGNOSISRESPONSE
-DESCRIPTOR.message_types_by_name['MsgRemoteDiagnosisResult'] = _MSGREMOTEDIAGNOSISRESULT
+DESCRIPTOR.message_types_by_name['MsgDiagnosisResp'] = _MSGDIAGNOSISRESP
 DESCRIPTOR.message_types_by_name['MsgDatamining'] = _MSGDATAMINING
 DESCRIPTOR.message_types_by_name['MsgVehicleStatus'] = _MSGVEHICLESTATUS
-DESCRIPTOR.message_types_by_name['GSensorValue'] = _GSENSORVALUE
-DESCRIPTOR.message_types_by_name['MsgAlarmSignal'] = _MSGALARMSIGNAL
-DESCRIPTOR.message_types_by_name['MsgAlarmSignalResponse'] = _MSGALARMSIGNALRESPONSE
+DESCRIPTOR.message_types_by_name['MsgAlarmReport'] = _MSGALARMREPORT
+DESCRIPTOR.message_types_by_name['MsgMotorFireSignal'] = _MSGMOTORFIRESIGNAL
+DESCRIPTOR.message_types_by_name['MsgTrackingData'] = _MSGTRACKINGDATA
 DESCRIPTOR.message_types_by_name['MsgPushMessage'] = _MSGPUSHMESSAGE
-DESCRIPTOR.message_types_by_name['MotorFireSignal'] = _MOTORFIRESIGNAL
-DESCRIPTOR.enum_types_by_name['EquipmentIdType'] = _EQUIPMENTIDTYPE
-DESCRIPTOR.enum_types_by_name['MsgType'] = _MSGTYPE
-DESCRIPTOR.enum_types_by_name['CommonAckCode'] = _COMMONACKCODE
-DESCRIPTOR.enum_types_by_name['RemoteConfigItem'] = _REMOTECONFIGITEM
-DESCRIPTOR.enum_types_by_name['RemoteConfigErrorCode'] = _REMOTECONFIGERRORCODE
-DESCRIPTOR.enum_types_by_name['RemoteControlCmdType'] = _REMOTECONTROLCMDTYPE
-DESCRIPTOR.enum_types_by_name['RemoteControlExcuteResult'] = _REMOTECONTROLEXCUTERESULT
+DESCRIPTOR.enum_types_by_name['OnOffState'] = _ONOFFSTATE
+DESCRIPTOR.enum_types_by_name['EnumDeviceIdType'] = _ENUMDEVICEIDTYPE
+DESCRIPTOR.enum_types_by_name['EnumMsgType'] = _ENUMMSGTYPE
+DESCRIPTOR.enum_types_by_name['EnumConfItem'] = _ENUMCONFITEM
+DESCRIPTOR.enum_types_by_name['EnumCmdType'] = _ENUMCMDTYPE
+DESCRIPTOR.enum_types_by_name['EnumWindowType'] = _ENUMWINDOWTYPE
+DESCRIPTOR.enum_types_by_name['EnumWindowParam'] = _ENUMWINDOWPARAM
+DESCRIPTOR.enum_types_by_name['EnumRoofParam'] = _ENUMROOFPARAM
+DESCRIPTOR.enum_types_by_name['EnumSeatLevel'] = _ENUMSEATLEVEL
 DESCRIPTOR.enum_types_by_name['OtaCmdResultCode'] = _OTACMDRESULTCODE
 DESCRIPTOR.enum_types_by_name['PepsPowerMode'] = _PEPSPOWERMODE
-DESCRIPTOR.enum_types_by_name['CrashInfo'] = _CRASHINFO
-DESCRIPTOR.enum_types_by_name['CommonTrueFalseUnknown'] = _COMMONTRUEFALSEUNKNOWN
-DESCRIPTOR.enum_types_by_name['AlarmSignalType'] = _ALARMSIGNALTYPE
-DESCRIPTOR.enum_types_by_name['EngineState'] = _ENGINESTATE
-DESCRIPTOR.enum_types_by_name['OnOffState'] = _ONOFFSTATE
+DESCRIPTOR.enum_types_by_name['EnumEngineState'] = _ENUMENGINESTATE
 DESCRIPTOR.enum_types_by_name['GearPosition'] = _GEARPOSITION
-DESCRIPTOR.enum_types_by_name['MotorFireMode'] = _MOTORFIREMODE
+DESCRIPTOR.enum_types_by_name['EnumCrashInfo'] = _ENUMCRASHINFO
+DESCRIPTOR.enum_types_by_name['EnumBoolean'] = _ENUMBOOLEAN
+DESCRIPTOR.enum_types_by_name['EnumAlarmType'] = _ENUMALARMTYPE
+DESCRIPTOR.enum_types_by_name['EnumMotorFireMode'] = _ENUMMOTORFIREMODE
+DESCRIPTOR.enum_types_by_name['EnumPushType'] = _ENUMPUSHTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
+
+MsgAck = _reflection.GeneratedProtocolMessageType('MsgAck', (_message.Message,), dict(
+  DESCRIPTOR = _MSGACK,
+  __module__ = 'tbox_pb2'
+  # @@protoc_insertion_point(class_scope:MsgAck)
+  ))
+_sym_db.RegisterMessage(MsgAck)
 
 MsgTop = _reflection.GeneratedProtocolMessageType('MsgTop', (_message.Message,), dict(
   DESCRIPTOR = _MSGTOP,
@@ -3104,124 +3401,128 @@ MsgTop = _reflection.GeneratedProtocolMessageType('MsgTop', (_message.Message,),
   ))
 _sym_db.RegisterMessage(MsgTop)
 
-CommonHead = _reflection.GeneratedProtocolMessageType('CommonHead', (_message.Message,), dict(
-  DESCRIPTOR = _COMMONHEAD,
+MsgHead = _reflection.GeneratedProtocolMessageType('MsgHead', (_message.Message,), dict(
+  DESCRIPTOR = _MSGHEAD,
   __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:CommonHead)
+  # @@protoc_insertion_point(class_scope:MsgHead)
   ))
-_sym_db.RegisterMessage(CommonHead)
+_sym_db.RegisterMessage(MsgHead)
 
-CommonAck = _reflection.GeneratedProtocolMessageType('CommonAck', (_message.Message,), dict(
-  DESCRIPTOR = _COMMONACK,
+MsgGpsInfo = _reflection.GeneratedProtocolMessageType('MsgGpsInfo', (_message.Message,), dict(
+  DESCRIPTOR = _MSGGPSINFO,
   __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:CommonAck)
+  # @@protoc_insertion_point(class_scope:MsgGpsInfo)
   ))
-_sym_db.RegisterMessage(CommonAck)
+_sym_db.RegisterMessage(MsgGpsInfo)
 
-GpsInfo = _reflection.GeneratedProtocolMessageType('GpsInfo', (_message.Message,), dict(
-  DESCRIPTOR = _GPSINFO,
+MsgRegReq = _reflection.GeneratedProtocolMessageType('MsgRegReq', (_message.Message,), dict(
+  DESCRIPTOR = _MSGREGREQ,
   __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:GpsInfo)
+  # @@protoc_insertion_point(class_scope:MsgRegReq)
   ))
-_sym_db.RegisterMessage(GpsInfo)
+_sym_db.RegisterMessage(MsgRegReq)
 
-MsgRegisterRequest = _reflection.GeneratedProtocolMessageType('MsgRegisterRequest', (_message.Message,), dict(
-  DESCRIPTOR = _MSGREGISTERREQUEST,
+MsgRegResp = _reflection.GeneratedProtocolMessageType('MsgRegResp', (_message.Message,), dict(
+  DESCRIPTOR = _MSGREGRESP,
   __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:MsgRegisterRequest)
+  # @@protoc_insertion_point(class_scope:MsgRegResp)
   ))
-_sym_db.RegisterMessage(MsgRegisterRequest)
+_sym_db.RegisterMessage(MsgRegResp)
 
-MsgRegisterResponse = _reflection.GeneratedProtocolMessageType('MsgRegisterResponse', (_message.Message,), dict(
-  DESCRIPTOR = _MSGREGISTERRESPONSE,
+MsgLoginReq = _reflection.GeneratedProtocolMessageType('MsgLoginReq', (_message.Message,), dict(
+  DESCRIPTOR = _MSGLOGINREQ,
   __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:MsgRegisterResponse)
+  # @@protoc_insertion_point(class_scope:MsgLoginReq)
   ))
-_sym_db.RegisterMessage(MsgRegisterResponse)
+_sym_db.RegisterMessage(MsgLoginReq)
 
-MsgLogIn = _reflection.GeneratedProtocolMessageType('MsgLogIn', (_message.Message,), dict(
-  DESCRIPTOR = _MSGLOGIN,
+MsgLoginResp = _reflection.GeneratedProtocolMessageType('MsgLoginResp', (_message.Message,), dict(
+  DESCRIPTOR = _MSGLOGINRESP,
   __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:MsgLogIn)
+  # @@protoc_insertion_point(class_scope:MsgLoginResp)
   ))
-_sym_db.RegisterMessage(MsgLogIn)
+_sym_db.RegisterMessage(MsgLoginResp)
 
-MsgLogInResponse = _reflection.GeneratedProtocolMessageType('MsgLogInResponse', (_message.Message,), dict(
-  DESCRIPTOR = _MSGLOGINRESPONSE,
+MsgHeartBeatResp = _reflection.GeneratedProtocolMessageType('MsgHeartBeatResp', (_message.Message,), dict(
+  DESCRIPTOR = _MSGHEARTBEATRESP,
   __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:MsgLogInResponse)
+  # @@protoc_insertion_point(class_scope:MsgHeartBeatResp)
   ))
-_sym_db.RegisterMessage(MsgLogInResponse)
+_sym_db.RegisterMessage(MsgHeartBeatResp)
 
-MsgHeartBeatResponse = _reflection.GeneratedProtocolMessageType('MsgHeartBeatResponse', (_message.Message,), dict(
-  DESCRIPTOR = _MSGHEARTBEATRESPONSE,
+MsgConfData = _reflection.GeneratedProtocolMessageType('MsgConfData', (_message.Message,), dict(
+  DESCRIPTOR = _MSGCONFDATA,
   __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:MsgHeartBeatResponse)
+  # @@protoc_insertion_point(class_scope:MsgConfData)
   ))
-_sym_db.RegisterMessage(MsgHeartBeatResponse)
+_sym_db.RegisterMessage(MsgConfData)
 
-RemoteConfigData = _reflection.GeneratedProtocolMessageType('RemoteConfigData', (_message.Message,), dict(
-  DESCRIPTOR = _REMOTECONFIGDATA,
+MsgConfQueryResp = _reflection.GeneratedProtocolMessageType('MsgConfQueryResp', (_message.Message,), dict(
+  DESCRIPTOR = _MSGCONFQUERYRESP,
   __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:RemoteConfigData)
+  # @@protoc_insertion_point(class_scope:MsgConfQueryResp)
   ))
-_sym_db.RegisterMessage(RemoteConfigData)
+_sym_db.RegisterMessage(MsgConfQueryResp)
 
-MsgRemoteConfigResponse = _reflection.GeneratedProtocolMessageType('MsgRemoteConfigResponse', (_message.Message,), dict(
-  DESCRIPTOR = _MSGREMOTECONFIGRESPONSE,
+MsgConfReq = _reflection.GeneratedProtocolMessageType('MsgConfReq', (_message.Message,), dict(
+  DESCRIPTOR = _MSGCONFREQ,
   __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:MsgRemoteConfigResponse)
+  # @@protoc_insertion_point(class_scope:MsgConfReq)
   ))
-_sym_db.RegisterMessage(MsgRemoteConfigResponse)
+_sym_db.RegisterMessage(MsgConfReq)
 
-MsgRemoteConfigRequest = _reflection.GeneratedProtocolMessageType('MsgRemoteConfigRequest', (_message.Message,), dict(
-  DESCRIPTOR = _MSGREMOTECONFIGREQUEST,
-  __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:MsgRemoteConfigRequest)
-  ))
-_sym_db.RegisterMessage(MsgRemoteConfigRequest)
+MsgConfResp = _reflection.GeneratedProtocolMessageType('MsgConfResp', (_message.Message,), dict(
 
-RemoteConfigResult = _reflection.GeneratedProtocolMessageType('RemoteConfigResult', (_message.Message,), dict(
-  DESCRIPTOR = _REMOTECONFIGRESULT,
+  MsgConfResult = _reflection.GeneratedProtocolMessageType('MsgConfResult', (_message.Message,), dict(
+    DESCRIPTOR = _MSGCONFRESP_MSGCONFRESULT,
+    __module__ = 'tbox_pb2'
+    # @@protoc_insertion_point(class_scope:MsgConfResp.MsgConfResult)
+    ))
+  ,
+  DESCRIPTOR = _MSGCONFRESP,
   __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:RemoteConfigResult)
+  # @@protoc_insertion_point(class_scope:MsgConfResp)
   ))
-_sym_db.RegisterMessage(RemoteConfigResult)
+_sym_db.RegisterMessage(MsgConfResp)
+_sym_db.RegisterMessage(MsgConfResp.MsgConfResult)
 
-MsgRemoteConfigResult = _reflection.GeneratedProtocolMessageType('MsgRemoteConfigResult', (_message.Message,), dict(
-  DESCRIPTOR = _MSGREMOTECONFIGRESULT,
-  __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:MsgRemoteConfigResult)
-  ))
-_sym_db.RegisterMessage(MsgRemoteConfigResult)
+MsgControlReq = _reflection.GeneratedProtocolMessageType('MsgControlReq', (_message.Message,), dict(
 
-AirConditionControlParameter = _reflection.GeneratedProtocolMessageType('AirConditionControlParameter', (_message.Message,), dict(
-  DESCRIPTOR = _AIRCONDITIONCONTROLPARAMETER,
-  __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:AirConditionControlParameter)
-  ))
-_sym_db.RegisterMessage(AirConditionControlParameter)
+  MsgAirParam = _reflection.GeneratedProtocolMessageType('MsgAirParam', (_message.Message,), dict(
+    DESCRIPTOR = _MSGCONTROLREQ_MSGAIRPARAM,
+    __module__ = 'tbox_pb2'
+    # @@protoc_insertion_point(class_scope:MsgControlReq.MsgAirParam)
+    ))
+  ,
 
-MsgRemoteControlCmd = _reflection.GeneratedProtocolMessageType('MsgRemoteControlCmd', (_message.Message,), dict(
-  DESCRIPTOR = _MSGREMOTECONTROLCMD,
-  __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:MsgRemoteControlCmd)
-  ))
-_sym_db.RegisterMessage(MsgRemoteControlCmd)
+  MsgWindowsParam = _reflection.GeneratedProtocolMessageType('MsgWindowsParam', (_message.Message,), dict(
+    DESCRIPTOR = _MSGCONTROLREQ_MSGWINDOWSPARAM,
+    __module__ = 'tbox_pb2'
+    # @@protoc_insertion_point(class_scope:MsgControlReq.MsgWindowsParam)
+    ))
+  ,
 
-RemoteControlResponseVehiceInfo = _reflection.GeneratedProtocolMessageType('RemoteControlResponseVehiceInfo', (_message.Message,), dict(
-  DESCRIPTOR = _REMOTECONTROLRESPONSEVEHICEINFO,
+  MsgSeatParam = _reflection.GeneratedProtocolMessageType('MsgSeatParam', (_message.Message,), dict(
+    DESCRIPTOR = _MSGCONTROLREQ_MSGSEATPARAM,
+    __module__ = 'tbox_pb2'
+    # @@protoc_insertion_point(class_scope:MsgControlReq.MsgSeatParam)
+    ))
+  ,
+  DESCRIPTOR = _MSGCONTROLREQ,
   __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:RemoteControlResponseVehiceInfo)
+  # @@protoc_insertion_point(class_scope:MsgControlReq)
   ))
-_sym_db.RegisterMessage(RemoteControlResponseVehiceInfo)
+_sym_db.RegisterMessage(MsgControlReq)
+_sym_db.RegisterMessage(MsgControlReq.MsgAirParam)
+_sym_db.RegisterMessage(MsgControlReq.MsgWindowsParam)
+_sym_db.RegisterMessage(MsgControlReq.MsgSeatParam)
 
-MsgRemoteControlResponse = _reflection.GeneratedProtocolMessageType('MsgRemoteControlResponse', (_message.Message,), dict(
-  DESCRIPTOR = _MSGREMOTECONTROLRESPONSE,
+MsgControlResp = _reflection.GeneratedProtocolMessageType('MsgControlResp', (_message.Message,), dict(
+  DESCRIPTOR = _MSGCONTROLRESP,
   __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:MsgRemoteControlResponse)
+  # @@protoc_insertion_point(class_scope:MsgControlResp)
   ))
-_sym_db.RegisterMessage(MsgRemoteControlResponse)
+_sym_db.RegisterMessage(MsgControlResp)
 
 MsgOtaCmd = _reflection.GeneratedProtocolMessageType('MsgOtaCmd', (_message.Message,), dict(
   DESCRIPTOR = _MSGOTACMD,
@@ -3258,34 +3559,20 @@ MsgOtaResult = _reflection.GeneratedProtocolMessageType('MsgOtaResult', (_messag
   ))
 _sym_db.RegisterMessage(MsgOtaResult)
 
-MsgOtaResultResponse = _reflection.GeneratedProtocolMessageType('MsgOtaResultResponse', (_message.Message,), dict(
-  DESCRIPTOR = _MSGOTARESULTRESPONSE,
-  __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:MsgOtaResultResponse)
-  ))
-_sym_db.RegisterMessage(MsgOtaResultResponse)
-
-MsgRemoteDiagnosisResponse = _reflection.GeneratedProtocolMessageType('MsgRemoteDiagnosisResponse', (_message.Message,), dict(
-  DESCRIPTOR = _MSGREMOTEDIAGNOSISRESPONSE,
-  __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:MsgRemoteDiagnosisResponse)
-  ))
-_sym_db.RegisterMessage(MsgRemoteDiagnosisResponse)
-
-MsgRemoteDiagnosisResult = _reflection.GeneratedProtocolMessageType('MsgRemoteDiagnosisResult', (_message.Message,), dict(
+MsgDiagnosisResp = _reflection.GeneratedProtocolMessageType('MsgDiagnosisResp', (_message.Message,), dict(
 
   DiagnosisResult = _reflection.GeneratedProtocolMessageType('DiagnosisResult', (_message.Message,), dict(
-    DESCRIPTOR = _MSGREMOTEDIAGNOSISRESULT_DIAGNOSISRESULT,
+    DESCRIPTOR = _MSGDIAGNOSISRESP_DIAGNOSISRESULT,
     __module__ = 'tbox_pb2'
-    # @@protoc_insertion_point(class_scope:MsgRemoteDiagnosisResult.DiagnosisResult)
+    # @@protoc_insertion_point(class_scope:MsgDiagnosisResp.DiagnosisResult)
     ))
   ,
-  DESCRIPTOR = _MSGREMOTEDIAGNOSISRESULT,
+  DESCRIPTOR = _MSGDIAGNOSISRESP,
   __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:MsgRemoteDiagnosisResult)
+  # @@protoc_insertion_point(class_scope:MsgDiagnosisResp)
   ))
-_sym_db.RegisterMessage(MsgRemoteDiagnosisResult)
-_sym_db.RegisterMessage(MsgRemoteDiagnosisResult.DiagnosisResult)
+_sym_db.RegisterMessage(MsgDiagnosisResp)
+_sym_db.RegisterMessage(MsgDiagnosisResp.DiagnosisResult)
 
 MsgDatamining = _reflection.GeneratedProtocolMessageType('MsgDatamining', (_message.Message,), dict(
   DESCRIPTOR = _MSGDATAMINING,
@@ -3295,32 +3582,56 @@ MsgDatamining = _reflection.GeneratedProtocolMessageType('MsgDatamining', (_mess
 _sym_db.RegisterMessage(MsgDatamining)
 
 MsgVehicleStatus = _reflection.GeneratedProtocolMessageType('MsgVehicleStatus', (_message.Message,), dict(
+
+  MsgGValue = _reflection.GeneratedProtocolMessageType('MsgGValue', (_message.Message,), dict(
+    DESCRIPTOR = _MSGVEHICLESTATUS_MSGGVALUE,
+    __module__ = 'tbox_pb2'
+    # @@protoc_insertion_point(class_scope:MsgVehicleStatus.MsgGValue)
+    ))
+  ,
   DESCRIPTOR = _MSGVEHICLESTATUS,
   __module__ = 'tbox_pb2'
   # @@protoc_insertion_point(class_scope:MsgVehicleStatus)
   ))
 _sym_db.RegisterMessage(MsgVehicleStatus)
+_sym_db.RegisterMessage(MsgVehicleStatus.MsgGValue)
 
-GSensorValue = _reflection.GeneratedProtocolMessageType('GSensorValue', (_message.Message,), dict(
-  DESCRIPTOR = _GSENSORVALUE,
-  __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:GSensorValue)
-  ))
-_sym_db.RegisterMessage(GSensorValue)
+MsgAlarmReport = _reflection.GeneratedProtocolMessageType('MsgAlarmReport', (_message.Message,), dict(
 
-MsgAlarmSignal = _reflection.GeneratedProtocolMessageType('MsgAlarmSignal', (_message.Message,), dict(
-  DESCRIPTOR = _MSGALARMSIGNAL,
-  __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:MsgAlarmSignal)
-  ))
-_sym_db.RegisterMessage(MsgAlarmSignal)
+  MsgGSensor = _reflection.GeneratedProtocolMessageType('MsgGSensor', (_message.Message,), dict(
+    DESCRIPTOR = _MSGALARMREPORT_MSGGSENSOR,
+    __module__ = 'tbox_pb2'
+    # @@protoc_insertion_point(class_scope:MsgAlarmReport.MsgGSensor)
+    ))
+  ,
 
-MsgAlarmSignalResponse = _reflection.GeneratedProtocolMessageType('MsgAlarmSignalResponse', (_message.Message,), dict(
-  DESCRIPTOR = _MSGALARMSIGNALRESPONSE,
+  MsgWindowInfo = _reflection.GeneratedProtocolMessageType('MsgWindowInfo', (_message.Message,), dict(
+    DESCRIPTOR = _MSGALARMREPORT_MSGWINDOWINFO,
+    __module__ = 'tbox_pb2'
+    # @@protoc_insertion_point(class_scope:MsgAlarmReport.MsgWindowInfo)
+    ))
+  ,
+  DESCRIPTOR = _MSGALARMREPORT,
   __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:MsgAlarmSignalResponse)
+  # @@protoc_insertion_point(class_scope:MsgAlarmReport)
   ))
-_sym_db.RegisterMessage(MsgAlarmSignalResponse)
+_sym_db.RegisterMessage(MsgAlarmReport)
+_sym_db.RegisterMessage(MsgAlarmReport.MsgGSensor)
+_sym_db.RegisterMessage(MsgAlarmReport.MsgWindowInfo)
+
+MsgMotorFireSignal = _reflection.GeneratedProtocolMessageType('MsgMotorFireSignal', (_message.Message,), dict(
+  DESCRIPTOR = _MSGMOTORFIRESIGNAL,
+  __module__ = 'tbox_pb2'
+  # @@protoc_insertion_point(class_scope:MsgMotorFireSignal)
+  ))
+_sym_db.RegisterMessage(MsgMotorFireSignal)
+
+MsgTrackingData = _reflection.GeneratedProtocolMessageType('MsgTrackingData', (_message.Message,), dict(
+  DESCRIPTOR = _MSGTRACKINGDATA,
+  __module__ = 'tbox_pb2'
+  # @@protoc_insertion_point(class_scope:MsgTrackingData)
+  ))
+_sym_db.RegisterMessage(MsgTrackingData)
 
 MsgPushMessage = _reflection.GeneratedProtocolMessageType('MsgPushMessage', (_message.Message,), dict(
   DESCRIPTOR = _MSGPUSHMESSAGE,
@@ -3328,13 +3639,6 @@ MsgPushMessage = _reflection.GeneratedProtocolMessageType('MsgPushMessage', (_me
   # @@protoc_insertion_point(class_scope:MsgPushMessage)
   ))
 _sym_db.RegisterMessage(MsgPushMessage)
-
-MotorFireSignal = _reflection.GeneratedProtocolMessageType('MotorFireSignal', (_message.Message,), dict(
-  DESCRIPTOR = _MOTORFIRESIGNAL,
-  __module__ = 'tbox_pb2'
-  # @@protoc_insertion_point(class_scope:MotorFireSignal)
-  ))
-_sym_db.RegisterMessage(MotorFireSignal)
 
 
 DESCRIPTOR.has_options = True
