@@ -22,6 +22,8 @@ import re
 import time
 
 # Third-party libraries
+import psutil
+import win32com
 from robot.api import logger
 
 # Customized libraries
@@ -61,10 +63,17 @@ class TBoxCore(Singleton):
 
     @staticmethod
     def is_connected():
+        # wmi = win32com.client.GetObject("winmgmts:")
+        # for usb in wmi.InstancesOf("win32_usbcontrollerdevice"):
+        #     logger.info("is_connected")
+        #     if "VID_1C9E&PID_9B00" in usb.Dependent:
+        #         return True
+        #     return False
         (status, output) = Utils.getstatusoutput('adb get-state')
         if not status and output.find('device') != -1:
             return True
         return False
+
 
     @staticmethod
     def get_special_log(path, obj):
@@ -137,6 +146,8 @@ class TBoxCore(Singleton):
         return self._mqttc.on_request_remote_ota(version, addr, timeout)
 
     def check_vdlog(self):
+        if not TBoxCore.is_connected():
+            raise TBoxCoreError("Exception on collect log")
         try:
             (status, output) = Utils.getstatusoutput("adb shell ls /data")
             if not status:

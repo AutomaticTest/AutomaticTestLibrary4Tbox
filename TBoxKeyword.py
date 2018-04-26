@@ -67,7 +67,10 @@ class TBoxKeyword(object):
         """
         logger.info(self._tag + 'Collecting log for TBox')
         timestamp = time.strftime("%m%d-%H%M%S", time.localtime(time.time()))
-        path = os.getcwd() + "\\" + timestamp
+        if Utils.is_windows_os():
+            path = os.getcwd() + "\\" + timestamp
+        else:
+            path = os.getcwd() + "/" + timestamp
         TBoxCore.on_collect_log(path)
         logger.info(self._tag + 'Collecte log finish.Path: ' + path)
 
@@ -148,7 +151,6 @@ class TBoxKeyword(object):
         """
         logger.info(self._tag + "Request CAN data called")
         return self._tbox.on_request_can_data(item, timeout)
-
 
 if __name__ == '__main__':
     pass
