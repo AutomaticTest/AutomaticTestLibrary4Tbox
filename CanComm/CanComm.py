@@ -121,6 +121,94 @@ class CanComm(object):
         self._alive = False
         self._transmitter_thread = None
         self._transmit_by_cycle = []
+        self._can_matrix_dict = {
+            # 左前门开关状态
+            'LF_DOOR_REQ':                  self._on_request_lf_door,
+            # 右前门开关状态
+            'RF_DOOR_REQ':                  self._on_request_rf_door,
+            # 左后门开关状态
+            'LR_DOOR_REQ':                  self._on_request_lr_door,
+            # 右后门开关状态
+            'RR_DOOR_REQ':                  self._on_request_rr_door,
+            # 后尾箱开关状态
+            'TRUNK_DOOR_REQ':               self._on_request_trunk_door,
+            # 左前窗开关状态
+            'LF_WINDOW_REQ':                self._on_request_lf_window,
+            # 右前窗开关状态
+            'RF_WINDOW_REQ':                self._on_request_rf_window,
+            # 左后窗开关状态
+            'LR_WINDOW_REQ':                self._on_request_lr_window,
+            # 右后窗开关状态
+            'RR_WINDOW_REQ':                self._on_request_rr_window,
+            # 天窗开关状态
+            'ROOF_WINDOW_REQ':              self._on_request_roof_window,
+            # 空调开关状态
+            'AC_REQ':                       self._on_request_ac,
+            # 空调前除霜开关状态
+            'FRONT_DEFROST_REQ':            self._on_request_front_defrost,
+            # 空调后除霜开关状态
+            'REAR_DEFROST_REQ':             self._on_request_rear_defrost,
+            # 空调温度
+            'AC_TEMPERATURE_REQ':           self._on_request_ac_temperature,
+            # 驾驶员左前门锁开关状态
+            'LOCK_DOOR_REQ':                self._on_request_lock_door,
+            # 发动机状态
+            'ENGINE_REQ':                   self._on_request_engine,
+            # 雨刷开关状态
+            'WIPER_REQ':                    self._on_request_wiper,
+            # 手刹状态
+            'HANDBRAKE_REQ':                self._on_request_handbrake,
+            # 前除霜状态
+            'FRONT_DEFROST_STS':            self._on_front_defrost_status,
+            # PEPS电源状态
+            'PEPS_POWER_REQ':               self._on_request_peps_power,
+            # 档位
+            'GEAR_POS_REQ':                 self._on_request_gear_pos,
+            # 左前胎压
+            'LF_TIRE_PRESSURE_REQ':         self._on_request_lf_tire_pressure,
+            # 左后胎压
+            'LR_TIRE_PRESSURE_REQ':         self._on_request_lr_tire_pressure,
+            # 右前胎压
+            'RF_TIRE_PRESSURE_REQ':         self._on_request_rf_tire_pressure,
+            # 右后胎压
+            'RR_TIRE_PRESSURE_REQ':         self._on_request_rr_tire_pressure,
+            # 蓄电池电压
+            'BATTERY_VOLTAGE_REQ':          self._on_request_battery_voltage,
+            # 剩余油量
+            'FUEL_LEVEL_REQ':               self._on_request_fuel_level,
+            # 剩余里程
+            'REMAIN_MILEAGE_REQ':           self._on_request_remain_mileage,
+            # 是否系安全带
+            'BELT_REQ':                     self._on_request_belt,
+            # 近光灯状态
+            'FRONT_FOG_LAMP_REQ':           self._on_request_front_fog_lamp,
+            # 远光灯状态
+            'REAR_FOG_LAMP_REQ':            self._on_request_rear_fog_lamp,
+            # G值
+            'G_VALUE_REQ':                  self._on_request_g_value,
+            # 光照强度
+            'LIGHT_INTENSITY_REQ':          self._on_request_light_intensity,
+            # 瞬时油耗
+            'CURR_FUEL_CONSUMPTION_REQ':    self._on_request_curr_fuel_consumption,
+            # 当前速度
+            'CURR_SPEED_REQ':               self._on_request_curr_speed,
+            # 当前转速
+            'ENGINE_SPEED_REQ':             self._on_request_engine_speed,
+            # 方向盘转角，左为正，右为负
+            'STEERING_ANGLE_REQ':           self._on_request_steering_angle,
+            # 油门脚踏板角度
+            'ACCELERATOR_PEDAL_ANGLE_REQ':  self._on_request_accelerator_pedal_angle,
+            # 刹车板角度
+            'BRAKE_PEDAL_ANGLE_REQ':        self._on_request_brake_pedal_angle,
+            # 离合器角度
+            'CLUTCH_PEDAL_ANGLE_REQ':       self._on_request_clutch_pedal_angle,
+            # 总里程
+            'TOTAL_MILEAGE_REQ':            self._on_request_total_mileage,
+            # 车辆位置
+            # 当前追踪状态
+            # 平均油耗
+            'AVERAGE_FUEL_CONSUMPTION_REQ': self._on_request_average_fuel_consumption,
+        }
 
     def on_create(self):
         logger.info(self._tag + "on_create called")
@@ -173,88 +261,62 @@ class CanComm(object):
         else:
             return sts_return[1]
 
-    def __set_config_data(self, canobj, item, data):
-        logger.console(item + ':')
-        logger.console(canobj.encode())
-        if item == 'LEFT_FRONT_DOOR_STS':
-            logger.console("LEFT_FRONT_DOOR_STS")
-            canobj.driver_door_status = DoorStatus.CanStatus[data]
-        elif item == 'RIGHT_FRONT_DOOR_STS':
-            logger.console("RIGHT_FRONT_DOOR_STS")
-            canobj.passenger_door_status = DoorStatus.CanStatus[data]
-        elif item == 'LEFT_REAR_DOOR_STS':
-            logger.console("LEFT_REAR_DOOR_STS")
-            canobj.left_rear_door_status = DoorStatus.CanStatus[data]
-        elif item == 'RIGHT_REAR_DOOR_STS':
-            logger.console("RIGHT_REAR_DOOR_STS")
-            canobj.right_rear_door_status = DoorStatus.CanStatus[data]
-        elif item == 'TRUNK_DOOR_STS':
-            logger.console("TRUNK_DOOR_STS")
-            canobj.tailgate_status = DoorStatus.CanStatus[data]
-        elif item == 'AC_STS':
-            logger.console("AC_STS")
-            canobj.on_off_state = AcStatus.CanStatus[data]
-        elif item == 'FRONT_DEFROST_STS':
-            logger.console("FRONT_DEFROST_STS")
-            canobj.defrost_mode = DefrostStatus.CanStatus[data]
-        elif item == 'REAR_DEFROST_STS':
-            logger.console("REAR_DEFROST_STS")
-            canobj.rear_defrost_status = DefrostStatus.CanStatus[data]
-        elif item == 'AC_TEMPERATURE':
-            logger.console("AC_TEMPERATURE")
-            canobj.set_temperature = float(data)
-        elif item == 'DOOR_LOCK_STS':
-            logger.console("DOOR_LOCK_STS")
-            canobj.driver_door_lock_status = LockStatus.CanStatus[data]
-        elif item == 'ENGINE_STS':
-            logger.console("ENGINE_STS")
-            canobj.engine_status = EngineStatus.CanStatus[data]
-        elif item == 'WIPER_STS':
-            logger.console("WIPER_STS")
-            canobj.wiper_status = WiperStatus.CanStatus[data]
-        elif item == 'HANDBRAKE_STS':
-            logger.console("HANDBRAKE_STS")
-            canobj.handbrake_signal = HandbrakeStatus.CanStatus[data]
-        elif item == 'PEPS_STS':
-            logger.console("PEPS_STS")
-            canobj.power_mode = PepsStatus.CanStatus[data]
-        elif item == 'GEAR_STS':
-            logger.console("GEAR_STS")
-            canobj.gear_position_status = GearStatus.CanStatus[data]
-        else:
-            raise CanCommError("Invalid CAN Config Item")
-        logger.console(canobj.encode())
+    # def __set_config_data(self, canobj, item, data):
+    #     logger.console(item + ':')
+    #     logger.console(canobj.encode())
+    #     if item == 'LEFT_FRONT_DOOR_STS':
+    #         logger.console("LEFT_FRONT_DOOR_STS")
+    #         canobj.driver_door_status = DoorStatus.CanStatus[data]
+    #     elif item == 'RIGHT_FRONT_DOOR_STS':
+    #         logger.console("RIGHT_FRONT_DOOR_STS")
+    #         canobj.passenger_door_status = DoorStatus.CanStatus[data]
+    #     elif item == 'LEFT_REAR_DOOR_STS':
+    #         logger.console("LEFT_REAR_DOOR_STS")
+    #         canobj.left_rear_door_status = DoorStatus.CanStatus[data]
+    #     elif item == 'RIGHT_REAR_DOOR_STS':
+    #         logger.console("RIGHT_REAR_DOOR_STS")
+    #         canobj.right_rear_door_status = DoorStatus.CanStatus[data]
+    #     elif item == 'TRUNK_DOOR_STS':
+    #         logger.console("TRUNK_DOOR_STS")
+    #         canobj.tailgate_status = DoorStatus.CanStatus[data]
+    #     elif item == 'AC_STS':
+    #         logger.console("AC_STS")
+    #         canobj.on_off_state = AcStatus.CanStatus[data]
+    #     elif item == 'FRONT_DEFROST_STS':
+    #         logger.console("FRONT_DEFROST_STS")
+    #         canobj.defrost_mode = DefrostStatus.CanStatus[data]
+    #     elif item == 'REAR_DEFROST_STS':
+    #         logger.console("REAR_DEFROST_STS")
+    #         canobj.rear_defrost_status = DefrostStatus.CanStatus[data]
+    #     elif item == 'AC_TEMPERATURE':
+    #         logger.console("AC_TEMPERATURE")
+    #         canobj.set_temperature = float(data)
+    #     elif item == 'DOOR_LOCK_STS':
+    #         logger.console("DOOR_LOCK_STS")
+    #         canobj.driver_door_lock_status = LockStatus.CanStatus[data]
+    #     elif item == 'ENGINE_STS':
+    #         logger.console("ENGINE_STS")
+    #         canobj.engine_status = EngineStatus.CanStatus[data]
+    #     elif item == 'WIPER_STS':
+    #         logger.console("WIPER_STS")
+    #         canobj.wiper_status = WiperStatus.CanStatus[data]
+    #     elif item == 'HANDBRAKE_STS':
+    #         logger.console("HANDBRAKE_STS")
+    #         canobj.handbrake_signal = HandbrakeStatus.CanStatus[data]
+    #     elif item == 'PEPS_STS':
+    #         logger.console("PEPS_STS")
+    #         canobj.power_mode = PepsStatus.CanStatus[data]
+    #     elif item == 'GEAR_STS':
+    #         logger.console("GEAR_STS")
+    #         canobj.gear_position_status = GearStatus.CanStatus[data]
+    #     else:
+    #         raise CanCommError("Invalid CAN Config Item")
+    #     logger.console(canobj.encode())
 
     def on_request(self, item, data):
-        logger.info(self._tag + "on_request called")
-        convert_config_item_dict = {
-            # 即时上报数据信息
-            'FUEL_CONSUMPTION':        self._ems360,
-            'TOTAL_MILEAGE':           self._ic380,
-            # 'CURRENT_SPEED':        ,
-            'ENGINE_SPEED':            self._ems302,
-            'STEERING_ANGLE':          self._sas300,
-            'ACCELERATOR_PEDAL_ANGLE': self._ems302,
-            # 'BRAKE_PEDAL_ANGLE': ,
-            # 'CLUTCH_PEDAL_ANGLE': ,
-            # 车辆状态上报数据
-            'LEFT_FRONT_DOOR_STS':  self._bcm350,
-            'RIGHT_FRONT_DOOR_STS': self._bcm350,
-            'LEFT_REAR_DOOR_STS':   self._bcm350,
-            'RIGHT_REAR_DOOR_STS':  self._bcm350,
-            'TRUNK_DOOR_STS':       self._bcm350,
-            'AC_STS':               self._ac378,
-            'FRONT_DEFROST_STS':    self._ac378,
-            'REAR_DEFROST_STS':     self._bcm365,
-            'AC_TEMPERATURE':       self._ac378,
-            'DOOR_LOCK_STS':        self._bcm350,
-            'ENGINE_STS':           self._ems303,
-            'WIPER_STS':            self._bcm365,
-            'HANDBRAKE_STS':        self._bcm350,
-            'PEPS_STS':             self._peps341,
-            'GEAR_STS':             self._tcu328,
-        }
-        self.__set_config_data(convert_config_item_dict[item], item, data)
+        logger.info(self._tag + "==> on_request")
+        # self.__set_config_data(convert_config_item_dict[item], item, data)
+        logger.info(self._tag + "on_request <===")
         return True
 
     # def process_message(self, msg):
@@ -351,6 +413,178 @@ class CanComm(object):
         """wait for worker threads to terminate"""
         if self._transmitter_thread is not None:
             self._transmitter_thread.join()
+
+    ################################################################################
+    def _on_request_lf_door(self, data):
+        """ LF_DOOR_REQ 左前门开关状态 """
+        self._bcm350.driver_door_status = DoorStatus.CanStatus[data]
+
+    def _on_request_rf_door(self, data):
+        """ RF_DOOR_REQ 右前门开关状态 """
+        self._bcm350.passenger_door_status = DoorStatus.CanStatus[data]
+
+    def _on_request_lr_door(self, data):
+        """ LR_DOOR_REQ 左后门开关状态 """
+        self._bcm350.left_rear_door_status = DoorStatus.CanStatus[data]
+
+    def _on_request_rr_door(self, data):
+        """ RR_DOOR_REQ 右后门开关状态 """
+        self._bcm350.right_rear_door_status = DoorStatus.CanStatus[data]
+
+    def _on_request_trunk_door(self, data):
+        """ TRUNK_DOOR_REQ 后尾箱开关状态 """
+        self._bcm350.tailgate_status = DoorStatus.CanStatus[data]
+
+    def _on_request_lf_window(self, data):
+        """ LF_WINDOW_REQ 左前窗开关状态 """
+        self._bcm365.lf_window_status = WindowStatus.CanStatus[data]
+
+    def _on_request_rf_window(self, data):
+        """ RF_WINDOW_REQ 右前窗开关状态 """
+        self._bcm365.rf_window_status = WindowStatus.CanStatus[data]
+
+    def _on_request_lr_window(self, data):
+        """ LR_WINDOW_REQ 左后窗开关状态 """
+        self._bcm365.lr_window_status = WindowStatus.CanStatus[data]
+
+    def _on_request_rr_window(self, data):
+        """ RR_WINDOW_REQ 右后窗开关状态 """
+        self._bcm365.rr_window_status = WindowStatus.CanStatus[data]
+
+    def _on_request_roof_window(self, data):
+        """ ROOF_WINDOW_REQ 天窗开关状态 """
+        self._bcm365.roof_window_status = WindowStatus.CanStatus[data]
+
+    def _on_request_ac(self, data):
+        """ AC_REQ 空调开关状态 """
+        pass
+
+    def _on_request_front_defrost(self, data):
+        """ FRONT_DEFROST_REQ 空调前除霜开关状态 """
+        pass
+
+    def _on_request_rear_defrost(self, data):
+        """ REAR_DEFROST_REQ 空调后除霜开关状态 """
+        pass
+
+    def _on_request_ac_temperature(self, data):
+        """ AC_TEMPERATURE_REQ 空调温度 """
+        pass
+
+    def _on_request_lock_door(self, data):
+        """ LOCK_DOOR_REQ 驾驶员左前门锁开关状态 """
+        pass
+
+    def _on_request_engine(self, data):
+        """ ENGINE_REQ 发动机状态 """
+        pass
+
+    def _on_request_wiper(self, data):
+        """ WIPER_REQ 雨刷开关状态 """
+        pass
+
+    def _on_request_handbrake(self, data):
+        """ HANDBRAKE_REQ 手刹状态 """
+        pass
+
+    def _on_front_defrost_status(self, data):
+        """ FRONT_DEFROST_STS 前除霜状态 """
+        pass
+
+    def _on_request_peps_power(self, data):
+        """ PEPS_POWER_REQ PEPS电源状态 """
+        pass
+
+    def _on_request_gear_pos(self, data):
+        """ GEAR_POS_REQ 档位 """
+        pass
+
+    def _on_request_lf_tire_pressure(self, data):
+        """ LF_TIRE_PRESSURE_REQ 左前胎压 """
+        pass
+
+    def _on_request_lr_tire_pressure(self, data):
+        """ LR_TIRE_PRESSURE_REQ 左后胎压 """
+        pass
+
+    def _on_request_rf_tire_pressure(self, data):
+        """ RF_TIRE_PRESSURE_REQ 右前胎压 """
+        pass
+
+    def _on_request_rr_tire_pressure(self, data):
+        """ RR_TIRE_PRESSURE_REQ 右后胎压 """
+        pass
+
+    def _on_request_battery_voltage(self, data):
+        """ BATTERY_VOLTAGE_REQ 蓄电池电压 """
+        pass
+
+    def _on_request_fuel_level(self, data):
+        """ FUEL_LEVEL_REQ 剩余油量 """
+        pass
+
+    def _on_request_remain_mileage(self, data):
+        """ REMAIN_MILEAGE_REQ 剩余里程 """
+        pass
+
+    def _on_request_belt(self, data):
+        """ BELT_REQ 是否系安全带 """
+        pass
+
+    def _on_request_front_fog_lamp(self, data):
+        """ FRONT_FOG_LAMP_REQ 近光灯状态 """
+        pass
+
+    def _on_request_rear_fog_lamp(self, data):
+        """ REAR_FOG_LAMP_REQ 远光灯状态 """
+        pass
+
+    def _on_request_g_value(self, data):
+        """ G_VALUE_REQ G值 """
+        pass
+
+    def _on_request_light_intensity(self, data):
+        """ LIGHT_INTENSITY_REQ 光照强度 """
+        pass
+
+    def _on_request_curr_fuel_consumption(self, data):
+        """ CURR_FUEL_CONSUMPTION_REQ 瞬时油耗 """
+        pass
+
+    def _on_request_curr_speed(self, data):
+        """ CURR_SPEED_REQ 当前速度 """
+        pass
+
+    def _on_request_engine_speed(self, data):
+        """ ENGINE_SPEED_REQ 当前转速 """
+        pass
+
+    def _on_request_steering_angle(self, data):
+        """ STEERING_ANGLE_REQ 方向盘转角，左为正，右为负 """
+        pass
+
+    def _on_request_accelerator_pedal_angle(self, data):
+        """ ACCELERATOR_PEDAL_ANGLE_REQ 油门脚踏板角度 """
+        pass
+
+    def _on_request_brake_pedal_angle(self, data):
+        """ BRAKE_PEDAL_ANGLE_REQ 刹车板角度 """
+        pass
+
+    def _on_request_clutch_pedal_angle(self, data):
+        """ CLUTCH_PEDAL_ANGLE_REQ 离合器角度 """
+        pass
+
+    def _on_request_total_mileage(self, data):
+        """ TOTAL_MILEAGE_REQ 总里程 """
+        pass
+
+    # 车辆位置
+    # 当前追踪状态
+
+    def _on_request_average_fuel_consumption(self, data):
+        """ AVERAGE_FUEL_CONSUMPTION_REQ 平均油耗 """
+        pass
 
 
 class CanCommError(Exception):

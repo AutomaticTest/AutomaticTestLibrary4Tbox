@@ -31,6 +31,7 @@ from Resource.DFSKVehicleStatus import WiperStatus
 from Resource.DFSKVehicleStatus import AcStatus
 from Resource.DFSKVehicleStatus import GearStatus
 from Resource.DFSKVehicleStatus import PepsStatus
+from Resource.DFSKVehicleStatus import WindowStatus
 
 
 class Tbox011(CanMsgBasic):
@@ -804,6 +805,16 @@ class Bcm365(CanMsgBasic):
         self.__exterior_mirror_elec_flod_status = 0
         # 车身防盗状态
         self.__vehicle_antt_status = 0
+        # 左前车窗状态
+        self.__lf_window_status = 0
+        # 右前车窗状态
+        self.__rf_window_status = 0
+        # 左后车窗状态
+        self.__lr_window_status = 0
+        # 右后车窗状态
+        self.__rr_window_status = 0
+        # 天窗状态
+        self.__roof_window_status = 0
 
     @property
     def rear_defrost_status(self):
@@ -837,6 +848,81 @@ class Bcm365(CanMsgBasic):
         except AttributeError:
             print("AttributeError on wiper_status")
 
+    @property
+    def lf_window_status(self):
+        """ 左前车窗状态 """
+        return self.__lf_window_status
+
+    @lf_window_status.setter
+    def lf_window_status(self, status):
+        """ 左前车窗状态 """
+        try:
+            if status not in WindowStatus.CanStatus:
+                raise AttributeError
+            self.__lf_window_status = status.value
+        except AttributeError:
+            print("AttributeError on lf_window_status")
+
+    @property
+    def rf_window_status(self):
+        """ 右前车窗状态 """
+        return self.__rf_window_status
+
+    @rf_window_status.setter
+    def rf_window_status(self, status):
+        """ 右前车窗状态 """
+        try:
+            if status not in WindowStatus.CanStatus:
+                raise AttributeError
+            self.__rf_window_status = status.value
+        except AttributeError:
+            print("AttributeError on rf_window_status")
+
+    @property
+    def lr_window_status(self):
+        """ 左后车窗状态 """
+        return self.__lr_window_status
+
+    @lr_window_status.setter
+    def lr_window_status(self, status):
+        """ 左后车窗状态 """
+        try:
+            if status not in WindowStatus.CanStatus:
+                raise AttributeError
+            self.__lr_window_status = status.value
+        except AttributeError:
+            print("AttributeError on lr_window_status")
+
+    @property
+    def rr_window_status(self):
+        """ 右后车窗状态 """
+        return self.__rr_window_status
+
+    @rr_window_status.setter
+    def rr_window_status(self, status):
+        """ 右后车窗状态 """
+        try:
+            if status not in WindowStatus.CanStatus:
+                raise AttributeError
+            self.__rr_window_status = status.value
+        except AttributeError:
+            print("AttributeError on rr_window_status")
+
+    @property
+    def roof_window_status(self):
+        """ 天窗状态 """
+        return self.__roof_window_status
+
+    @roof_window_status.setter
+    def roof_window_status(self, status):
+        """ 天窗状态 """
+        try:
+            if status not in WindowStatus.CanStatus:
+                raise AttributeError
+            self.__roof_window_status = status.value
+        except AttributeError:
+            print("AttributeError on roof_window_status")
+
     def encode(self):
         # ESCL电源请求的响应信号 + ESCL解锁信号反馈 + 电源继电器输出状态
         self._msg_data[0] = hex((self.__escl_power_resp << 0) |
@@ -852,6 +938,13 @@ class Bcm365(CanMsgBasic):
                                 (self.__rear_defrost_status_valid << (17 % 8)) |
                                 (self.__exterior_mirror_elec_flod_status << (18 % 8)) |
                                 (self.__vehicle_antt_status << (20 % 8)))
+        # 左前车窗状态 + 右前车窗状态
+        self._msg_data[3] = hex((self.__lf_window_status << (26 % 8)) |
+                                (self.__rf_window_status << (29 % 8)))
+        # 左后车窗状态 + 右后车窗状态 + 天窗状态
+        self._msg_data[4] = hex((self.__lr_window_status << (33 % 8)) |
+                                (self.__rr_window_status << (36 % 8)) |
+                                (self.__roof_window_status << (39 % 8)))
         return self._msg_data
 
     def dump(self):

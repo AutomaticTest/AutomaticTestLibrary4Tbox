@@ -152,5 +152,6 @@ class TBoxKeyword(object):
         logger.info(self._tag + "Request CAN data called")
         return self._tbox.on_request_can_data(item, timeout)
 
+
 if __name__ == '__main__':
     pass
