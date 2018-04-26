@@ -83,7 +83,7 @@ class MqttComm(object):
         self._did_type = tbox_pb2.PDID
         self._msg_id = 1
         self._token = "token-" + expected_device
-        self._task_id = expected_device
+        self._task_id = 'task-' + str(int(time.time())) + ''.join(str(random.choice(range(10))) for _ in range(5))
         # MQTT parameter
         self._mqttc = None
         self._expected_device = expected_device
@@ -98,20 +98,20 @@ class MqttComm(object):
         self._handle_report_dict = {
             tbox_pb2.DATAMINING:           self.__on_response_datamining,
             tbox_pb2.VEHICLE_STATUS:       self.__on_response_vehicle_status,
+        }
+        self._handle_business_dict = {
+            tbox_pb2.LOGIN_REQ:            self.__on_response_login,
+            tbox_pb2.HEART_BEAT_REQ:       self.__on_response_heartbeat,
+            tbox_pb2.CONFIG_QUERY_REQ:     self.__on_response_config_query,
+            tbox_pb2.CONFIG_RESP:          self.__on_response_config,
+            tbox_pb2.CONTROL_RESP:         self.__on_response_control,
+            tbox_pb2.OTA_CMD_RESP:         self.__on_response_ota_cmd,
+            tbox_pb2.OTA_CHECKSUM_REQ:     self.__on_request_ota_checksum,
+            tbox_pb2.OTA_RESULT_REPORT:    self.__on_response_ota_result,
+            tbox_pb2.DIAGNOSIS_RESPONSE:   self.__on_response_diagnosis,
             tbox_pb2.ALARM_REPORT:         self.__on_response_alarm_signal,
             tbox_pb2.MOTOR_FIRE_REPORT:    self.__on_response_motor_fire_signal,
             tbox_pb2.TRACKING_DATA_REPORT: self.__on_response_tracking_data,
-        }
-        self._handle_business_dict = {
-            tbox_pb2.LOGIN_REQ:          self.__on_response_login,
-            tbox_pb2.HEART_BEAT_REQ:     self.__on_response_heartbeat,
-            tbox_pb2.CONFIG_QUERY_REQ:   self.__on_response_config_query,
-            tbox_pb2.CONFIG_RESP:        self.__on_response_config,
-            tbox_pb2.CONTROL_RESP:       self.__on_response_control,
-            tbox_pb2.OTA_CMD_RESP:       self.__on_response_ota_cmd,
-            tbox_pb2.OTA_CHECKSUM_REQ:   self.__on_request_ota_checksum,
-            tbox_pb2.OTA_RESULT_REPORT:  self.__on_response_ota_result,
-            tbox_pb2.DIAGNOSIS_RESPONSE: self.__on_response_diagnosis,
         }
         # Sync parameter
         self._event = threading.Event()
@@ -167,7 +167,7 @@ class MqttComm(object):
         return self._is_connected
 
     def __on_connect(self, client, userdata, flags, rc):
-        logger.console(self._tag + "Connected with result:" + mqtt.connack_string(rc))
+        logger.console("\n" + self._tag + "Connected with result:" + mqtt.connack_string(rc))
         client.subscribe(MQTT_WILL_TOPIC, qos=1)
         client.subscribe(MQTT_REPORT_TOPIC, qos=1)
         client.subscribe(MQTT_BUSINESS_TOPIC, qos=1)
@@ -190,38 +190,42 @@ class MqttComm(object):
             self._is_connected = False
 
     def __handle_topic_report(self, client, userdata, msg):
-        logger.console(self._tag + "__handle_topic_report called")
+        logger.console(self._tag + "==> handle_topic_report")
         msgtop = tbox_pb2.MsgTop()
         msgtop.ParseFromString(msg.payload)
         if self.__is_valid_device(msgtop):
             # set parameter
             if not self._is_connected:
                 self._protocol_version = msgtop.message_head.protocol_version
-                self._did_type = msgtop.message_head.equipment_id_type
+                self._did_type = msgtop.message_head.did_type
                 self._msg_id = msgtop.message_head.message_id
-                self._token = "token-" + self._expected_device
+                self._token = msgtop.message_head.token
+                self._task_id = msgtop.message_head.task_id
                 self._is_connected = True
             MqttDump.dump(msgtop)
             handle = self._handle_report_dict.get(msgtop.message_head.msg_type, None)
             if handle is not None:
                 handle(client, userdata, msgtop)
+        logger.console(self._tag + "handle_topic_report <===")
 
     def __handle_topic_business(self, client, userdata, msg):
-        logger.console(self._tag + "__handle_topic_business called")
+        logger.console(self._tag + "===> handle_topic_business")
         msgtop = tbox_pb2.MsgTop()
         msgtop.ParseFromString(msg.payload)
         if self.__is_valid_device(msgtop):
             # set parameter
             if not self._is_connected:
                 self._protocol_version = msgtop.message_head.protocol_version
-                self._did_type = msgtop.message_head.equipment_id_type
+                self._did_type = msgtop.message_head.did_type
                 self._msg_id = msgtop.message_head.message_id
-                self._token = "token-" + self._expected_device
+                self._token = msgtop.message_head.token
+                self._task_id = msgtop.message_head.task_id
                 self._is_connected = True
             MqttDump.dump(msgtop)
             handle = self._handle_business_dict.get(msgtop.message_head.msg_type, None)
             if handle is not None:
                 handle(client, userdata, msgtop)
+        logger.console(self._tag + "handle_topic_business <===")
 
     def __on_response_datamining(self, client, userdata, msgtop):
         self._msgtop.datamining.CopyFrom(msgtop.datamining)
@@ -245,8 +249,8 @@ class MqttComm(object):
         return self._msg_id
 
     def __is_valid_device(self, msgtop):
-        logger.info(self._tag + "__is_valid_device called, DevId:" + msgtop.message_head.equipment_id)
-        if msgtop.message_head.equipment_id == self._expected_device:
+        logger.console(self._tag + "is_valid_device called, DevId:" + msgtop.message_head.device_id)
+        if msgtop.message_head.device_id == self._expected_device:
             logger.console(self._tag + "=====================New Message=====================")
             return True
         return False
@@ -260,7 +264,7 @@ class MqttComm(object):
         msgtop.message_head.msg_c_time = int(time.time())
         msgtop.message_head.token = self._token
         msgtop.message_head.flag = flag
-        msgtop.task_id = self._expected_device
+        msgtop.message_head.task_id = self._task_id
 
     def __on_response_login(self, client, userdata, msgtop):
         """ MsgLoginResp """
@@ -271,7 +275,6 @@ class MqttComm(object):
             self._did_type = msgtop.message_head.did_type
             self._msg_id = msgtop.message_head.message_id
             self._token = "token-" + self._expected_device
-            self._task_id = self._expected_device
             self._is_connected = True
         publish_msg = tbox_pb2.MsgTop()
         # message_head
@@ -412,9 +415,9 @@ class MqttComm(object):
         if self._msg_id != msgtop.message_head.message_id:
             logger.warn(self._tag + "on_response_config: Not expected msg_id")
             return
-        if msgtop.HasField("remote_config_result"):
+        if msgtop.HasField("config_response"):
             # TODO: Handle receive mulit-config_items
-            for config in msgtop.remote_config_result.config_results:
+            for config in msgtop.config_response.config_results:
                 self._result = config.result
             self._event.set()
         logger.console(self._tag + "on_response_config <===")
@@ -604,7 +607,7 @@ class MqttComm(object):
             'FUEL_CONSUMPTION':        'asd',
             'TOTAL_MILEAGE':           'asd',
             'CURRENT_SPEED':           'asd',
-            'ENGINE_SPEED':            str(self._msgtop.datamining.engine_speed),
+            'ENGINE_SPEED':            str(self._msgtop.vehicle_status.engine_speed),
             'STEERING_ANGLE':          'asd',
             'ACCELERATOR_PEDAL_ANGLE': 'asd',
             'BRAKE_PEDAL_ANGLE':       'asd',
