@@ -120,6 +120,42 @@ class WiperStatus(object):
         On = 2
 
 
+class WindowStatus(object):
+    @unique
+    class CanStatus(Enum):
+        Closed = 0
+        Opened = 1
+        Closing = 2
+        Opening = 3
+        Stop = 4
+        ClosedNotCompletely = 5
+
+    @unique
+    class TspStatus(Enum):
+        Unknown = 0
+        Off = 1
+        On = 2
+
+
+class RoofStatus(object):
+    @unique
+    class CanStatus(Enum):
+        TiltUp = 0
+        VentArea = 1
+        AntipinchInVent = 2
+        FullyClose = 3
+        AntipinchInPartiallySlide = 4
+        PartiallySlide = 5
+        FullyOpen = 6
+        Uninitialized = 7
+
+    @unique
+    class TspStatus(Enum):
+        Unknown = 0
+        Off = 1
+        On = 2
+
+
 class AcStatus(object):
     @unique
     class CanStatus(Enum):
