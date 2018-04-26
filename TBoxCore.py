@@ -59,7 +59,14 @@ class TBoxCore(Singleton):
     @staticmethod
     def on_clean_log():
         if TBoxCore.is_connected():
-            Utils.getstatusoutput("adb shell rm mpulog tsplog systemlog mculog")
+            (status, output) = Utils.getstatusoutput("adb shell ls")
+            if not status:
+                result = re.findall("[a-z]*log",output)
+                if result.__len__() == 0:
+                    raise TBoxCoreError("Not find mpulog tsplog systemlog mculog")
+                (status, output) = Utils.getstatusoutput("adb shell rm mpulog tsplog systemlog mculog")
+                if not status:
+                    logger.info("remove log Success!")
 
     @staticmethod
     def is_connected():
