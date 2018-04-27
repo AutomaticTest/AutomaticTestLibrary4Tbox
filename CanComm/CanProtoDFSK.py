@@ -23,6 +23,8 @@
 # Customized libraries
 from CanMsgBasic import *
 from Resource.DFSKVehicleStatus import EngineStatus
+from Resource.DFSKVehicleStatus import TyrePressureStatus
+from Resource.DFSKVehicleStatus import TyreTPMSStatus
 from Resource.DFSKVehicleStatus import DoorStatus
 from Resource.DFSKVehicleStatus import LockStatus
 from Resource.DFSKVehicleStatus import HandbrakeStatus
@@ -32,6 +34,7 @@ from Resource.DFSKVehicleStatus import AcStatus
 from Resource.DFSKVehicleStatus import GearStatus
 from Resource.DFSKVehicleStatus import PepsStatus
 from Resource.DFSKVehicleStatus import WindowStatus
+from robot.api import logger
 
 
 class Tbox011(CanMsgBasic):
@@ -355,8 +358,40 @@ class Tcu328(CanMsgBasic):
         self.__gear_position_status = 0
         # Validity of Gear Position
         self.__gear_position_vd = 0
+        # TCU request MIL on
+        self.__tcu_mil_status = 0
+        # TCU request AC state fixed or not
+        self.__tcu_ac_fix_state = 0
+        # TCU允许SBW换挡标志位
+        self.__tcu_gear_shift_allowed = 0
+        # "Invalid Value=0xFF Vehicle Speed caculated by TCU"
+        self.__tcu_veh_speed_value = 0
+        # TCU request FAN on（high speed）
+        self.__tcu_cooling_fan_rq = 0
         # TCU warning for meter display
-        self.__ind_fault_status = 0
+        self.__tcu_ind_fault_status = 0
+        # Winter Mode Fault
+        self.__tcu_winter_mode_fault = 0
+        # Winter Mode
+        self.__tcu_winter_mode_status = 0
+        # TCU request AC off
+        self.__tcu_ac_off_rq = 0
+        # Clutch status（when the transmission is VT5, the signal  repesents DNR clutch state.）
+        self.__tcu_clutch_status = 0
+        # Invalid Value=0xFF Transmission temperature
+        self.__tcu_temp_value = 0
+        # Max engine speed limited value
+        self.__tcu_engspd_maxlimt_value = 0
+        # Request max engine speed limit
+        self.__tcu_engspd_maxlmit_rq = 0
+        # TCU is in emergency mode or not
+        self.__tcu_emerg_mode_status = 0
+        # Cruise Control Status
+        self.__tcu_cruise_control_status = 0
+
+        self.__tcu_counter_msg_2 = 0
+        # 校验和
+        self.__tcu_checksum_msg_2 = 0
 
     @property
     def gear_position_status(self):
@@ -378,9 +413,25 @@ class Tcu328(CanMsgBasic):
     def encode(self):
         # Gear Position + Gear Position VD
         self._msg_data[0] = hex((self.__gear_position_status << 0) |
-                                (self.__gear_position_vd << 4))
+                                (self.__gear_position_vd << 4) |
+                                (self.__tcu_mil_status << 5) |
+                                (self.__tcu_ac_fix_state << 6) |
+                                (self.__tcu_gear_shift_allowed << 7))
+        self._msg_data[1] = hex((self.__tcu_veh_speed_value << (8 % 8)))
         # IND Fault Status
-        self._msg_data[2] = hex(self.__ind_fault_status << (17 % 8))
+        self._msg_data[2] = hex((self.__tcu_cooling_fan_rq << (16 % 8)) |
+                                (self.__tcu_ind_fault_status << (17 % 8)) |
+                                (self.__tcu_winter_mode_fault << (18 % 8)) |
+                                (self.__tcu_winter_mode_status << (19 % 8)) |
+                                (self.__tcu_ac_off_rq << (20 % 8)) |
+                                (self.__tcu_clutch_status << (21 % 8)))
+        self._msg_data[3] = hex(self.__tcu_temp_value << (24 % 8))
+        self._msg_data[4] = hex(self.__tcu_engspd_maxlimt_value << (32 % 8))
+        self._msg_data[5] = hex((self.__tcu_engspd_maxlmit_rq << (40 % 8)) |
+                                (self.__tcu_emerg_mode_status << (41 % 8)) |
+                                (self.__tcu_cruise_control_status << (42 % 8)))
+        self._msg_data[6] = hex(self.__tcu_counter_msg_2 << (52 % 8))
+        self._msg_data[7] = hex(self.__tcu_checksum_msg_2 << (56 % 8))
         return self._msg_data
 
     def dump(self):
@@ -949,6 +1000,147 @@ class Bcm365(CanMsgBasic):
 
     def dump(self):
         super(Bcm365, self).dump()
+
+
+class Bcm383(CanMsgBasic):
+    """ 车轮胎压传感器、胎压、温度 """
+    def __init__(self):
+        super(Bcm383, self).__init__('BCM_383',
+                                     EnumMsgType.Normal,
+                                     0x383,
+                                     EnumMsgTransmitType.Cycle,
+                                     EnumMsgSignalType.Cycle,
+                                     100,
+                                     8,
+                                     ['0x00', '0x00', '0x00', '0x00', '0x00', '0x00', '0x00', '0x00'])
+        # 左前车轮胎压传感器状态
+        self.__lf_tpms_status = 0
+        # 左前车轮胎压
+        self.__lf_tyre_pressure = 0
+        # 左前车轮温度
+        self.__lf_tyre_temperature = 0
+        # 右前车轮胎压传感器状态
+        self.__rf_tpms_status = 0
+        # 右前车轮胎压
+        self.__rf_tyre_pressure = 0
+        # 右前车轮温度
+        self.__rf_tyre_temperature = 0
+        # 左后车轮胎压传感器状态
+        self.__lr_tpms_status = 0
+        # 左后车轮胎压
+        self.__lr_tyre_pressure = 0
+        # 左后车轮温度
+        self.__lr_tyre_temperature = 0
+        # 右后车轮胎压传感器状态
+        self.__rr_tpms_status = 0
+        # 右后车轮胎压
+        self.__rr_tyre_pressure = 0
+        # 右后车轮温度
+        self.__rr_tyre_temperature = 0
+
+    @property
+    def lf_tpms_status(self):
+        """ 左前车轮胎压传感器状态 """
+        return self.__lf_tpms_status
+
+    @lf_tpms_status.setter
+    def lf_tpms_status(self, status):
+        """ 左前车轮胎压传感器状态 """
+        try:
+            if status not in TyreTPMSStatus.CanStatus:
+                raise AttributeError
+            self.__lf_tpms_status = status.value
+        except AttributeError:
+            print("AttributeError on lf_tpms_status")
+
+    @property
+    def lf_tire_pressure(self):
+        """ 左前车轮胎压 """
+        return self.__lf_tyre_pressure * 0.1 + 0.9
+
+    @lf_tire_pressure.setter
+    def lf_tire_pressure(self, status):
+        """ 左前车轮胎压 """
+        try:
+            if status not in TyrePressureStatus.CanStatus:
+                raise AttributeError
+            self.__lf_tyre_pressure = status.value
+        except AttributeError:
+            print("AttributeError on lf_tyre_pressure")
+
+    @property
+    def rf_tire_pressure(self):
+        """ 右前车轮胎压 """
+        return self.__rf_tyre_pressure * 0.1 + 0.9
+
+    @rf_tire_pressure.setter
+    def rf_tire_pressure(self, status):
+        """ 右前车轮胎压 """
+        try:
+            if status not in TyrePressureStatus.CanStatus:
+                raise AttributeError
+            self.__rf_tyre_pressure = status.value
+        except AttributeError:
+            print("AttributeError on rf_tyre_pressure")
+
+    @property
+    def lr_tire_pressure(self):
+        """ 左前车轮胎压 """
+        return self.__lr_tyre_pressure * 0.1 + 0.9
+
+    @lr_tire_pressure.setter
+    def lr_tire_pressure(self, status):
+        """ 左前车轮胎压 """
+        try:
+            if status not in TyrePressureStatus.CanStatus:
+                raise AttributeError
+            self.__lr_tyre_pressure = status.value
+        except AttributeError:
+            print("AttributeError on lr_tyre_pressure")
+
+    @property
+    def rr_tire_pressure(self):
+        """ 右后车轮胎压 """
+        return self.__rr_tyre_pressure * 0.1 + 0.9
+
+    @rr_tire_pressure.setter
+    def rr_tire_pressure(self, status):
+        """ 右后车轮胎压 """
+        try:
+            if status not in TyrePressureStatus.CanStatus:
+                raise AttributeError
+            self.__rr_tyre_pressure = status.value
+        except AttributeError:
+            print("AttributeError on rr_tyre_pressure")
+
+    def encode(self):
+        # 左前车轮胎压传感器状态、左前车轮胎压
+        self._msg_data[0] = hex((self.__lf_tpms_status << 0) |
+                                (self.__lf_tyre_pressure << 3))
+        # 左前车轮温度
+        self._msg_data[1] = hex((self.__lf_tyre_temperature << (8 % 8)))
+
+        # 右前车轮胎压传感器状态、右前车轮胎压
+        self._msg_data[2] = hex((self.__rf_tpms_status << (16 % 8)) |
+                                (self.__rf_tyre_pressure << (19 % 8)))
+        # 右前车轮碾温度
+        self._msg_data[3] = hex((self.__rf_tyre_temperature << (24 % 8)))
+
+        # 左后车轮胎压传感器状态、左前车轮胎压
+        self._msg_data[4] = hex((self.__lr_tpms_status << (32 % 8)) |
+                                (self.__lr_tyre_pressure << (35 % 8)))
+        # 左后车轮温度
+        self._msg_data[5] = hex((self.__lr_tyre_temperature << (40 % 8)))
+
+        # 右后车轮胎压传感器状态、右前车轮胎压
+        self._msg_data[6] = hex((self.__rr_tpms_status << (48 % 8)) |
+                                (self.__rr_tyre_pressure << (51 % 8)))
+        # 右后车轮碾温度
+        self._msg_data[7] = hex((self.__rr_tyre_temperature << (56 % 8)))
+        return self._msg_data
+
+    def dump(self):
+        super(Bcm383, self).dump()
 
 
 class Ac378(CanMsgBasic):

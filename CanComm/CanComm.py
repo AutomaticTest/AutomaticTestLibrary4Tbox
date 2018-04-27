@@ -27,7 +27,7 @@ from robot.api import logger
 # Customized libraries
 from CanProtoDFSK import *
 from TimerRepeater.TimerRepeater import TimerRepeater
-from Resource.DFSKVehicleStatus import EngineStatus
+from Resource.DFSKVehicleStatus import EngineStatus, TyrePressureStatus
 from Resource.DFSKVehicleStatus import DoorStatus
 from Resource.DFSKVehicleStatus import LockStatus
 from Resource.DFSKVehicleStatus import HandbrakeStatus
@@ -109,6 +109,7 @@ class CanComm(object):
         self._ems360 = None
         self._bcm350 = None
         self._bcm365 = None
+        self._bcm383 = None
         self._ic380 = None
         self._ac378 = None
         self._peps341 = None
@@ -219,6 +220,7 @@ class CanComm(object):
         self._abs330 = Abs330()
         self._ems360 = Ems360()
         self._bcm350 = Bcm350()
+        self._bcm383 = Bcm383()
         self._bcm365 = Bcm365()
         self._ic380 = Ic380()
         self._ac378 = Ac378()
@@ -232,6 +234,7 @@ class CanComm(object):
         self.register_transmitter(self._ems360)
         self.register_transmitter(self._bcm350)
         self.register_transmitter(self._bcm365)
+        self.register_transmitter(self._bcm383)
         self.register_transmitter(self._ic380)
         self.register_transmitter(self._ac378)
         self.register_transmitter(self._peps341)
@@ -316,6 +319,7 @@ class CanComm(object):
     def on_request(self, item, data):
         logger.info(self._tag + "==> on_request")
         # self.__set_config_data(convert_config_item_dict[item], item, data)
+        self._can_matrix_dict[item](data)
         logger.info(self._tag + "on_request <===")
         return True
 
@@ -390,7 +394,7 @@ class CanComm(object):
                         # logger.console(msg.get_name() + ", utc_dvalue:" + str(current_utc - expected_utc))
                         self.write_msg(msg)
                         msg.set_expected_utc(current_utc)
-                        time.sleep(0.1)
+                        time.sleep(0.05)
         except Exception, e:
             logger.error(self._tag + "Exception on transmit_by_cycle_mode:" + str(e))
             self._alive = False
@@ -497,23 +501,26 @@ class CanComm(object):
 
     def _on_request_gear_pos(self, data):
         """ GEAR_POS_REQ 档位 """
-        pass
+        self._ems303.engine_status = EngineStatus.CanStatus["KeyOn"]
+        self._peps341.power_mode = PepsStatus.CanStatus["On"]
+        self._tcu328.gear_position_status = GearStatus.CanStatus[data]
 
     def _on_request_lf_tire_pressure(self, data):
         """ LF_TIRE_PRESSURE_REQ 左前胎压 """
-        pass
+        # self._bcm383.lf_tpms_status = TyreTPMSStatus.CanStatus["Normal"]
+        self._bcm383.lf_tire_pressure = TyrePressureStatus.CanStatus[data]
 
     def _on_request_lr_tire_pressure(self, data):
         """ LR_TIRE_PRESSURE_REQ 左后胎压 """
-        pass
+        self._bcm383.lr_tire_pressure = TyrePressureStatus.CanStatus[data]
 
     def _on_request_rf_tire_pressure(self, data):
         """ RF_TIRE_PRESSURE_REQ 右前胎压 """
-        pass
+        self._bcm383.rf_tire_pressure = TyrePressureStatus.CanStatus[data]
 
     def _on_request_rr_tire_pressure(self, data):
         """ RR_TIRE_PRESSURE_REQ 右后胎压 """
-        pass
+        self._bcm383.rr_tire_pressure = TyrePressureStatus.CanStatus[data]
 
     def _on_request_battery_voltage(self, data):
         """ BATTERY_VOLTAGE_REQ 蓄电池电压 """
@@ -593,7 +600,7 @@ class CanCommError(Exception):
 
 if __name__ == '__main__':
     pass
-    pcan = CanComm('PCAN_USBBUS01', '500 kBit/sec', 'ISA-82C200', '02A0', '11')
+    pcan = CanComm('PCAN_USBBUS01', '500 kBit/sec')
     if not pcan.on_create():
         print("Error on initialize")
     try:

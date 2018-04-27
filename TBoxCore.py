@@ -58,15 +58,19 @@ class TBoxCore(Singleton):
 
     @staticmethod
     def on_clean_log():
-        if TBoxCore.is_connected():
-            (status, output) = Utils.getstatusoutput("adb shell ls")
-            if not status:
-                result = re.findall("[a-z]*log",output)
+        if not TBoxCore.is_connected():
+            raise TBoxCoreError("TBox Connect Fault")
+        (status, output) = Utils.getstatusoutput("adb shell ls")
+        if not status:
+            try:
+                result = re.findall("[a-z]*log", output)
                 if result.__len__() == 0:
-                    raise TBoxCoreError("Not find mpulog tsplog systemlog mculog")
+                    raise IndexError
                 (status, output) = Utils.getstatusoutput("adb shell rm mpulog tsplog systemlog mculog")
                 if not status:
                     logger.info("remove log Success!")
+            except IndexError:
+                logger.info("No find mpulog tsplog systemlog mculog")
 
     @staticmethod
     def is_connected():
@@ -90,6 +94,8 @@ class TBoxCore(Singleton):
 
     @staticmethod
     def on_collect_log(path):
+        if not TBoxCore.is_connected():
+            raise TBoxCoreError("Exception on collect log")
         try:
             os.makedirs(path)
         except OSError, e:
@@ -97,8 +103,6 @@ class TBoxCore(Singleton):
             # if e.errno == 17:
             #     shutil.rmtree(path)
             #     os.mkdir(path)
-        if not TBoxCore.is_connected():
-            raise TBoxCoreError("Exception on collect log")
         TBoxCore.get_special_log(path, 'mcu')
         TBoxCore.get_special_log(path, 'mpu')
         TBoxCore.get_special_log(path, 'system')

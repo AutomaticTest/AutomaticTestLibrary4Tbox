@@ -32,6 +32,7 @@ import paho.mqtt.client as mqtt
 from Protobuf import tbox_pb2
 from MqttDump import MqttDump
 from Resource.DFSKVehicleStatus import EngineStatus
+from Resource.DFSKVehicleStatus import TyrePressureStatus
 from Resource.DFSKVehicleStatus import DoorStatus
 from Resource.DFSKVehicleStatus import LockStatus
 from Resource.DFSKVehicleStatus import HandbrakeStatus
@@ -603,16 +604,14 @@ class MqttComm(object):
         """
         logger.info(self._tag + "on_request_can_data called")
         data_dict = {
-            # 即时上报数据信息
             'FUEL_CONSUMPTION':        'asd',
             'TOTAL_MILEAGE':           'asd',
             'CURRENT_SPEED':           'asd',
-            'ENGINE_SPEED':            str(self._msgtop.vehicle_status.engine_speed),
+            'ENGINE_SPEED':            'asdsd',
             'STEERING_ANGLE':          'asd',
             'ACCELERATOR_PEDAL_ANGLE': 'asd',
             'BRAKE_PEDAL_ANGLE':       'asd',
             'CLUTCH_PEDAL_ANGLE':      'asd',
-            # 车辆状态上报数据
             'LEFT_FRONT_DOOR_STS':  DoorStatus.TspStatus(self._msgtop.vehicle_status.lf_door_status).name,
             'RIGHT_FRONT_DOOR_STS': DoorStatus.TspStatus(self._msgtop.vehicle_status.rf_door_status).name,
             'LEFT_REAR_DOOR_STS':   DoorStatus.TspStatus(self._msgtop.vehicle_status.lr_door_status).name,
@@ -627,7 +626,11 @@ class MqttComm(object):
             'WIPER_STS':            WiperStatus.TspStatus(self._msgtop.vehicle_status.wiper_Status).name,
             'HANDBRAKE_STS':        HandbrakeStatus.TspStatus(self._msgtop.vehicle_status.hand_break_status).name,
             'PEPS_STS':             PepsStatus.TspStatus(self._msgtop.vehicle_status.peps_power_mode).name,
-            'GEAR_STS':             GearStatus.TspStatus(self._msgtop.vehicle_status.gear_position).name,
+            'GEAR_POS_REQ':         GearStatus.TspStatus(self._msgtop.vehicle_status.gear_position).name,
+            'LF_TIRE_PRESSURE_REQ': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.lf_tire_pressure)).name,
+            'RF_TIRE_PRESSURE_REQ': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.rf_tire_pressure)).name,
+            'RR_TIRE_PRESSURE_REQ': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.rr_tire_pressure)).name,
+            'LR_TIRE_PRESSURE_REQ': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.lr_tire_pressure)).name,
         }
         return data_dict[item]
 

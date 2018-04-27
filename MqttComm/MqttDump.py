@@ -697,7 +697,7 @@ class MqttDump(object):
     def __list_msg_alarm_signal(alarm_signal):
         """报警信息上报 21"""
         logging("====> MsgAlarmSignal <====")
-        logging("alarm_type:            " + MqttDump.__enum_alarm_signal_type(alarm_signal.alarm_signal_type))
+        logging("alarm_type:            " + MqttDump.__enum_alarm_signal_type(alarm_signal.alarm_type))
         logging("gps_info:              " + MqttDump.__show_gps_info(alarm_signal.gps_info))
         logging("side_turn_flag:        " + MqttDump.__enum_common_true_false_unknown(alarm_signal.side_turn_flag))
         logging("air_bag_exploded:      " + MqttDump.__enum_common_true_false_unknown(alarm_signal.air_bag_exploded))
