@@ -701,12 +701,18 @@ class MqttComm(object):
             'REAR_DEFROST_RESP':   DefrostSwitch.TspStatus(self._msgtop.vehicle_status.air_condition_rear_defrost_status).name,
             # 空调温度
             'AC_TEMPERATURE_RESP': str(self._msgtop.vehicle_status.air_condition_temperature),
-            'DOOR_LOCK_STS':        LockStatus.TspStatus(self._msgtop.vehicle_status.lock_status).name,
-            'ENGINE_STS':           EngineStatus.TspStatus(self._msgtop.vehicle_status.engine_status).name,
-            'WIPER_STS':            WiperStatus.TspStatus(self._msgtop.vehicle_status.wiper_Status).name,
-            'HANDBRAKE_STS':        HandbrakeStatus.TspStatus(self._msgtop.vehicle_status.hand_break_status).name,
-            'PEPS_STS':             PepsStatus.TspStatus(self._msgtop.vehicle_status.peps_power_mode).name,
-            'GEAR_POS_REQ':         GearStatus.TspStatus(self._msgtop.vehicle_status.gear_position).name,
+            # 驾驶员左前门锁开关状态
+            'LOCK_DOOR_RESP': LockStatus.TspStatus(self._msgtop.vehicle_status.lock_status).name,
+            # 发动机状态
+            'ENGINE_RESP': EngineStatus.TspStatus(self._msgtop.vehicle_status.engine_status).name,
+            # 雨刷开关状态
+            'WIPER_RESP': WiperStatus.TspStatus(self._msgtop.vehicle_status.wiper_Status).name,
+            # 手刹状态
+            'HANDBRAKE_RESP': HandbrakeStatus.TspStatus(self._msgtop.vehicle_status.hand_break_status).name,
+            # PEPS电源状态
+            'PEPS_POWER_RESP': PepsStatus.TspStatus(self._msgtop.vehicle_status.peps_power_mode).name,
+            # 档位
+            'GEAR_POS_RESP': GearStatus.TspStatus(self._msgtop.vehicle_status.gear_position).name,
             'LF_TIRE_PRESSURE_REQ': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.lf_tire_pressure)).name,
             'RF_TIRE_PRESSURE_REQ': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.rf_tire_pressure)).name,
             'RR_TIRE_PRESSURE_REQ': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.rr_tire_pressure)).name,

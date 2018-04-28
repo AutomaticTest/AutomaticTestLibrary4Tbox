@@ -1368,7 +1368,7 @@ class Ac378(CanMsgBasic):
     def front_defrost_switch(self, status):
         """ 空调前除霜开关状态 """
         try:
-            if status not in DefrostStatus.CanStatus:
+            if status not in DefrostSwitch.CanStatus:
                 raise AttributeError
             self.__defrost_mode = status.value
         except AttributeError:

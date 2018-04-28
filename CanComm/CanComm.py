@@ -448,7 +448,7 @@ class CanComm(object):
 
     def _on_request_handbrake(self, data):
         """ HANDBRAKE_REQ 手刹状态 """
-        self._bcm350.lock_door_status = HandbrakeStatus.CanStatus[data]
+        self._bcm350.handbrake_status = HandbrakeStatus.CanStatus[data]
 
     def _on_front_defrost_status(self, data):
         """ FRONT_DEFROST_STS 前除霜状态 """
