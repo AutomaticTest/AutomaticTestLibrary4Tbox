@@ -35,7 +35,6 @@ from Resource.DFSKVehicleStatus import EngineStatus
 from Resource.DFSKVehicleStatus import TyrePressureStatus
 from Resource.DFSKVehicleStatus import LockStatus
 from Resource.DFSKVehicleStatus import HandbrakeStatus
-from Resource.DFSKVehicleStatus import DefrostStatus
 from Resource.DFSKVehicleStatus import WiperStatus
 from Resource.DFSKVehicleStatus import GearStatus
 from Resource.DFSKVehicleStatus import PepsStatus

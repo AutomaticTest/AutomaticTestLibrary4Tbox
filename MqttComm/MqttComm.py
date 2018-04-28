@@ -33,6 +33,8 @@ from Protobuf import tbox_pb2
 from MqttDump import MqttDump
 from Resource.DFSKVehicleStatus import DoorStatus
 from Resource.DFSKVehicleStatus import WindowStatus
+from Resource.DFSKVehicleStatus import RoofStatus
+from Resource.DFSKVehicleStatus import DefrostSwitch
 from Resource.DFSKVehicleStatus import EngineStatus
 from Resource.DFSKVehicleStatus import TyrePressureStatus
 from Resource.DFSKVehicleStatus import LockStatus
@@ -602,26 +604,6 @@ class MqttComm(object):
     ################################################################################
     def on_request_can_data(self, item, timeout):
         """
-                    # 左前门开关状态
-            'LF_DOOR_REQ':                  self._on_request_lf_door,
-            # 右前门开关状态
-            'RF_DOOR_REQ':                  self._on_request_rf_door,
-            # 左后门开关状态
-            'LR_DOOR_REQ':                  self._on_request_lr_door,
-            # 右后门开关状态
-            'RR_DOOR_REQ':                  self._on_request_rr_door,
-            # 后尾箱开关状态
-            'TRUNK_DOOR_REQ':               self._on_request_trunk_door,
-            # 左前窗开关状态
-            'LF_WINDOW_REQ':                self._on_request_lf_window,
-            # 右前窗开关状态
-            'RF_WINDOW_REQ':                self._on_request_rf_window,
-            # 左后窗开关状态
-            'LR_WINDOW_REQ':                self._on_request_lr_window,
-            # 右后窗开关状态
-            'RR_WINDOW_REQ':                self._on_request_rr_window,
-            # 天窗开关状态
-            'ROOF_WINDOW_REQ':              self._on_request_roof_window,
             # 空调开关状态
             'AC_REQ':                       self._on_request_ac,
             # 空调前除霜开关状态
@@ -702,19 +684,23 @@ class MqttComm(object):
             # 后尾箱开关状态
             'TRUNK_DOOR_RESP': DoorStatus.TspStatus(self._msgtop.vehicle_status.trunk_door_status).name,
             # 左前窗开关状态
-            'LF_WINDOW_RESP':   WindowStatus.TspStatus(self._msgtop.vehicle_status.lf_window_status).name,
+            'LF_WINDOW_RESP': WindowStatus.TspStatus(self._msgtop.vehicle_status.lf_window_status).name,
             # 右前窗开关状态
-            'RF_WINDOW_RESP':   WindowStatus.TspStatus(self._msgtop.vehicle_status.rf_window_status).name,
+            'RF_WINDOW_RESP': WindowStatus.TspStatus(self._msgtop.vehicle_status.rf_window_status).name,
             # 左后窗开关状态
-            'LR_WINDOW_RESP':   WindowStatus.TspStatus(self._msgtop.vehicle_status.lr_window_status).name,
+            'LR_WINDOW_RESP': WindowStatus.TspStatus(self._msgtop.vehicle_status.lr_window_status).name,
             # 右后窗开关状态
-            'RR_WINDOW_RESP':   WindowStatus.TspStatus(self._msgtop.vehicle_status.rr_window_status).name,
+            'RR_WINDOW_RESP': WindowStatus.TspStatus(self._msgtop.vehicle_status.rr_window_status).name,
             # 天窗开关状态
-            'ROOF_WINDOW_RESP': WindowStatus.TspStatus(self._msgtop.vehicle_status.roof_window_status).name,
-            'AC_STS':               AcStatus.TspStatus(self._msgtop.vehicle_status.air_condition_status).name,
-            'FRONT_DEFROST_STS':    DefrostStatus.TspStatus(self._msgtop.vehicle_status.air_condition_defrost_status).name,
-            'REAR_DEFROST_STS':     DefrostStatus.TspStatus(self._msgtop.vehicle_status.air_condition_rear_defrost_status).name,
-            'AC_TEMPERATURE':       str(self._msgtop.vehicle_status.air_condition_temperature),
+            'ROOF_WINDOW_RESP': RoofStatus.TspStatus(self._msgtop.vehicle_status.roof_window_status).name,
+            # 空调开关状态
+            'AC_RESP':             AcStatus.TspStatus(self._msgtop.vehicle_status.air_condition_status).name,
+            # 空调前除霜开关状态
+            'FRONT_DEFROST_RESP':  DefrostSwitch.TspStatus(self._msgtop.vehicle_status.air_condition_defrost_status).name,
+            # 空调后除霜开关状态
+            'REAR_DEFROST_RESP':   DefrostSwitch.TspStatus(self._msgtop.vehicle_status.air_condition_rear_defrost_status).name,
+            # 空调温度
+            'AC_TEMPERATURE_RESP': str(self._msgtop.vehicle_status.air_condition_temperature),
             'DOOR_LOCK_STS':        LockStatus.TspStatus(self._msgtop.vehicle_status.lock_status).name,
             'ENGINE_STS':           EngineStatus.TspStatus(self._msgtop.vehicle_status.engine_status).name,
             'WIPER_STS':            WiperStatus.TspStatus(self._msgtop.vehicle_status.wiper_Status).name,
