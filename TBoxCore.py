@@ -21,16 +21,17 @@ import os
 import re
 import time
 
-# Third-party libraries
-import psutil
-import win32com
-from robot.api import logger
-
 # Customized libraries
 import Utils
 from MqttComm.MqttComm import MqttComm
 from CanComm.CanComm import CanComm
 from DesignPattern.Singleton import Singleton
+
+# Third-party libraries
+from robot.api import logger
+if Utils.is_windows_os():
+    import psutil
+    import win32com
 
 
 class TBoxCore(Singleton):
@@ -74,17 +75,10 @@ class TBoxCore(Singleton):
 
     @staticmethod
     def is_connected():
-        # wmi = win32com.client.GetObject("winmgmts:")
-        # for usb in wmi.InstancesOf("win32_usbcontrollerdevice"):
-        #     logger.info("is_connected")
-        #     if "VID_1C9E&PID_9B00" in usb.Dependent:
-        #         return True
-        #     return False
         (status, output) = Utils.getstatusoutput('adb get-state')
         if not status and output.find('device') != -1:
             return True
         return False
-
 
     @staticmethod
     def get_special_log(path, obj):
@@ -100,9 +94,6 @@ class TBoxCore(Singleton):
             os.makedirs(path)
         except OSError, e:
             logger.warn(str(e))
-            # if e.errno == 17:
-            #     shutil.rmtree(path)
-            #     os.mkdir(path)
         TBoxCore.get_special_log(path, 'mcu')
         TBoxCore.get_special_log(path, 'mpu')
         TBoxCore.get_special_log(path, 'system')

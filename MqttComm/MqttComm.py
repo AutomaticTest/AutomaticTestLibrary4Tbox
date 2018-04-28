@@ -31,9 +31,10 @@ import paho.mqtt.client as mqtt
 # import Config as CONFIG
 from Protobuf import tbox_pb2
 from MqttDump import MqttDump
+from Resource.DFSKVehicleStatus import DoorStatus
+from Resource.DFSKVehicleStatus import WindowStatus
 from Resource.DFSKVehicleStatus import EngineStatus
 from Resource.DFSKVehicleStatus import TyrePressureStatus
-from Resource.DFSKVehicleStatus import DoorStatus
 from Resource.DFSKVehicleStatus import LockStatus
 from Resource.DFSKVehicleStatus import HandbrakeStatus
 from Resource.DFSKVehicleStatus import DefrostStatus
@@ -601,22 +602,115 @@ class MqttComm(object):
     ################################################################################
     def on_request_can_data(self, item, timeout):
         """
+                    # 左前门开关状态
+            'LF_DOOR_REQ':                  self._on_request_lf_door,
+            # 右前门开关状态
+            'RF_DOOR_REQ':                  self._on_request_rf_door,
+            # 左后门开关状态
+            'LR_DOOR_REQ':                  self._on_request_lr_door,
+            # 右后门开关状态
+            'RR_DOOR_REQ':                  self._on_request_rr_door,
+            # 后尾箱开关状态
+            'TRUNK_DOOR_REQ':               self._on_request_trunk_door,
+            # 左前窗开关状态
+            'LF_WINDOW_REQ':                self._on_request_lf_window,
+            # 右前窗开关状态
+            'RF_WINDOW_REQ':                self._on_request_rf_window,
+            # 左后窗开关状态
+            'LR_WINDOW_REQ':                self._on_request_lr_window,
+            # 右后窗开关状态
+            'RR_WINDOW_REQ':                self._on_request_rr_window,
+            # 天窗开关状态
+            'ROOF_WINDOW_REQ':              self._on_request_roof_window,
+            # 空调开关状态
+            'AC_REQ':                       self._on_request_ac,
+            # 空调前除霜开关状态
+            'FRONT_DEFROST_REQ':            self._on_request_front_defrost,
+            # 空调后除霜开关状态
+            'REAR_DEFROST_REQ':             self._on_request_rear_defrost,
+            # 空调温度
+            'AC_TEMPERATURE_REQ':           self._on_request_ac_temperature,
+            # 驾驶员左前门锁开关状态
+            'LOCK_DOOR_REQ':                self._on_request_lock_door,
+            # 发动机状态
+            'ENGINE_REQ':                   self._on_request_engine,
+            # 雨刷开关状态
+            'WIPER_REQ':                    self._on_request_wiper,
+            # 手刹状态
+            'HANDBRAKE_REQ':                self._on_request_handbrake,
+            # 前除霜状态
+            'FRONT_DEFROST_STS':            self._on_front_defrost_status,
+            # PEPS电源状态
+            'PEPS_POWER_REQ':               self._on_request_peps_power,
+            # 档位
+            'GEAR_POS_REQ':                 self._on_request_gear_pos,
+            # 左前胎压
+            'LF_TIRE_PRESSURE_REQ':         self._on_request_lf_tire_pressure,
+            # 左后胎压
+            'LR_TIRE_PRESSURE_REQ':         self._on_request_lr_tire_pressure,
+            # 右前胎压
+            'RF_TIRE_PRESSURE_REQ':         self._on_request_rf_tire_pressure,
+            # 右后胎压
+            'RR_TIRE_PRESSURE_REQ':         self._on_request_rr_tire_pressure,
+            # 蓄电池电压
+            'BATTERY_VOLTAGE_REQ':          self._on_request_battery_voltage,
+            # 剩余油量
+            'FUEL_LEVEL_REQ':               self._on_request_fuel_level,
+            # 剩余里程
+            'REMAIN_MILEAGE_REQ':           self._on_request_remain_mileage,
+            # 是否系安全带
+            'BELT_REQ':                     self._on_request_belt,
+            # 近光灯状态
+            'FRONT_FOG_LAMP_REQ':           self._on_request_front_fog_lamp,
+            # 远光灯状态
+            'REAR_FOG_LAMP_REQ':            self._on_request_rear_fog_lamp,
+            # G值
+            'G_VALUE_REQ':                  self._on_request_g_value,
+            # 光照强度
+            'LIGHT_INTENSITY_REQ':          self._on_request_light_intensity,
+            # 瞬时油耗
+            'CURR_FUEL_CONSUMPTION_REQ':    self._on_request_curr_fuel_consumption,
+            # 当前速度
+            'CURR_SPEED_REQ':               self._on_request_curr_speed,
+            # 当前转速
+            'ENGINE_SPEED_REQ':             self._on_request_engine_speed,
+            # 方向盘转角，左为正，右为负
+            'STEERING_ANGLE_REQ':           self._on_request_steering_angle,
+            # 油门脚踏板角度
+            'ACCELERATOR_PEDAL_ANGLE_REQ':  self._on_request_accelerator_pedal_angle,
+            # 刹车板角度
+            'BRAKE_PEDAL_ANGLE_REQ':        self._on_request_brake_pedal_angle,
+            # 离合器角度
+            'CLUTCH_PEDAL_ANGLE_REQ':       self._on_request_clutch_pedal_angle,
+            # 总里程
+            'TOTAL_MILEAGE_REQ':            self._on_request_total_mileage,
+            # 车辆位置
+            # 当前追踪状态
+            # 平均油耗
+            'AVERAGE_FUEL_CONSUMPTION_REQ': self._on_request_average_fuel_consumption,
         """
         logger.info(self._tag + "on_request_can_data called")
         data_dict = {
-            'FUEL_CONSUMPTION':        'asd',
-            'TOTAL_MILEAGE':           'asd',
-            'CURRENT_SPEED':           'asd',
-            'ENGINE_SPEED':            'asdsd',
-            'STEERING_ANGLE':          'asd',
-            'ACCELERATOR_PEDAL_ANGLE': 'asd',
-            'BRAKE_PEDAL_ANGLE':       'asd',
-            'CLUTCH_PEDAL_ANGLE':      'asd',
-            'LEFT_FRONT_DOOR_STS':  DoorStatus.TspStatus(self._msgtop.vehicle_status.lf_door_status).name,
-            'RIGHT_FRONT_DOOR_STS': DoorStatus.TspStatus(self._msgtop.vehicle_status.rf_door_status).name,
-            'LEFT_REAR_DOOR_STS':   DoorStatus.TspStatus(self._msgtop.vehicle_status.lr_door_status).name,
-            'RIGHT_REAR_DOOR_STS':  DoorStatus.TspStatus(self._msgtop.vehicle_status.rr_door_status).name,
-            'TRUNK_DOOR_STS':       DoorStatus.TspStatus(self._msgtop.vehicle_status.trunk_door_status).name,
+            # 左前门开关状态
+            'LF_DOOR_RESP':    DoorStatus.TspStatus(self._msgtop.vehicle_status.lf_door_status).name,
+            # 右前门开关状态
+            'RF_DOOR_RESP':    DoorStatus.TspStatus(self._msgtop.vehicle_status.rf_door_status).name,
+            # 左后门开关状态
+            'LR_DOOR_RESP':    DoorStatus.TspStatus(self._msgtop.vehicle_status.lr_door_status).name,
+            # 右后门开关状态
+            'RR_DOOR_RESP':    DoorStatus.TspStatus(self._msgtop.vehicle_status.rr_door_status).name,
+            # 后尾箱开关状态
+            'TRUNK_DOOR_RESP': DoorStatus.TspStatus(self._msgtop.vehicle_status.trunk_door_status).name,
+            # 左前窗开关状态
+            'LF_WINDOW_RESP':   WindowStatus.TspStatus(self._msgtop.vehicle_status.lf_window_status).name,
+            # 右前窗开关状态
+            'RF_WINDOW_RESP':   WindowStatus.TspStatus(self._msgtop.vehicle_status.rf_window_status).name,
+            # 左后窗开关状态
+            'LR_WINDOW_RESP':   WindowStatus.TspStatus(self._msgtop.vehicle_status.lr_window_status).name,
+            # 右后窗开关状态
+            'RR_WINDOW_RESP':   WindowStatus.TspStatus(self._msgtop.vehicle_status.rr_window_status).name,
+            # 天窗开关状态
+            'ROOF_WINDOW_RESP': WindowStatus.TspStatus(self._msgtop.vehicle_status.roof_window_status).name,
             'AC_STS':               AcStatus.TspStatus(self._msgtop.vehicle_status.air_condition_status).name,
             'FRONT_DEFROST_STS':    DefrostStatus.TspStatus(self._msgtop.vehicle_status.air_condition_defrost_status).name,
             'REAR_DEFROST_STS':     DefrostStatus.TspStatus(self._msgtop.vehicle_status.air_condition_rear_defrost_status).name,

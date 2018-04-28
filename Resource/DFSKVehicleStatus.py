@@ -101,6 +101,19 @@ class DefrostStatus(object):
         On = 2
 
 
+class DefrostSwitch(object):
+    @unique
+    class CanStatus(Enum):
+        Off = 0
+        On = 1
+
+    @unique
+    class TspStatus(Enum):
+        Unknown = 0
+        Off = 1
+        On = 2
+
+
 class WiperStatus(object):
     @unique
     class CanStatus(Enum):
@@ -167,6 +180,21 @@ class AcStatus(object):
         Unknown = 0
         Off = 1
         On = 2
+
+
+class BlowerSpeedLevel(object):
+    @unique
+    class CanStatus(Enum):
+        Off = 0
+        Level1 = 1
+        Level2 = 2
+        Level3 = 3
+        Level4 = 4
+        Level5 = 5
+        Level6 = 6
+        Level7 = 7
+        Level8 = 8
+        Invalid = 9
 
 
 class GearStatus(object):
