@@ -460,8 +460,6 @@ class CanComm(object):
 
     def _on_request_gear_pos(self, data):
         """ GEAR_POS_REQ 档位 """
-        self._ems303.engine_status = EngineStatus.CanStatus["KeyOn"]
-        self._peps341.power_mode = PepsStatus.CanStatus["On"]
         self._tcu328.gear_position_status = GearStatus.CanStatus[data]
 
     def _on_request_lf_tire_pressure(self, data):
@@ -520,15 +518,15 @@ class CanComm(object):
 
     def _on_request_curr_fuel_consumption(self, data):
         """ CURR_FUEL_CONSUMPTION_REQ 瞬时油耗 """
-        self._ic34a.temp_fuel_consumption = int(data)
+        self._ic34a.temp_fuel_consumption = float(data)
 
     def _on_request_curr_speed(self, data):
         """ CURR_SPEED_REQ 当前速度 """
-        self._abs330.vehicle_speed = float(data)
+        self._abs330.vehicle_speed = int(data)
 
     def _on_request_engine_speed(self, data):
         """ ENGINE_SPEED_REQ 当前转速 """
-        self._ems302.engine_speed = float(data)
+        self._ems302.engine_speed = int(data)
 
     def _on_request_steering_angle(self, data):
         """ STEERING_ANGLE_REQ 方向盘转角，左为正，右为负 """

@@ -109,7 +109,7 @@ class TBoxCore(Singleton):
         # return False
         while not self._mqttc.is_connected:
             time.sleep(1)
-        return True
+        return str(True)
 
     def on_request_can_config(self, item, data, timeout):
         """

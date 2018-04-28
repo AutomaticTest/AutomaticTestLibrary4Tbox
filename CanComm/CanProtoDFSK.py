@@ -19,6 +19,7 @@
 # Builtin libraries
 
 # Third-party libraries
+from robot.api import logger
 
 # Customized libraries
 from CanMsgBasic import *
@@ -28,13 +29,13 @@ from Resource.DFSKVehicleStatus import TyreTPMSStatus
 from Resource.DFSKVehicleStatus import DoorStatus
 from Resource.DFSKVehicleStatus import LockStatus
 from Resource.DFSKVehicleStatus import HandbrakeStatus
-from Resource.DFSKVehicleStatus import DefrostStatus
 from Resource.DFSKVehicleStatus import DefrostSwitch
 from Resource.DFSKVehicleStatus import WiperStatus
 from Resource.DFSKVehicleStatus import AcStatus
 from Resource.DFSKVehicleStatus import GearStatus
 from Resource.DFSKVehicleStatus import PepsStatus
 from Resource.DFSKVehicleStatus import WindowStatus
+from Resource.DFSKVehicleStatus import RoofStatus
 from Resource.DFSKVehicleStatus import BlowerSpeedLevel
 
 
@@ -191,7 +192,7 @@ class Sas300(CanMsgBasic):
     @property
     def steering_angle(self):
         """ 方向盘角度 """
-        return self.__steering_angle * 0.1
+        return (self.__steering_angle * 0.1) - 780
 
     @steering_angle.setter
     def steering_angle(self, value):
@@ -201,11 +202,11 @@ class Sas300(CanMsgBasic):
             self.__steering_angle = 0xFFFF
             if not isinstance(value, float):
                 raise AttributeError
-            if value >= -780.0 or value < 780:
+            if value >= -780.0 or value < 780.0:
                 self.__steering_angle_valid = Sas300.ValidInvalidStatus.Valid.value
-                self.__steering_angle = value
+                self.__steering_angle = int((value + 780) * 10)
         except AttributeError:
-            print("AttributeError on steering_angle")
+            logger.error("AttributeError on steering_angle")
 
     def encode(self):
         # Message Counter + Message Checksum
@@ -277,7 +278,7 @@ class Ems302(CanMsgBasic):
     @property
     def engine_speed(self):
         """ 发动机转速 """
-        return float(self.__engine_speed * 0.25)
+        return self.__engine_speed * 0.25
 
     @engine_speed.setter
     def engine_speed(self, value):
@@ -285,18 +286,18 @@ class Ems302(CanMsgBasic):
         try:
             self.__engine_speed_error = Ems302.ValidInvalidStatus.Invalid.value
             self.__engine_speed = 0xFFFF
-            if not isinstance(value, float):
+            if not isinstance(value, int):
                 raise AttributeError
-            if value >= 0.0 or value <= 16383.5:
+            if value >= 0 or value < 16384:
                 self.__engine_speed_error = Ems302.ValidInvalidStatus.Valid.value
                 self.__engine_speed = int(value / 0.25)
         except AttributeError:
-            print("AttributeError on engine_speed")
+            logger.error("AttributeError on engine_speed")
 
     @property
     def acc_pedal(self):
         """ 加速踏板位置 """
-        return float(self.__acc_pedal * 0.4)
+        return self.__acc_pedal * 0.4
 
     @acc_pedal.setter
     def acc_pedal(self, value):
@@ -310,7 +311,7 @@ class Ems302(CanMsgBasic):
                 self.__acc_pedal_error = Ems302.ValidInvalidStatus.Valid.value
                 self.__acc_pedal = int(value / 0.4)
         except AttributeError:
-            print("AttributeError on acc_pedal")
+            logger.error("AttributeError on acc_pedal")
 
     def encode(self):
         # 发动机转速故障 + 节气门位置故障 + 加速踏板故障
@@ -328,12 +329,6 @@ class Ems302(CanMsgBasic):
 
     def dump(self):
         super(Ems302, self).dump()
-        # print("-> EMS_EngineSpeedErr:\t\t" + Ems302.ValidInvalidStatus(self.engine_speed_error).name)
-        # print("-> EMS_ThrottlePosErr:\t\t" + Ems302.ValidInvalidStatus(self.throttle_position_error).name)
-        # print("-> EMS_AccPedalErr:\t\t\t" + Ems302.ValidInvalidStatus(self.acc_pedal_error).name)
-        # print("-> EMS_EngineSpeed:\t\t\t" + (str(self.engine_speed) if self.__engine_speed != int('FFFF', 16) else 'Invalid'))
-        # print("-> EMS_EngineThrottlePos:\t" + (str(self.engine_throttle_position) if self.__engine_throttle_position != int('FF', 16) else 'Invalid'))
-        # print("-> EMS_AccPedal:\t\t\t" + (str(self.acc_pedal) if self.__acc_pedal != int('FF', 16) else 'Invalid'))
 
 
 class Ems303(CanMsgBasic):
@@ -389,7 +384,7 @@ class Ems303(CanMsgBasic):
             else:
                 self.__engine_start_flag = Ems303.EngineStartFlag.NotFinished.value
         except AttributeError:
-            print("AttributeError on engine_status")
+            logger.error("AttributeError on engine_status")
 
     def encode(self):
         # 发动机运行状态　+ 发动机启动成功状态 + Engine fuel cut off status + Driving cycle detection
@@ -479,7 +474,7 @@ class Tcu328(CanMsgBasic):
             self.__gear_position_status = status.value
             self.__gear_position_vd = Tcu328.ValidInvalidStatus.Valid.value
         except AttributeError:
-            print("AttributeError on gear_position_status")
+            logger.error("AttributeError on gear_position_status")
 
     def encode(self):
         # Gear Position + Gear Position VD
@@ -571,16 +566,15 @@ class Abs330(CanMsgBasic):
     def vehicle_speed(self, value):
         """ 车速 """
         try:
-            if not isinstance(value, float):
+            self.__vehicle_speed = 0x1FFF
+            self.__vehicle_speed_valid = Abs330.ValidInvalidStatus.Invalid.value
+            if not isinstance(value, int):
                 raise AttributeError
-            if value < 0.0 or value > 270.0:
-                self.__vehicle_speed = 0
-                self.__vehicle_speed_valid = Abs330.ValidInvalidStatus.Invalid.value
-            else:
+            if value >= 0 or value <= 270:
                 self.__vehicle_speed = int(value / 0.05625)
                 self.__vehicle_speed_valid = Abs330.ValidInvalidStatus.Valid.value
         except AttributeError:
-            print("AttributeError on vehicle_speed")
+            logger.error("AttributeError on vehicle_speed")
 
     def encode(self):
         # ABS intervention active + ABS Failure + EBD Failure
@@ -589,7 +583,7 @@ class Abs330(CanMsgBasic):
                                 (self.__abs_failure << 6) |
                                 (self.__abs_active << 7))
         # vehicle reference speed
-        self._msg_data[1] = hex(self.__vehicle_speed % 256)
+        self._msg_data[1] = hex(self.__vehicle_speed & 0xFF)
         # vehicle reference speed valid
         self._msg_data[2] = hex((self.__vehicle_speed_valid << (16 % 8)) |
                                 (self.__bls_active_valid << (17 % 8)))
@@ -667,7 +661,7 @@ class Peps341(CanMsgBasic):
                 raise AttributeError
             self.__power_mode = status.value
         except AttributeError:
-            print("AttributeError on power_mode")
+            logger.error("AttributeError on power_mode")
 
     def encode(self):
         # 电源分配状态　+ 智能钥匙电池电量低提示 + 远程模式
@@ -761,7 +755,7 @@ class Bcm350(CanMsgBasic):
                 raise AttributeError
             self.__driver_door_status = status.value
         except AttributeError:
-            print("AttributeError on lf_door_status")
+            logger.error("AttributeError on lf_door_status")
 
     @property
     def rf_door_status(self):
@@ -776,7 +770,7 @@ class Bcm350(CanMsgBasic):
                 raise AttributeError
             self.__passenger_door_status = status.value
         except AttributeError:
-            print("AttributeError on rf_door_status")
+            logger.error("AttributeError on rf_door_status")
 
     @property
     def lr_door_status(self):
@@ -791,7 +785,7 @@ class Bcm350(CanMsgBasic):
                 raise AttributeError
             self.__left_rear_door_status = status.value
         except AttributeError:
-            print("AttributeError on lr_door_status")
+            logger.error("AttributeError on lr_door_status")
 
     @property
     def rr_door_status(self):
@@ -806,7 +800,7 @@ class Bcm350(CanMsgBasic):
                 raise AttributeError
             self.__right_rear_door_status = status.value
         except AttributeError:
-            print("AttributeError on rr_door_status")
+            logger.error("AttributeError on rr_door_status")
 
     @property
     def trunk_door_status(self):
@@ -821,7 +815,7 @@ class Bcm350(CanMsgBasic):
                 raise AttributeError
             self.__tailgate_status = status.value
         except AttributeError:
-            print("AttributeError on trunk_door_status")
+            logger.error("AttributeError on trunk_door_status")
 
     @property
     def lock_door_status(self):
@@ -836,7 +830,7 @@ class Bcm350(CanMsgBasic):
                 raise AttributeError
             self.__driver_door_lock_status = status.value
         except AttributeError:
-            print("AttributeError on lock_door_status")
+            logger.error("AttributeError on lock_door_status")
 
     @property
     def handbrake_status(self):
@@ -851,7 +845,7 @@ class Bcm350(CanMsgBasic):
                 raise AttributeError
             self.__handbrake_signal = status.value
         except AttributeError:
-            print("AttributeError on handbrake_status")
+            logger.error("AttributeError on handbrake_status")
 
     @property
     def hood_status(self):
@@ -866,7 +860,7 @@ class Bcm350(CanMsgBasic):
                 raise AttributeError
             self.__hood_status = status.value
         except AttributeError:
-            print("AttributeError on hood_status")
+            logger.error("AttributeError on hood_status")
 
     def encode(self):
         # 近光灯工作状态 + 远光灯工作状态 + 前雾灯工作状态 + 后雾灯工作状态
@@ -939,7 +933,7 @@ class Ems360(CanMsgBasic):
                 raise AttributeError
             self.__fuel_consumption = 0xFFFF if value < 0.0 or value > 14220.878 else int(value / 0.217)
         except AttributeError:
-            print("AttributeError on acc_pedal")
+            logger.error("AttributeError on acc_pedal")
 
     def encode(self):
         # MIL指示灯
@@ -1019,7 +1013,7 @@ class Bcm365(CanMsgBasic):
             self.__rear_defrost_status = status.value
             self.__rear_defrost_status_valid = Bcm365.ValidInvalidStatus.Valid.value
         except AttributeError:
-            print("AttributeError on rear_defrost_switch")
+            logger.error("AttributeError on rear_defrost_switch")
 
     @property
     def wiper_status(self):
@@ -1034,7 +1028,7 @@ class Bcm365(CanMsgBasic):
                 raise AttributeError
             self.__wiper_status = status.value
         except AttributeError:
-            print("AttributeError on wiper_status")
+            logger.error("AttributeError on wiper_status")
 
     @property
     def lf_window_status(self):
@@ -1049,7 +1043,7 @@ class Bcm365(CanMsgBasic):
                 raise AttributeError
             self.__lf_window_status = status.value
         except AttributeError:
-            print("AttributeError on lf_window_status")
+            logger.error("AttributeError on lf_window_status")
 
     @property
     def rf_window_status(self):
@@ -1064,7 +1058,7 @@ class Bcm365(CanMsgBasic):
                 raise AttributeError
             self.__rf_window_status = status.value
         except AttributeError:
-            print("AttributeError on rf_window_status")
+            logger.error("AttributeError on rf_window_status")
 
     @property
     def lr_window_status(self):
@@ -1079,7 +1073,7 @@ class Bcm365(CanMsgBasic):
                 raise AttributeError
             self.__lr_window_status = status.value
         except AttributeError:
-            print("AttributeError on lr_window_status")
+            logger.error("AttributeError on lr_window_status")
 
     @property
     def rr_window_status(self):
@@ -1094,7 +1088,7 @@ class Bcm365(CanMsgBasic):
                 raise AttributeError
             self.__rr_window_status = status.value
         except AttributeError:
-            print("AttributeError on rr_window_status")
+            logger.error("AttributeError on rr_window_status")
 
     @property
     def roof_window_status(self):
@@ -1105,11 +1099,11 @@ class Bcm365(CanMsgBasic):
     def roof_window_status(self, status):
         """ 天窗状态 """
         try:
-            if status not in WindowStatus.CanStatus:
+            if status not in RoofStatus.CanStatus:
                 raise AttributeError
             self.__roof_window_status = status.value
         except AttributeError:
-            print("AttributeError on roof_window_status")
+            logger.error("AttributeError on roof_window_status")
 
     def encode(self):
         # ESCL电源请求的响应信号 + ESCL解锁信号反馈 + 电源继电器输出状态
@@ -1127,12 +1121,13 @@ class Bcm365(CanMsgBasic):
                                 (self.__exterior_mirror_elec_flod_status << (18 % 8)) |
                                 (self.__vehicle_antt_status << (20 % 8)))
         # 左前车窗状态 + 右前车窗状态
-        self._msg_data[3] = hex((self.__lf_window_status << (26 % 8)) |
+        self._msg_data[3] = hex(((self.__roof_window_status >> 1) << (24 % 8)) |
+                                (self.__lf_window_status << (26 % 8)) |
                                 (self.__rf_window_status << (29 % 8)))
         # 左后车窗状态 + 右后车窗状态 + 天窗状态
         self._msg_data[4] = hex((self.__lr_window_status << (33 % 8)) |
                                 (self.__rr_window_status << (36 % 8)) |
-                                (self.__roof_window_status << (39 % 8)))
+                                ((self.__roof_window_status & 0x1) << (39 % 8)))
         return self._msg_data
 
     def dump(self):
@@ -1188,7 +1183,7 @@ class Bcm383(CanMsgBasic):
                 raise AttributeError
             self.__lf_tpms_status = status.value
         except AttributeError:
-            print("AttributeError on lf_tpms_status")
+            logger.error("AttributeError on lf_tpms_status")
 
     @property
     def lf_tire_pressure(self):
@@ -1203,7 +1198,7 @@ class Bcm383(CanMsgBasic):
                 raise AttributeError
             self.__lf_tyre_pressure = status.value
         except AttributeError:
-            print("AttributeError on lf_tyre_pressure")
+            logger.error("AttributeError on lf_tyre_pressure")
 
     @property
     def rf_tire_pressure(self):
@@ -1218,7 +1213,7 @@ class Bcm383(CanMsgBasic):
                 raise AttributeError
             self.__rf_tyre_pressure = status.value
         except AttributeError:
-            print("AttributeError on rf_tyre_pressure")
+            logger.error("AttributeError on rf_tyre_pressure")
 
     @property
     def lr_tire_pressure(self):
@@ -1233,7 +1228,7 @@ class Bcm383(CanMsgBasic):
                 raise AttributeError
             self.__lr_tyre_pressure = status.value
         except AttributeError:
-            print("AttributeError on lr_tyre_pressure")
+            logger.error("AttributeError on lr_tyre_pressure")
 
     @property
     def rr_tire_pressure(self):
@@ -1248,7 +1243,7 @@ class Bcm383(CanMsgBasic):
                 raise AttributeError
             self.__rr_tyre_pressure = status.value
         except AttributeError:
-            print("AttributeError on rr_tyre_pressure")
+            logger.error("AttributeError on rr_tyre_pressure")
 
     def encode(self):
         # 左前车轮胎压传感器状态、左前车轮胎压
@@ -1346,7 +1341,7 @@ class Ac378(CanMsgBasic):
     @property
     def ac_temperature(self):
         """ 设置温度 """
-        return float(self.__set_temperature * 0.5)
+        return self.__set_temperature * 0.5
 
     @ac_temperature.setter
     def ac_temperature(self, value):
@@ -1357,7 +1352,7 @@ class Ac378(CanMsgBasic):
             # self.__set_temperature = int('7F', 16) if value < 17.0 or value > 32.0 else int(value / 0.5)
             self.__set_temperature = int(value / 0.5)
         except AttributeError:
-            print("AttributeError on ac_temperature")
+            logger.error("AttributeError on ac_temperature")
 
     @property
     def front_defrost_switch(self):
@@ -1372,7 +1367,7 @@ class Ac378(CanMsgBasic):
                 raise AttributeError
             self.__defrost_mode = status.value
         except AttributeError:
-            print("AttributeError on front_defrost_switch")
+            logger.error("AttributeError on front_defrost_switch")
 
     @property
     def ac_switch(self):
@@ -1387,7 +1382,7 @@ class Ac378(CanMsgBasic):
                 raise AttributeError
             self.__on_off_state = status.value
         except AttributeError:
-            print("AttributeError on ac_switch")
+            logger.error("AttributeError on ac_switch")
 
     @property
     def blower_speed_level(self):
@@ -1402,7 +1397,7 @@ class Ac378(CanMsgBasic):
                 raise AttributeError
             self.__blower_speed_level = status.value
         except AttributeError:
-            print("AttributeError on blower_speed_level")
+            logger.error("AttributeError on blower_speed_level")
 
     def encode(self):
         # 当前环境温度(摄氏度)
@@ -1466,11 +1461,11 @@ class Ic34A(CanMsgBasic):
     def temp_fuel_consumption(self, value):
         """ 瞬时油耗 """
         try:
-            if not isinstance(value, int):
+            if not isinstance(value, float):
                 raise AttributeError
-            self.__temp_fuel_consump = value * 10
+            self.__temp_fuel_consump = int(value * 10)
         except AttributeError:
-            print("AttributeError on temp_fuel_consumption")
+            logger.error("AttributeError on temp_fuel_consumption")
 
     @property
     def sub_total_mileage(self):
@@ -1487,13 +1482,15 @@ class Ic34A(CanMsgBasic):
                 value = 50
             self.__sub_total_mileage = value
         except AttributeError:
-            print("AttributeError on sub_total_mileage")
+            logger.error("AttributeError on sub_total_mileage")
 
     def encode(self):
-        # 瞬时油耗
-        self._msg_data[1] = hex((self.__temp_fuel_consump << (14 % 8)))
+        # 瞬时油耗 + 小计里程
+        self._msg_data[0] = hex(self.__temp_fuel_consump >> 2)
+        self._msg_data[1] = hex(((self.__sub_total_mileage >> 4) << (8 % 8)) |
+                                ((self.__temp_fuel_consump & 0x3) << (14 % 8)))
         # 小计里程
-        self._msg_data[2] = hex((self.__sub_total_mileage << (20 % 8)))
+        self._msg_data[2] = hex(((self.__sub_total_mileage & 0xF) << (20 % 8)))
         # 单次里程平均油耗
         self._msg_data[3] = hex((self.__single_trip_aver_fuel_consump << (26 % 8)))
         return self._msg_data
@@ -1542,11 +1539,12 @@ class Ic367(CanMsgBasic):
     def average_oil_consumption(self, value):
         """ 平均油耗 """
         try:
+            self.__average_oil_consumption = 0x400
             if not isinstance(value, int):
                 raise AttributeError
             self.__average_oil_consumption = value * 10
         except AttributeError:
-            print("AttributeError on average_oil_consumption")
+            logger.error("AttributeError on average_oil_consumption")
 
     def encode(self):
         # 仪表显示车速有效 + 仪表显示车速 + 平均油耗
@@ -1555,7 +1553,7 @@ class Ic367(CanMsgBasic):
                                 (self.__speed_displayed_valid << (10 % 8)) |
                                 ((self.__speed_displayed & 0x1F) << (11 % 8)))
         # 平均油耗
-        self._msg_data[2] = hex(((self.__average_oil_consumption & 0xFF) << (16 % 8)))
+        self._msg_data[2] = hex(self.__average_oil_consumption & 0xFF)
         # 报文计数器 + 剩余油量报警 + 机油压力低报警 + 制动液位低报警
         self._msg_data[6] = hex((self.__rolling_counter << (48 % 8)) |
                                 (self.__fuel_remain_warning << (52 % 8)) |
@@ -1632,16 +1630,18 @@ class Ic380(CanMsgBasic):
     def total_mileage(self, value):
         """ 里程 """
         try:
+            self.__mileage = 0xFFFF
             if not isinstance(value, long):
                 raise AttributeError
-            self.__mileage = 0xFFFF if value < 0 or value > 655350 else (value / 10)
+            if value <= 655350:
+                self.__mileage = int(value / 10)
         except AttributeError:
-            print("AttributeError on total_mileage")
+            logger.error("AttributeError on total_mileage")
 
     @property
     def driving_mileage(self):
         """ 续航里程 """
-        return self.__driving_mileage
+        return self.__driving_mileage - 50
 
     @driving_mileage.setter
     def driving_mileage(self, value):
@@ -1651,7 +1651,7 @@ class Ic380(CanMsgBasic):
                 raise AttributeError
             self.__driving_mileage = value
         except AttributeError:
-            print("AttributeError on driving_mileage")
+            logger.error("AttributeError on driving_mileage")
 
     @property
     def residual_oil(self):
@@ -1666,7 +1666,7 @@ class Ic380(CanMsgBasic):
                 raise AttributeError
             self.__residual_oil_volume = value
         except AttributeError:
-            print("AttributeError on residual_oil")
+            logger.error("AttributeError on residual_oil")
 
     def encode(self):
         # 驾驶位安全带状态　+ 驾驶位安全带状态有效位 + 副驾驶位安全带状态 + 副驾驶位安全带状态有效位 + 第二排座位左边安全带状态 + 第二排座位左边安全带状态有效位 + 第二排座位中间安全带状态 + 第二排座位中间安全带状态有效位
@@ -1680,13 +1680,14 @@ class Ic380(CanMsgBasic):
                                 (self.__second_row_middle_seat_belt_status_valid << 7))
         # 里程
         self._msg_data[1] = hex(self.__mileage >> 8)
-        self._msg_data[2] = hex(self.__mileage % 256)
+        self._msg_data[2] = hex(self.__mileage & 0xFF)
         # 第二排座位右边安全带状态 + 油位信号输入电路对电源短路标志位 + 油位信号输入电路对地短裤标志位 + 油位信号输入电路对开路标志位 + 续航里程
+        self._msg_data[3] = hex(self.__driving_mileage >> 2)
         self._msg_data[4] = hex((self.__second_row_right_seat_belt_status << (32 % 8)) |
                                 (self.__oil_signal_short_to_battery << (33 % 8)) |
                                 (self.__oil_signal_short_to_gnd << (34 % 8)) |
                                 (self.__oil_signal_open << (35 % 8)) |
-                                (self.__driving_mileage << (38 % 8)))
+                                ((self.__driving_mileage & 0x3) << (38 % 8)))
         # 剩余油量 + 第二排座位右边安全带状态有效位
         self._msg_data[5] = hex((self.__residual_oil_volume << (40 % 8)) |
                                 (self.__second_row_right_seat_belt_status_valid << (47 % 8)))
@@ -1736,12 +1737,6 @@ class Bcm401(CanMsgBasic):
 
     def dump(self):
         super(Bcm401, self).dump()
-        # print("-> BCM_NM_DestinationAddress:" + hex(self.destination_address))
-        # print("-> BCM_NM_Alive:\t\t\t " + EnumNmStatus(self.alive).name)
-        # print("-> BCM_NM_Ring:\t\t\t\t " + EnumNmStatus(self.ring).name)
-        # print("-> BCM_NM_LimpHome:\t\t\t " + EnumNmStatus(self.limp_home).name)
-        # print("-> BCM_NM_SleepIndication:\t " + EnumNmStatus(self.sleep_indication).name)
-        # print("-> BCM_NM_SleepAcknowledge:\t " + EnumNmStatus(self.sleep_acknowledge).name)
 
 
 if __name__ == '__main__':

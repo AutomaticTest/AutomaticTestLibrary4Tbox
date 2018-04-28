@@ -709,16 +709,58 @@ class MqttComm(object):
             'WIPER_RESP': WiperStatus.TspStatus(self._msgtop.vehicle_status.wiper_Status).name,
             # 手刹状态
             'HANDBRAKE_RESP': HandbrakeStatus.TspStatus(self._msgtop.vehicle_status.hand_break_status).name,
+            # 前除霜状态
+            'FRONT_DEFROST_STS': "",
             # PEPS电源状态
             'PEPS_POWER_RESP': PepsStatus.TspStatus(self._msgtop.vehicle_status.peps_power_mode).name,
             # 档位
             'GEAR_POS_RESP': GearStatus.TspStatus(self._msgtop.vehicle_status.gear_position).name,
-            'LF_TIRE_PRESSURE_REQ': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.lf_tire_pressure)).name,
-            'RF_TIRE_PRESSURE_REQ': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.rf_tire_pressure)).name,
-            'RR_TIRE_PRESSURE_REQ': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.rr_tire_pressure)).name,
-            'LR_TIRE_PRESSURE_REQ': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.lr_tire_pressure)).name,
+            # 左前胎压
+            'LF_TIRE_PRESSURE_RESP': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.lf_tire_pressure)).name,
+            # 右前胎压
+            'RF_TIRE_PRESSURE_RESP': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.rf_tire_pressure)).name,
+            # 左后胎压
+            'LR_TIRE_PRESSURE_RESP': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.lr_tire_pressure)).name,
+            # 右后胎压
+            'RR_TIRE_PRESSURE_RESP': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.rr_tire_pressure)).name,
+            # 蓄电池电压(TBox未上传)
+            'BATTERY_VOLTAGE_RESP': "",
+            # 剩余油量
+            'FUEL_LEVEL_RESP': str(self._msgtop.vehicle_status.fuel_level),
+            # 剩余里程
+            'REMAIN_MILEAGE_RESP': str(int(self._msgtop.vehicle_status.remain_mileage)),
+            # 是否系安全带(TBox未上传)
+            'BELT_RESP': "",
+            # 近光灯状态(TBox未上传)
+            'FRONT_FOG_LAMP_RESP': "",
+            # 远光灯状态(TBox未上传)
+            'REAR_FOG_LAMP_RESP': "",
+            # G值(TBox未上传)
+            'G_VALUE_RESP': "",
+            # 光照强度(TBox未上传)
+            'LIGHT_INTENSITY_RESP': str(self._msgtop.vehicle_status.light_intensity),
+            # 瞬时油耗
+            'CURR_FUEL_CONSUMPTION_RESP': str(int(self._msgtop.vehicle_status.current_fuel_consumption)),
+            # 当前速度
+            'CURR_SPEED_RESP': str(self._msgtop.vehicle_status.current_speed),
+            # 当前转速
+            'ENGINE_SPEED_RESP': str(self._msgtop.vehicle_status.engine_speed),
+            # 方向盘转角，左为正，右为负
+            'STEERING_ANGLE_RESP': str(self._msgtop.vehicle_status.steering_angle),
+            # 油门脚踏板角度
+            'ACCELERATOR_PEDAL_ANGLE_RESP': str(self._msgtop.vehicle_status.accelerator_pedal_angle),
+            # 刹车板角度(TBox未上传)
+            'BRAKE_PEDAL_ANGLE_RESP': str(self._msgtop.vehicle_status.brake_pedal_angle),
+            # 离合器角度(TBox未上传)
+            'CLUTCH_PEDAL_ANGLE_RESP': str(self._msgtop.vehicle_status.clutch_pedal_angle),
+            # 总里程
+            'TOTAL_MILEAGE_RESP': str(self._msgtop.vehicle_status.total_mileage),
+            # 车辆位置
+            # 当前追踪状态
+            # 平均油耗
+            'AVERAGE_FUEL_CONSUMPTION_RESP': str(self._msgtop.vehicle_status.average_fuel_consumption),
         }
-        return data_dict[item]
+        return unicode(data_dict[item])
 
 
 class MqttCommError(Exception):

@@ -718,7 +718,7 @@ class MqttDump(object):
     def __list_motor_fire_signal(motor_fire_signal):
         """点火熄火上报 23"""
         logging("====> MotorFireSignal <====")
-        logging("mode:          " + MqttDump.__enum_motor_fire_mode(motor_fire_signal.fire_signal))
+        logging("mode:          " + MqttDump.__enum_motor_fire_mode(motor_fire_signal.mode))
         logging("total_mileage: " + str(motor_fire_signal.total_mileage))
         logging("gps_info:      " + MqttDump.__show_gps_info(motor_fire_signal.gps_info))
         logging("moter_fire_no: " + str(motor_fire_signal.moter_fire_no))

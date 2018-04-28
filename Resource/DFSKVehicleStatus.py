@@ -157,7 +157,7 @@ class RoofStatus(object):
         VentArea = 1
         AntipinchInVent = 2
         FullyClose = 3
-        AntipinchInPartiallySlide = 4
+        AntipInchInPartiallySlide = 4
         PartiallySlide = 5
         FullyOpen = 6
         Uninitialized = 7

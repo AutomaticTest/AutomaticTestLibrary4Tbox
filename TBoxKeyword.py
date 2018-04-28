@@ -80,7 +80,7 @@ class TBoxKeyword(object):
         :return: True if succeed to connect MQTT Broker or not
         """
         logger.info(self._tag + "Wait until ready called")
-        return self._tbox.wait_until_ready()
+        return unicode(self._tbox.wait_until_ready())
 
     def request_remote_ota(self, version, addr, timeout=30):
         """ 请求远程升级
@@ -150,7 +150,7 @@ class TBoxKeyword(object):
         :return: Specified data
         """
         logger.info(self._tag + "Request CAN data called")
-        return self._tbox.on_request_can_data(item, timeout)
+        return unicode(self._tbox.on_request_can_data(item, timeout))
 
 
 if __name__ == '__main__':
