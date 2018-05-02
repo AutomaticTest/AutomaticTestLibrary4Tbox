@@ -112,7 +112,7 @@ class TBoxKeyword(object):
         logger.info(self._tag + "Request remote diagnosis called")
         return self._tbox.on_request_remote_diagnosis(timeout)
 
-    def request_remote_config(self, item, data, timeout=30):
+    def request_tsp_config(self, item, data, timeout=30):
         """ 请求远程配置
 
         :param item: 配置项
@@ -123,8 +123,8 @@ class TBoxKeyword(object):
 
         :return: True if succeed to configuration or not
         """
-        logger.info(self._tag + "Request remote config called")
-        return self._tbox.on_request_remote_config(item, data, timeout)
+        logger.info(self._tag + "Request tsp config called")
+        return self._tbox.on_request_tsp_config(item, data, timeout)
 
     def request_can_config(self, item, data, timeout=10):
         """ 请求CAN配置
@@ -140,8 +140,8 @@ class TBoxKeyword(object):
         logger.info(self._tag + "Request CAN config called")
         return self._tbox.on_request_can_config(item, data, timeout)
 
-    def request_can_data(self, item, timeout=10):
-        """ 请求指定CAN数据
+    def request_tsp_data(self, item, timeout=10):
+        """ 请求指定TSP数据
 
         :param item: 配置项
 
@@ -149,8 +149,8 @@ class TBoxKeyword(object):
 
         :return: Specified data
         """
-        logger.info(self._tag + "Request CAN data called")
-        return unicode(self._tbox.on_request_can_data(item, timeout))
+        logger.info(self._tag + "Request tsp data called")
+        return unicode(self._tbox.on_request_tsp_data(item, timeout))
 
 
 if __name__ == '__main__':

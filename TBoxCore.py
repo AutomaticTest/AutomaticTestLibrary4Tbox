@@ -117,16 +117,16 @@ class TBoxCore(Singleton):
         logger.info(self._tag + "on_request_can_config called")
         return self._pcan.on_request(item, data)
 
-    def on_request_can_data(self, item, timeout):
+    def on_request_tsp_data(self, item, timeout):
         """
         """
-        logger.info(self._tag + "on_request_can_data called")
-        return self._mqttc.on_request_can_data(item, timeout)
+        logger.info(self._tag + "on_request_tsp_data called")
+        return self._mqttc.on_request_tsp_data(item, timeout)
 
-    def on_request_remote_config(self, item, data, timeout):
+    def on_request_tsp_config(self, item, data, timeout):
         """
         """
-        logger.info(self._tag + "on_request_remote_config called")
+        logger.info(self._tag + "on_request_tsp_config called")
         return self._mqttc.on_request_config(item, data, timeout)
 
     def on_request_remote_diagnosis(self, timeout):

@@ -1634,14 +1634,14 @@ class Ic380(CanMsgBasic):
             if not isinstance(value, long):
                 raise AttributeError
             if value <= 655350:
-                self.__mileage = int(value / 10)
+                self.__mileage = value / 10
         except AttributeError:
             logger.error("AttributeError on total_mileage")
 
     @property
     def driving_mileage(self):
         """ 续航里程 """
-        return self.__driving_mileage - 50
+        return self.__driving_mileage + 50
 
     @driving_mileage.setter
     def driving_mileage(self, value):
@@ -1649,7 +1649,7 @@ class Ic380(CanMsgBasic):
         try:
             if not isinstance(value, int):
                 raise AttributeError
-            self.__driving_mileage = value
+            self.__driving_mileage = value - 50
         except AttributeError:
             logger.error("AttributeError on driving_mileage")
 

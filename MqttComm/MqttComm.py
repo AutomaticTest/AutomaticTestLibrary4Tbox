@@ -373,26 +373,27 @@ class MqttComm(object):
         """ MsgConfReq """
         logger.info(self._tag + "===> on_request_config")
         convert_config_item_dict = {
-            'MQTT_SERVER_ADDR':                tbox_pb2.MQTT_SERVER_ADDR,
-            'MQTT_SERVER_TOPIC':               tbox_pb2.MQTT_SERVER_TOPIC,
-            'MQTT_KEY_BUSINESS_SERVER_ADDR':   tbox_pb2.MQTT_KEY_BUSINESS_SERVER_ADDR,
-            'MQTT_KEY_BUSINESS_SERVER_TOPIC':  tbox_pb2.MQTT_KEY_BUSINESS_SERVER_TOPIC,
-            'ECALL_NUMBER':                    tbox_pb2.ECALL_NUMBER,
-            'BCALL_NUMBER':                    tbox_pb2.BCALL_NUMBER,
-            'ICALL_NUMBER':                    tbox_pb2.ICALL_NUMBER,
-            'ECALL_ENABLE':                    tbox_pb2.ECALL_ENABLE,
-            'BCALL_ENABLE':                    tbox_pb2.BCALL_ENABLE,
-            'ICALL_ENABLE':                    tbox_pb2.ICALL_ENABLE,
-            'SMS_GATE_NUMBER_UPLOAD':          tbox_pb2.SMS_GATE_NUMBER_UPLOAD,
-            'SMS_GATE_NUMBER_DOWNLOAD':        tbox_pb2.SMS_GATE_NUMBER_DOWNLOAD,
-            'DATAMINING_UPLOAD_FREQUENCY':     tbox_pb2.DATAMINING_UPLOAD_FREQUENCY,
-            'VEHICLE_STATUS_UPLOAD_FREQUENCY': tbox_pb2.VEHICLE_STATUS_UPLOAD_FREQUENCY,
-            'IGNITION_BLOWOUT_UPLOAD_ENABLE':  tbox_pb2.IGNITION_BLOWOUT_UPLOAD_ENABLE,
-            'UPLOAD_ALERT_ENABLE':             tbox_pb2.UPLOAD_ALERT_ENABLE,
-            'DATAMING_ENABLE':                 tbox_pb2.DATAMING_ENABLE,
-            'SVT_ENABLE':                      tbox_pb2.SVT_ENABLE,
-            'ELETRONIC_DEFENSE_ENABLE':        tbox_pb2.ELETRONIC_DEFENSE_ENABLE,
-            'ABNORMAL_MOVE_THRESHOLD_VALUE':   tbox_pb2.ABNORMAL_MOVE_THRESHOLD_VALUE,
+            'MQTT_SERVER_ADDR_REQ':                tbox_pb2.MQTT_SERVER_ADDR,
+            'MQTT_SERVER_TOPIC_REQ':               tbox_pb2.MQTT_SERVER_TOPIC,
+            'MQTT_KEY_BUSINESS_SERVER_ADDR_REQ':   tbox_pb2.MQTT_KEY_BUSINESS_SERVER_ADDR,
+            'MQTT_KEY_BUSINESS_SERVER_TOPIC_REQ':  tbox_pb2.MQTT_KEY_BUSINESS_SERVER_TOPIC,
+            'ECALL_NUMBER_REQ':                    tbox_pb2.ECALL_NUMBER,
+            'BCALL_NUMBER_REQ':                    tbox_pb2.BCALL_NUMBER,
+            'ICALL_NUMBER_REQ':                    tbox_pb2.ICALL_NUMBER,
+            'ECALL_ENABLE_REQ':                    tbox_pb2.ECALL_ENABLE,
+            'BCALL_ENABLE_REQ':                    tbox_pb2.BCALL_ENABLE,
+            'ICALL_ENABLE_REQ':                    tbox_pb2.ICALL_ENABLE,
+            'SMS_GATE_NUMBER_UPLOAD_REQ':          tbox_pb2.SMS_GATE_NUMBER_UPLOAD,
+            'SMS_GATE_NUMBER_DOWNLOAD_REQ':        tbox_pb2.SMS_GATE_NUMBER_DOWNLOAD,
+            'DATAMINING_UPLOAD_FREQUENCY_REQ':     tbox_pb2.DATAMINING_UPLOAD_FREQUENCY,
+            'VEHICLE_STATUS_UPLOAD_FREQUENCY_REQ': tbox_pb2.VEHICLE_STATUS_UPLOAD_FREQUENCY,
+            'IGNITION_BLOWOUT_UPLOAD_ENABLE_REQ':  tbox_pb2.IGNITION_BLOWOUT_UPLOAD_ENABLE,
+            'UPLOAD_ALERT_ENABLE_REQ':             tbox_pb2.UPLOAD_ALERT_ENABLE,
+            'DATAMING_ENABLE_REQ':                 tbox_pb2.DATAMING_ENABLE,
+            'SVT_ENABLE_REQ':                      tbox_pb2.SVT_ENABLE,
+            'ELETRONIC_DEFENSE_ENABLE_REQ':        tbox_pb2.ELETRONIC_DEFENSE_ENABLE,
+            'ABNORMAL_MOVE_THRESHOLD_VALUE_REQ':   tbox_pb2.ABNORMAL_MOVE_THRESHOLD_VALUE,
+            'TRACKING_DATA_FREQUENCY_REQ':         tbox_pb2.TRACKING_DATA_FREQUENCY,
         }
         config_item = convert_config_item_dict[item]
         self._result = False
@@ -406,12 +407,12 @@ class MqttComm(object):
         self._mqttc.publish(MQTT_DEVICE_TOPIC_PREFIX + self._expected_device + MQTT_DEVICE_TOPIC_SUFFIX, publish_msg.SerializeToString())
         MqttDump.dump(publish_msg, logger.info)
         logger.info(self._tag + "on_request_config <===")
-        # wait_event
-        self._event.wait(int(timeout))
-        if not self._event.isSet() or not self._result:
-            logger.error(self._tag + "Exception on remote_config_request: Timeout to wait event")
-        self._event.clear()
-        return self._result
+        # # wait_event
+        # self._event.wait(int(timeout))
+        # if not self._event.isSet() or not self._result:
+        #     logger.error(self._tag + "Exception on remote_config_request: Timeout to wait event")
+        # self._event.clear()
+        # return self._result
 
     def __on_response_config(self, client, userdata, msgtop):
         """ MsgConfResp """
@@ -420,10 +421,11 @@ class MqttComm(object):
             logger.warn(self._tag + "on_response_config: Not expected msg_id")
             return
         if msgtop.HasField("config_response"):
-            # TODO: Handle receive mulit-config_items
-            for config in msgtop.config_response.config_results:
-                self._result = config.result
-            self._event.set()
+            self._msgtop.config_response.CopyFrom(msgtop.config_response)
+            # # TODO: Handle receive mulit-config_items
+            # for config in msgtop.config_response.config_results:
+            #     self._result = config.result
+            # self._event.set()
         logger.console(self._tag + "on_response_config <===")
 
     ################################################################################
@@ -602,163 +604,176 @@ class MqttComm(object):
         logger.info(self._tag + "on_push_message <===")
 
     ################################################################################
-    def on_request_can_data(self, item, timeout):
+    def on_request_tsp_data(self, item, timeout):
         """
-            # 空调开关状态
-            'AC_REQ':                       self._on_request_ac,
-            # 空调前除霜开关状态
-            'FRONT_DEFROST_REQ':            self._on_request_front_defrost,
-            # 空调后除霜开关状态
-            'REAR_DEFROST_REQ':             self._on_request_rear_defrost,
-            # 空调温度
-            'AC_TEMPERATURE_REQ':           self._on_request_ac_temperature,
-            # 驾驶员左前门锁开关状态
-            'LOCK_DOOR_REQ':                self._on_request_lock_door,
-            # 发动机状态
-            'ENGINE_REQ':                   self._on_request_engine,
-            # 雨刷开关状态
-            'WIPER_REQ':                    self._on_request_wiper,
-            # 手刹状态
-            'HANDBRAKE_REQ':                self._on_request_handbrake,
-            # 前除霜状态
-            'FRONT_DEFROST_STS':            self._on_front_defrost_status,
-            # PEPS电源状态
-            'PEPS_POWER_REQ':               self._on_request_peps_power,
-            # 档位
-            'GEAR_POS_REQ':                 self._on_request_gear_pos,
-            # 左前胎压
-            'LF_TIRE_PRESSURE_REQ':         self._on_request_lf_tire_pressure,
-            # 左后胎压
-            'LR_TIRE_PRESSURE_REQ':         self._on_request_lr_tire_pressure,
-            # 右前胎压
-            'RF_TIRE_PRESSURE_REQ':         self._on_request_rf_tire_pressure,
-            # 右后胎压
-            'RR_TIRE_PRESSURE_REQ':         self._on_request_rr_tire_pressure,
-            # 蓄电池电压
-            'BATTERY_VOLTAGE_REQ':          self._on_request_battery_voltage,
-            # 剩余油量
-            'FUEL_LEVEL_REQ':               self._on_request_fuel_level,
-            # 剩余里程
-            'REMAIN_MILEAGE_REQ':           self._on_request_remain_mileage,
-            # 是否系安全带
-            'BELT_REQ':                     self._on_request_belt,
-            # 近光灯状态
-            'FRONT_FOG_LAMP_REQ':           self._on_request_front_fog_lamp,
-            # 远光灯状态
-            'REAR_FOG_LAMP_REQ':            self._on_request_rear_fog_lamp,
-            # G值
-            'G_VALUE_REQ':                  self._on_request_g_value,
-            # 光照强度
-            'LIGHT_INTENSITY_REQ':          self._on_request_light_intensity,
-            # 瞬时油耗
-            'CURR_FUEL_CONSUMPTION_REQ':    self._on_request_curr_fuel_consumption,
-            # 当前速度
-            'CURR_SPEED_REQ':               self._on_request_curr_speed,
-            # 当前转速
-            'ENGINE_SPEED_REQ':             self._on_request_engine_speed,
-            # 方向盘转角，左为正，右为负
-            'STEERING_ANGLE_REQ':           self._on_request_steering_angle,
-            # 油门脚踏板角度
-            'ACCELERATOR_PEDAL_ANGLE_REQ':  self._on_request_accelerator_pedal_angle,
-            # 刹车板角度
-            'BRAKE_PEDAL_ANGLE_REQ':        self._on_request_brake_pedal_angle,
-            # 离合器角度
-            'CLUTCH_PEDAL_ANGLE_REQ':       self._on_request_clutch_pedal_angle,
-            # 总里程
-            'TOTAL_MILEAGE_REQ':            self._on_request_total_mileage,
+            ################################################################################
+            'AC_REQ' 空调开关状态
+            'FRONT_DEFROST_REQ' 空调前除霜开关状态
+            'REAR_DEFROST_REQ' 空调后除霜开关状态
+            'AC_TEMPERATURE_REQ' 空调温度
+            'LOCK_DOOR_REQ' 驾驶员左前门锁开关状态
+            'ENGINE_REQ' 发动机状态
+            'WIPER_REQ' 雨刷开关状态
+            'HANDBRAKE_REQ' 手刹状态
+            'FRONT_DEFROST_STS' 前除霜状态
+            'PEPS_POWER_REQ' PEPS电源状态
+            'GEAR_POS_REQ' 档位
+            'LF_TIRE_PRESSURE_REQ' 左前胎压
+            'LR_TIRE_PRESSURE_REQ' 左后胎压
+            'RF_TIRE_PRESSURE_REQ' 右前胎压
+            'RR_TIRE_PRESSURE_REQ' 右后胎压
+            'BATTERY_VOLTAGE_REQ' 蓄电池电压
+            'FUEL_LEVEL_REQ' 剩余油量
+            'REMAIN_MILEAGE_REQ' 剩余里程
+            'BELT_REQ' 是否系安全带
+            'FRONT_FOG_LAMP_REQ' 近光灯状态
+            'REAR_FOG_LAMP_REQ' 远光灯状态
+            'G_VALUE_REQ' G值
+            'LIGHT_INTENSITY_REQ' 光照强度
+            'CURR_FUEL_CONSUMPTION_REQ' 瞬时油耗
+            'CURR_SPEED_REQ' 当前速度
+            'ENGINE_SPEED_REQ' 当前转速
+            'STEERING_ANGLE_REQ' 方向盘转角，左为正，右为负
+            'ACCELERATOR_PEDAL_ANGLE_REQ' 油门脚踏板角度
+            'BRAKE_PEDAL_ANGLE_REQ' 刹车板角度
+            'CLUTCH_PEDAL_ANGLE_REQ' 离合器角度
+            'TOTAL_MILEAGE_REQ' 总里程
             # 车辆位置
             # 当前追踪状态
-            # 平均油耗
-            'AVERAGE_FUEL_CONSUMPTION_REQ': self._on_request_average_fuel_consumption,
+            'AVERAGE_FUEL_CONSUMPTION_REQ' 平均油耗
         """
         logger.info(self._tag + "on_request_can_data called")
         data_dict = {
+            ################################################################################
+            # mqtt server IP地址+端口号
+            'CONFIG_MQTT_SERVER_ADDR_RESP':                self._msgtop.config_response.config_new.mqtt_server_addr,
+            # mqtt topic
+            'CONFIG_MQTT_SERVER_TOPIC_RESP':               self._msgtop.config_response.config_new.mqtt_server_topic,
+            # 核心紧急业务mqtt server IP地址 + 端口号
+            'CONFIG_MQTT_KEY_BUSINESS_SERVER_ADDR_RESP':   self._msgtop.config_response.config_new.mqtt_key_business_server_addr,
+            # 核心紧急业务mqtt topic
+            'CONFIG_MQTT_KEY_BUSINESS_SERVER_TOPIC_RESP':  self._msgtop.config_response.config_new.mqtt_key_business_server_topic,
+            # E-call号码
+            'CONFIG_ECALL_NUMBER_RESP':                    self._msgtop.config_response.config_new.ecall_number,
+            # B-call号码
+            'CONFIG_BCALL_NUMBER_RESP':                    self._msgtop.config_response.config_new.bcall_number,
+            # I-call号码
+            'CONFIG_ICALL_NUMBER_RESP':                    self._msgtop.config_response.config_new.icall_number,
+            # E-call使能
+            'CONFIG_ECALL_ENABLE_RESP':                    str(self._msgtop.config_response.config_new.ecall_enable),
+            # B-call使能
+            'CONFIG_BCALL_ENABLE_RESP':                    str(self._msgtop.config_response.config_new.bcall_enable),
+            # I-call使能
+            'CONFIG_ICALL_ENABLE_RESP':                    str(self._msgtop.config_response.config_new.icall_enable),
+            # 上行短消息网关
+            'CONFIG_SMS_GATE_NUMBER_UPLOAD_RESP':          self._msgtop.config_response.config_new.sms_gate_number_upload,
+            # 下行短消息网关
+            'CONFIG_SMS_GATE_NUMBER_DOWNLOAD_RESP':        self._msgtop.config_response.config_new.sms_gate_number_download,
+            # Datamining上传频率
+            'CONFIG_DATAMINING_UPLOAD_FREQUENCY_RESP':     str(self._msgtop.config_response.config_new.datamining_upload_frequency),
+            # 车身状态上报频率
+            'CONFIG_VEHICLE_STATUS_UPLOAD_FREQUENCY_RESP': str(self._msgtop.config_response.config_new.vehicle_status_upload_frequency),
+            # 点火熄火上传状态使能
+            'CONFIG_IGNITION_BLOWOUT_UPLOAD_ENABLE_RESP':  str(self._msgtop.config_response.config_new.ignition_blowout_upload_enable),
+            # 上报告警信息使能
+            'CONFIG_UPLOAD_ALERT_ENABLE_RESP':             str(self._msgtop.config_response.config_new.upload_alert_enable),
+            # Datamining使能
+            'CONFIG_DATAMING_ENABLE_RESP':                 str(self._msgtop.config_response.config_new.datamining_enable),
+            # 追踪功能使能
+            'CONFIG_SVT_ENABLE_RESP':                      str(self._msgtop.config_response.config_new.svt_enable),
+            # 电子围栏功能使能
+            'CONFIG_ELETRONIC_DEFENSE_ENABLE_RESP':        str(self._msgtop.config_response.config_new.eletronic_defense_enable),
+            # 异动拖车G-SERNOR触发阈值,单位：0.5G, 取值范围（1-32）
+            'CONFIG_ABNORMAL_MOVE_THRESHOLD_VALUE_RESP':   str(self._msgtop.config_response.config_new.abnormal_move_threshold_value),
+            # 远程追踪上报频率	5s
+            'CONFIG_TRACKING_DATA_FREQUENCY_RESP':         str(self._msgtop.config_response.config_new.tracking_data_frequency),
+            ################################################################################
             # 左前门开关状态
-            'LF_DOOR_RESP':    DoorStatus.TspStatus(self._msgtop.vehicle_status.lf_door_status).name,
+            'VEHICLE_LF_DOOR_RESP':    DoorStatus.TspStatus(self._msgtop.vehicle_status.lf_door_status).name,
             # 右前门开关状态
-            'RF_DOOR_RESP':    DoorStatus.TspStatus(self._msgtop.vehicle_status.rf_door_status).name,
+            'VEHICLE_RF_DOOR_RESP':    DoorStatus.TspStatus(self._msgtop.vehicle_status.rf_door_status).name,
             # 左后门开关状态
-            'LR_DOOR_RESP':    DoorStatus.TspStatus(self._msgtop.vehicle_status.lr_door_status).name,
+            'VEHICLE_LR_DOOR_RESP':    DoorStatus.TspStatus(self._msgtop.vehicle_status.lr_door_status).name,
             # 右后门开关状态
-            'RR_DOOR_RESP':    DoorStatus.TspStatus(self._msgtop.vehicle_status.rr_door_status).name,
+            'VEHICLE_RR_DOOR_RESP':    DoorStatus.TspStatus(self._msgtop.vehicle_status.rr_door_status).name,
             # 后尾箱开关状态
-            'TRUNK_DOOR_RESP': DoorStatus.TspStatus(self._msgtop.vehicle_status.trunk_door_status).name,
+            'VEHICLE_TRUNK_DOOR_RESP': DoorStatus.TspStatus(self._msgtop.vehicle_status.trunk_door_status).name,
             # 左前窗开关状态
-            'LF_WINDOW_RESP': WindowStatus.TspStatus(self._msgtop.vehicle_status.lf_window_status).name,
+            'VEHICLE_LF_WINDOW_RESP': WindowStatus.TspStatus(self._msgtop.vehicle_status.lf_window_status).name,
             # 右前窗开关状态
-            'RF_WINDOW_RESP': WindowStatus.TspStatus(self._msgtop.vehicle_status.rf_window_status).name,
+            'VEHICLE_RF_WINDOW_RESP': WindowStatus.TspStatus(self._msgtop.vehicle_status.rf_window_status).name,
             # 左后窗开关状态
-            'LR_WINDOW_RESP': WindowStatus.TspStatus(self._msgtop.vehicle_status.lr_window_status).name,
+            'VEHICLE_LR_WINDOW_RESP': WindowStatus.TspStatus(self._msgtop.vehicle_status.lr_window_status).name,
             # 右后窗开关状态
-            'RR_WINDOW_RESP': WindowStatus.TspStatus(self._msgtop.vehicle_status.rr_window_status).name,
+            'VEHICLE_RR_WINDOW_RESP': WindowStatus.TspStatus(self._msgtop.vehicle_status.rr_window_status).name,
             # 天窗开关状态
-            'ROOF_WINDOW_RESP': RoofStatus.TspStatus(self._msgtop.vehicle_status.roof_window_status).name,
+            'VEHICLE_ROOF_WINDOW_RESP': RoofStatus.TspStatus(self._msgtop.vehicle_status.roof_window_status).name,
             # 空调开关状态
-            'AC_RESP':             AcStatus.TspStatus(self._msgtop.vehicle_status.air_condition_status).name,
+            'VEHICLE_AC_RESP':             AcStatus.TspStatus(self._msgtop.vehicle_status.air_condition_status).name,
             # 空调前除霜开关状态
-            'FRONT_DEFROST_RESP':  DefrostSwitch.TspStatus(self._msgtop.vehicle_status.air_condition_defrost_status).name,
+            'VEHICLE_FRONT_DEFROST_RESP':  DefrostSwitch.TspStatus(self._msgtop.vehicle_status.air_condition_defrost_status).name,
             # 空调后除霜开关状态
-            'REAR_DEFROST_RESP':   DefrostSwitch.TspStatus(self._msgtop.vehicle_status.air_condition_rear_defrost_status).name,
+            'VEHICLE_REAR_DEFROST_RESP':   DefrostSwitch.TspStatus(self._msgtop.vehicle_status.air_condition_rear_defrost_status).name,
             # 空调温度
-            'AC_TEMPERATURE_RESP': str(self._msgtop.vehicle_status.air_condition_temperature),
+            'VEHICLE_AC_TEMPERATURE_RESP': str(self._msgtop.vehicle_status.air_condition_temperature),
             # 驾驶员左前门锁开关状态
-            'LOCK_DOOR_RESP': LockStatus.TspStatus(self._msgtop.vehicle_status.lock_status).name,
+            'VEHICLE_LOCK_DOOR_RESP': LockStatus.TspStatus(self._msgtop.vehicle_status.lock_status).name,
             # 发动机状态
-            'ENGINE_RESP': EngineStatus.TspStatus(self._msgtop.vehicle_status.engine_status).name,
+            'VEHICLE_ENGINE_RESP': EngineStatus.TspStatus(self._msgtop.vehicle_status.engine_status).name,
             # 雨刷开关状态
-            'WIPER_RESP': WiperStatus.TspStatus(self._msgtop.vehicle_status.wiper_Status).name,
+            'VEHICLE_WIPER_RESP': WiperStatus.TspStatus(self._msgtop.vehicle_status.wiper_Status).name,
             # 手刹状态
-            'HANDBRAKE_RESP': HandbrakeStatus.TspStatus(self._msgtop.vehicle_status.hand_break_status).name,
+            'VEHICLE_HANDBRAKE_RESP': HandbrakeStatus.TspStatus(self._msgtop.vehicle_status.hand_break_status).name,
             # 前除霜状态
-            'FRONT_DEFROST_STS': "",
+            'VEHICLE_FRONT_DEFROST_STS': "",
             # PEPS电源状态
-            'PEPS_POWER_RESP': PepsStatus.TspStatus(self._msgtop.vehicle_status.peps_power_mode).name,
+            'VEHICLE_PEPS_POWER_RESP': PepsStatus.TspStatus(self._msgtop.vehicle_status.peps_power_mode).name,
             # 档位
-            'GEAR_POS_RESP': GearStatus.TspStatus(self._msgtop.vehicle_status.gear_position).name,
+            'VEHICLE_GEAR_POS_RESP': GearStatus.TspStatus(self._msgtop.vehicle_status.gear_position).name,
             # 左前胎压
-            'LF_TIRE_PRESSURE_RESP': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.lf_tire_pressure)).name,
+            'VEHICLE_LF_TIRE_PRESSURE_RESP': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.lf_tire_pressure)).name,
             # 右前胎压
-            'RF_TIRE_PRESSURE_RESP': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.rf_tire_pressure)).name,
+            'VEHICLE_RF_TIRE_PRESSURE_RESP': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.rf_tire_pressure)).name,
             # 左后胎压
-            'LR_TIRE_PRESSURE_RESP': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.lr_tire_pressure)).name,
+            'VEHICLE_LR_TIRE_PRESSURE_RESP': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.lr_tire_pressure)).name,
             # 右后胎压
-            'RR_TIRE_PRESSURE_RESP': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.rr_tire_pressure)).name,
+            'VEHICLE_RR_TIRE_PRESSURE_RESP': TyrePressureStatus.TspStatus(int(self._msgtop.vehicle_status.rr_tire_pressure)).name,
             # 蓄电池电压(TBox未上传)
-            'BATTERY_VOLTAGE_RESP': "",
+            'VEHICLE_BATTERY_VOLTAGE_RESP': "",
             # 剩余油量
-            'FUEL_LEVEL_RESP': str(self._msgtop.vehicle_status.fuel_level),
+            'VEHICLE_FUEL_LEVEL_RESP': str(self._msgtop.vehicle_status.fuel_level),
             # 剩余里程
-            'REMAIN_MILEAGE_RESP': str(int(self._msgtop.vehicle_status.remain_mileage)),
+            'VEHICLE_REMAIN_MILEAGE_RESP': str(int(self._msgtop.vehicle_status.remain_mileage)),
             # 是否系安全带(TBox未上传)
-            'BELT_RESP': "",
+            'VEHICLE_BELT_RESP': "",
             # 近光灯状态(TBox未上传)
-            'FRONT_FOG_LAMP_RESP': "",
+            'VEHICLE_FRONT_FOG_LAMP_RESP': "",
             # 远光灯状态(TBox未上传)
-            'REAR_FOG_LAMP_RESP': "",
+            'VEHICLE_REAR_FOG_LAMP_RESP': "",
             # G值(TBox未上传)
-            'G_VALUE_RESP': "",
+            'VEHICLE_G_VALUE_RESP': "",
             # 光照强度(TBox未上传)
-            'LIGHT_INTENSITY_RESP': str(self._msgtop.vehicle_status.light_intensity),
+            'VEHICLE_LIGHT_INTENSITY_RESP': str(self._msgtop.vehicle_status.light_intensity),
             # 瞬时油耗
-            'CURR_FUEL_CONSUMPTION_RESP': str(int(self._msgtop.vehicle_status.current_fuel_consumption)),
+            'VEHICLE_CURR_FUEL_CONSUMPTION_RESP': str(self._msgtop.vehicle_status.current_fuel_consumption),
             # 当前速度
-            'CURR_SPEED_RESP': str(self._msgtop.vehicle_status.current_speed),
+            'VEHICLE_CURR_SPEED_RESP': str(self._msgtop.vehicle_status.current_speed),
             # 当前转速
-            'ENGINE_SPEED_RESP': str(self._msgtop.vehicle_status.engine_speed),
+            'VEHICLE_ENGINE_SPEED_RESP': str(self._msgtop.vehicle_status.engine_speed),
             # 方向盘转角，左为正，右为负
-            'STEERING_ANGLE_RESP': str(self._msgtop.vehicle_status.steering_angle),
+            'VEHICLE_STEERING_ANGLE_RESP': str(self._msgtop.vehicle_status.steering_angle),
             # 油门脚踏板角度
-            'ACCELERATOR_PEDAL_ANGLE_RESP': str(self._msgtop.vehicle_status.accelerator_pedal_angle),
+            'VEHICLE_ACCELERATOR_PEDAL_ANGLE_RESP': str(self._msgtop.vehicle_status.accelerator_pedal_angle),
             # 刹车板角度(TBox未上传)
-            'BRAKE_PEDAL_ANGLE_RESP': str(self._msgtop.vehicle_status.brake_pedal_angle),
+            'VEHICLE_BRAKE_PEDAL_ANGLE_RESP': str(self._msgtop.vehicle_status.brake_pedal_angle),
             # 离合器角度(TBox未上传)
-            'CLUTCH_PEDAL_ANGLE_RESP': str(self._msgtop.vehicle_status.clutch_pedal_angle),
+            'VEHICLE_CLUTCH_PEDAL_ANGLE_RESP': str(self._msgtop.vehicle_status.clutch_pedal_angle),
             # 总里程
-            'TOTAL_MILEAGE_RESP': str(self._msgtop.vehicle_status.total_mileage),
+            'VEHICLE_TOTAL_MILEAGE_RESP': str(self._msgtop.vehicle_status.total_mileage),
             # 车辆位置
             # 当前追踪状态
             # 平均油耗
-            'AVERAGE_FUEL_CONSUMPTION_RESP': str(self._msgtop.vehicle_status.average_fuel_consumption),
+            'VEHICLE_AVERAGE_FUEL_CONSUMPTION_RESP': str(self._msgtop.vehicle_status.average_fuel_consumption),
         }
         return unicode(data_dict[item])
 
