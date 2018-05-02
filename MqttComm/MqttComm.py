@@ -327,92 +327,126 @@ class MqttComm(object):
         logger.console(self._tag + "on_response_config_query <===")
 
     ################################################################################
-    def __set_config_item(self, msgtop, item, data):
-        if item == tbox_pb2.MQTT_SERVER_ADDR:
-            msgtop.config_request.rconfig_data.mqtt_server_addr = data
-        elif item == tbox_pb2.MQTT_SERVER_TOPIC:
-            msgtop.config_request.rconfig_data.mqtt_server_topic = data
-        elif item == tbox_pb2.MQTT_KEY_BUSINESS_SERVER_ADDR:
-            msgtop.config_request.rconfig_data.mqtt_key_business_server_addr = data
-        elif item == tbox_pb2.MQTT_KEY_BUSINESS_SERVER_TOPIC:
-            msgtop.config_request.rconfig_data.mqtt_key_business_server_topic = data
-        elif item == tbox_pb2.ECALL_NUMBER:
-            msgtop.config_request.rconfig_data.ecall_number = data
-        elif item == tbox_pb2.BCALL_NUMBER:
-            msgtop.config_request.rconfig_data.bcall_number = data
-        elif item == tbox_pb2.ICALL_NUMBER:
-            msgtop.config_request.rconfig_data.icall_number = data
-        elif item == tbox_pb2.ECALL_ENABLE:
-            msgtop.config_request.rconfig_data.ecall_enable = True if data.lower() == 'true' else False
-        elif item == tbox_pb2.BCALL_ENABLE:
-            msgtop.config_request.rconfig_data.bcall_enable = True if data.lower() == 'true' else False
-        elif item == tbox_pb2.ICALL_ENABLE:
-            msgtop.config_request.rconfig_data.icall_enable = True if data.lower() == 'true' else False
-        elif item == tbox_pb2.SMS_GATE_NUMBER_UPLOAD:
-            msgtop.config_request.rconfig_data.sms_gate_number_upload = data
-        elif item == tbox_pb2.SMS_GATE_NUMBER_DOWNLOAD:
-            msgtop.config_request.rconfig_data.sms_gate_number_download = data
-        elif item == tbox_pb2.DATAMINING_UPLOAD_FREQUENCY:
-            msgtop.config_request.rconfig_data.datamining_upload_frequency = int(data)
-        elif item == tbox_pb2.VEHICLE_STATUS_UPLOAD_FREQUENCY:
-            msgtop.config_request.rconfig_data.vehicle_status_upload_frequency = int(data)
-        elif item == tbox_pb2.IGNITION_BLOWOUT_UPLOAD_ENABLE:
-            msgtop.config_request.rconfig_data.ignition_blowout_upload_enable = True if data.lower() == 'true' else False
-        elif item == tbox_pb2.UPLOAD_ALERT_ENABLE:
-            msgtop.config_request.rconfig_data.upload_alert_enable = True if data.lower() == 'true' else False
-        elif item == tbox_pb2.SVT_ENABLE:
-            msgtop.config_request.rconfig_data.svt_enable = True if data.lower() == 'true' else False
-        elif item == tbox_pb2.ELETRONIC_DEFENSE_ENABLE:
-            msgtop.config_request.rconfig_data.eletronic_defense_enable = True if data.lower() == 'true' else False
-        elif item == tbox_pb2.ABNORMAL_MOVE_THRESHOLD_VALUE:
-            msgtop.config_request.rconfig_data.abnormal_move_threshold_value = True if data.lower() == 'true' else False
-        else:
-            raise MqttCommError("Invalid Remote Config Item")
+    def _on_request_mqtt_server_addr(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.MQTT_SERVER_ADDR)
+        msgtop.config_request.rconfig_data.mqtt_server_addr = data
+
+    def _on_request_mqtt_server_topic(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.MQTT_SERVER_TOPIC)
+        msgtop.config_request.rconfig_data.mqtt_server_topic = data
+
+    def _on_request_mqtt_key_business_server_addr(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.MQTT_KEY_BUSINESS_SERVER_ADDR)
+        msgtop.config_request.rconfig_data.mqtt_key_business_server_addr = data
+
+    def _on_request_mqtt_key_business_server_topic(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.MQTT_KEY_BUSINESS_SERVER_TOPIC)
+        msgtop.config_request.rconfig_data.mqtt_key_business_server_topic = data
+
+    def _on_request_ecall_number(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.ECALL_NUMBER)
+        msgtop.config_request.rconfig_data.ecall_number = data
+
+    def _on_request_bcall_number(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.BCALL_NUMBER)
+        msgtop.config_request.rconfig_data.bcall_number = data
+
+    def _on_request_icall_number(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.ICALL_NUMBER)
+        msgtop.config_request.rconfig_data.icall_number = data
+
+    def _on_request_ecall_enable(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.ECALL_ENABLE)
+        msgtop.config_request.rconfig_data.ecall_enable = True if data.lower() == 'true' else False
+
+    def _on_request_bcall_enable(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.BCALL_ENABLE)
+        msgtop.config_request.rconfig_data.bcall_enable = True if data.lower() == 'true' else False
+
+    def _on_request_icall_enable(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.ICALL_ENABLE)
+        msgtop.config_request.rconfig_data.icall_enable = True if data.lower() == 'true' else False
+
+    def _on_request_sms_gate_number_upload(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.SMS_GATE_NUMBER_UPLOAD)
+        msgtop.config_request.rconfig_data.sms_gate_number_upload = data
+
+    def _on_request_sms_gate_number_download(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.SMS_GATE_NUMBER_DOWNLOAD)
+        msgtop.config_request.rconfig_data.sms_gate_number_download = data
+
+    def _on_request_datamining_upload_freq(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.DATAMINING_UPLOAD_FREQUENCY)
+        msgtop.config_request.rconfig_data.datamining_upload_frequency = int(data)
+
+    def _on_request_vehicle_status_upload_freq(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.VEHICLE_STATUS_UPLOAD_FREQUENCY)
+        msgtop.config_request.rconfig_data.vehicle_status_upload_frequency = int(data)
+
+    def _on_request_ignition_blowout_upload_enable(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.IGNITION_BLOWOUT_UPLOAD_ENABLE)
+        msgtop.config_request.rconfig_data.ignition_blowout_upload_enable = True if data.lower() == 'true' else False
+
+    def _on_request_upload_alert_enable(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.UPLOAD_ALERT_ENABLE)
+        msgtop.config_request.rconfig_data.upload_alert_enable = True if data.lower() == 'true' else False
+
+    def _on_request_datamining_enable(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.DATAMING_ENABLE)
+        msgtop.config_request.rconfig_data.datamining_enable = True if data.lower() == 'true' else False
+
+    def _on_request_svt_enable(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.SVT_ENABLE)
+        msgtop.config_request.rconfig_data.upload_alert_enable = True if data.lower() == 'true' else False
+
+    def _on_request_eletronic_defense_enable(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.ELETRONIC_DEFENSE_ENABLE)
+        msgtop.config_request.rconfig_data.eletronic_defense_enable = True if data.lower() == 'true' else False
+
+    def _on_request_abnormal_move_threshold_value(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.ABNORMAL_MOVE_THRESHOLD_VALUE)
+        msgtop.config_request.rconfig_data.abnormal_move_threshold_value = int(data)
+
+    def _on_request_tracking_data_freq(self, msgtop, data):
+        msgtop.config_request.config_items.append(tbox_pb2.TRACKING_DATA_FREQUENCY)
+        msgtop.config_request.rconfig_data.tracking_data_frequency = int(data)
 
     def on_request_config(self, item, data, timeout):
         """ MsgConfReq """
         logger.info(self._tag + "===> on_request_config")
-        convert_config_item_dict = {
-            'MQTT_SERVER_ADDR_REQ':                tbox_pb2.MQTT_SERVER_ADDR,
-            'MQTT_SERVER_TOPIC_REQ':               tbox_pb2.MQTT_SERVER_TOPIC,
-            'MQTT_KEY_BUSINESS_SERVER_ADDR_REQ':   tbox_pb2.MQTT_KEY_BUSINESS_SERVER_ADDR,
-            'MQTT_KEY_BUSINESS_SERVER_TOPIC_REQ':  tbox_pb2.MQTT_KEY_BUSINESS_SERVER_TOPIC,
-            'ECALL_NUMBER_REQ':                    tbox_pb2.ECALL_NUMBER,
-            'BCALL_NUMBER_REQ':                    tbox_pb2.BCALL_NUMBER,
-            'ICALL_NUMBER_REQ':                    tbox_pb2.ICALL_NUMBER,
-            'ECALL_ENABLE_REQ':                    tbox_pb2.ECALL_ENABLE,
-            'BCALL_ENABLE_REQ':                    tbox_pb2.BCALL_ENABLE,
-            'ICALL_ENABLE_REQ':                    tbox_pb2.ICALL_ENABLE,
-            'SMS_GATE_NUMBER_UPLOAD_REQ':          tbox_pb2.SMS_GATE_NUMBER_UPLOAD,
-            'SMS_GATE_NUMBER_DOWNLOAD_REQ':        tbox_pb2.SMS_GATE_NUMBER_DOWNLOAD,
-            'DATAMINING_UPLOAD_FREQUENCY_REQ':     tbox_pb2.DATAMINING_UPLOAD_FREQUENCY,
-            'VEHICLE_STATUS_UPLOAD_FREQUENCY_REQ': tbox_pb2.VEHICLE_STATUS_UPLOAD_FREQUENCY,
-            'IGNITION_BLOWOUT_UPLOAD_ENABLE_REQ':  tbox_pb2.IGNITION_BLOWOUT_UPLOAD_ENABLE,
-            'UPLOAD_ALERT_ENABLE_REQ':             tbox_pb2.UPLOAD_ALERT_ENABLE,
-            'DATAMING_ENABLE_REQ':                 tbox_pb2.DATAMING_ENABLE,
-            'SVT_ENABLE_REQ':                      tbox_pb2.SVT_ENABLE,
-            'ELETRONIC_DEFENSE_ENABLE_REQ':        tbox_pb2.ELETRONIC_DEFENSE_ENABLE,
-            'ABNORMAL_MOVE_THRESHOLD_VALUE_REQ':   tbox_pb2.ABNORMAL_MOVE_THRESHOLD_VALUE,
-            'TRACKING_DATA_FREQUENCY_REQ':         tbox_pb2.TRACKING_DATA_FREQUENCY,
+        config_item_req_dict = {
+            'MQTT_SERVER_ADDR_REQ':                self._on_request_mqtt_server_addr,
+            'MQTT_SERVER_TOPIC_REQ':               self._on_request_mqtt_server_topic,
+            'MQTT_KEY_BUSINESS_SERVER_ADDR_REQ':   self._on_request_mqtt_key_business_server_addr,
+            'MQTT_KEY_BUSINESS_SERVER_TOPIC_REQ':  self._on_request_mqtt_key_business_server_topic,
+            'ECALL_NUMBER_REQ':                    self._on_request_ecall_number,
+            'BCALL_NUMBER_REQ':                    self._on_request_bcall_number,
+            'ICALL_NUMBER_REQ':                    self._on_request_icall_number,
+            'ECALL_ENABLE_REQ':                    self._on_request_ecall_enable,
+            'BCALL_ENABLE_REQ':                    self._on_request_bcall_enable,
+            'ICALL_ENABLE_REQ':                    self._on_request_icall_enable,
+            'SMS_GATE_NUMBER_UPLOAD_REQ':          self._on_request_sms_gate_number_upload,
+            'SMS_GATE_NUMBER_DOWNLOAD_REQ':        self._on_request_sms_gate_number_download,
+            'DATAMINING_UPLOAD_FREQUENCY_REQ':     self._on_request_datamining_upload_freq,
+            'VEHICLE_STATUS_UPLOAD_FREQUENCY_REQ': self._on_request_vehicle_status_upload_freq,
+            'IGNITION_BLOWOUT_UPLOAD_ENABLE_REQ':  self._on_request_ignition_blowout_upload_enable,
+            'UPLOAD_ALERT_ENABLE_REQ':             self._on_request_upload_alert_enable,
+            'DATAMING_ENABLE_REQ':                 self._on_request_datamining_enable,
+            'SVT_ENABLE_REQ':                      self._on_request_svt_enable,
+            'ELETRONIC_DEFENSE_ENABLE_REQ':        self._on_request_eletronic_defense_enable,
+            'ABNORMAL_MOVE_THRESHOLD_VALUE_REQ':   self._on_request_abnormal_move_threshold_value,
+            'TRACKING_DATA_FREQUENCY_REQ':         self._on_request_tracking_data_freq,
         }
-        config_item = convert_config_item_dict[item]
         self._result = False
         publish_msg = tbox_pb2.MsgTop()
         # message_head
         self.__fill_message_head(publish_msg, self.__inc_msg_id(), tbox_pb2.CONFIG_REQ)
         # remote_config_request
-        publish_msg.config_request.config_items.append(config_item)
-        self.__set_config_item(publish_msg, config_item, data)
+        config_item_req_dict[item](publish_msg, data)
         # publish
         self._mqttc.publish(MQTT_DEVICE_TOPIC_PREFIX + self._expected_device + MQTT_DEVICE_TOPIC_SUFFIX, publish_msg.SerializeToString())
         MqttDump.dump(publish_msg, logger.info)
         logger.info(self._tag + "on_request_config <===")
-        # # wait_event
-        # self._event.wait(int(timeout))
-        # if not self._event.isSet() or not self._result:
-        #     logger.error(self._tag + "Exception on remote_config_request: Timeout to wait event")
-        # self._event.clear()
-        # return self._result
 
     def __on_response_config(self, client, userdata, msgtop):
         """ MsgConfResp """
@@ -422,10 +456,6 @@ class MqttComm(object):
             return
         if msgtop.HasField("config_response"):
             self._msgtop.config_response.CopyFrom(msgtop.config_response)
-            # # TODO: Handle receive mulit-config_items
-            # for config in msgtop.config_response.config_results:
-            #     self._result = config.result
-            # self._event.set()
         logger.console(self._tag + "on_response_config <===")
 
     ################################################################################
@@ -484,28 +514,21 @@ class MqttComm(object):
         logger.console(self._tag + "on_response_remote_control <===")
 
     ################################################################################
-    def on_request_remote_ota(self, version, addr, timeout):
+    def on_request_ota_cmd(self, version, addr, timeout):
         """ MsgOtaCmd """
         logger.info(self._tag + "===> on_request_ota_cmd")
-        self._result = False
         publish_msg = tbox_pb2.MsgTop()
         # message_head
         self.__fill_message_head(publish_msg, self.__inc_msg_id(), tbox_pb2.OTA_CMD_REQ)
         # remote_ota_request
         publish_msg.ota_cmd.update_target_version = version
         publish_msg.ota_cmd.upgrade_file_download_addr = addr
-        publish_msg.ota_cmd.ota_task_id = 'task-' + publish_msg.message_head.msg_c_time + ''.join(str(random.choice(range(10))) for _ in range(5))
+        publish_msg.ota_cmd.ota_task_id = 'task-' + str(publish_msg.message_head.msg_c_time) + ''.join(str(random.choice(range(10))) for _ in range(5))
         # publish
         self._mqttc.publish(MQTT_DEVICE_TOPIC_PREFIX + self._expected_device + MQTT_DEVICE_TOPIC_SUFFIX,
                             publish_msg.SerializeToString())
         MqttDump.dump(publish_msg, logger.info)
         logger.info(self._tag + "on_request_ota_cmd <===")
-        # wait_event
-        self._event.wait(int(timeout))
-        if not self._event.isSet() or not self._result:
-            logger.error(self._tag + "Exception on remote_ota_request: Timeout to wait event")
-        self._event.clear()
-        return self._result
 
     def __on_response_ota_cmd(self, client, userdata, msgtop):
         """ MsgOtaCmdResponse """
@@ -515,7 +538,6 @@ class MqttComm(object):
             return
         if msgtop.HasField("config_response"):
             self._result = msgtop.ota_cmd_response.ack.status
-            self._event.set()
         logger.console(self._tag + "on_response_ota_cmd <===")
 
     def __on_request_ota_checksum(self, client, userdata, msgtop):

@@ -82,15 +82,19 @@ class TBoxKeyword(object):
         logger.info(self._tag + "Wait until ready called")
         return unicode(self._tbox.wait_until_ready())
 
-    def request_remote_ota(self, version, addr, timeout=30):
+    def request_ota_cmd(self, ver, addr, timeout=30):
         """ 请求远程升级
+
+        :param ver: 软件版本
+
+        :param add: 下载地址
 
         :param timeout: 设置超时
 
         :return: True if succeed to configuration or not
         """
-        logger.info(self._tag + "Request remote control called")
-        return self._tbox.on_request_remote_ota(version, addr, timeout)
+        logger.info(self._tag + "Request tsp control called")
+        return self._tbox.on_request_ota_cmd(ver, addr, timeout)
 
     def request_remote_control(self, item, data, timeout=30):
         """ 请求远程控制

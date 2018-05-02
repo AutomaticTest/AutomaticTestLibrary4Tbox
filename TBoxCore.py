@@ -141,11 +141,11 @@ class TBoxCore(Singleton):
         logger.info(self._tag + "on_request_remote_control called")
         return self._mqttc.on_request_control(item, data, timeout)
 
-    def on_request_remote_ota(self, version, addr, timeout):
+    def on_request_ota_cmd(self, ver, addr, timeout):
         """
         """
-        logger.info(self._tag + "on_request_remote_ota called")
-        return self._mqttc.on_request_remote_ota(version, addr, timeout)
+        logger.info(self._tag + "on_request_ota_cmd called")
+        return self._mqttc.on_request_ota_cmd(ver, addr, timeout)
 
     def check_vdlog(self):
         if not TBoxCore.is_connected():
