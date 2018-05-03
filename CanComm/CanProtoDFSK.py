@@ -1631,7 +1631,7 @@ class Ic380(CanMsgBasic):
         """ 里程 """
         try:
             self.__mileage = 0xFFFF
-            if not isinstance(value, long):
+            if not isinstance(value, int):
                 raise AttributeError
             if value <= 655350:
                 self.__mileage = value / 10

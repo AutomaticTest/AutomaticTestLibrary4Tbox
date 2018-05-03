@@ -548,7 +548,7 @@ class CanComm(object):
 
     def _on_request_total_mileage(self, data):
         """ TOTAL_MILEAGE_REQ 总里程 """
-        self._ic380.total_mileage = long(data)
+        self._ic380.total_mileage = int(data)
 
     # 车辆位置
     # 当前追踪状态
