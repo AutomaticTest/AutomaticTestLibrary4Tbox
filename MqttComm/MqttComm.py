@@ -167,7 +167,7 @@ class MqttComm(object):
 
     @property
     def is_connected(self):
-        logger.console(self._tag + "is connected: " + str(self._is_connected))
+        logger.console("TBox device is connected: " + str(self._is_connected))
         return self._is_connected
 
     def __on_connect(self, client, userdata, flags, rc):
