@@ -93,6 +93,7 @@ class MqttComm(object):
         self._expected_device = expected_device
         self._server = MqttComm.IPADDRS[server]
         self._is_connected = False
+        self._ota_checksum = None
         self._msgtop = None
         self._handle_topic_dict = {
             MQTT_WILL_TOPIC:     self.__handle_topic_will,
@@ -110,7 +111,7 @@ class MqttComm(object):
             tbox_pb2.CONFIG_RESP:          self.__on_response_config,
             tbox_pb2.CONTROL_RESP:         self.__on_response_control,
             tbox_pb2.OTA_CMD_RESP:         self.__on_response_ota_cmd,
-            tbox_pb2.OTA_CHECKSUM_REQ:     self.__on_request_ota_checksum,
+            tbox_pb2.OTA_CHECKSUM_REQ:     self.__on_response_ota_checksum,
             tbox_pb2.OTA_RESULT_REPORT:    self.__on_response_ota_result,
             tbox_pb2.DIAGNOSIS_RESPONSE:   self.__on_response_diagnosis,
             tbox_pb2.ALARM_REPORT:         self.__on_response_alarm_signal,
@@ -514,14 +515,15 @@ class MqttComm(object):
         logger.console(self._tag + "on_response_remote_control <===")
 
     ################################################################################
-    def on_request_ota_cmd(self, version, addr, timeout):
+    def on_request_ota_cmd(self, ver, addr, checksum, timeout):
         """ MsgOtaCmd """
         logger.info(self._tag + "===> on_request_ota_cmd")
+        self._ota_checksum = checksum
         publish_msg = tbox_pb2.MsgTop()
         # message_head
         self.__fill_message_head(publish_msg, self.__inc_msg_id(), tbox_pb2.OTA_CMD_REQ)
         # remote_ota_request
-        publish_msg.ota_cmd.update_target_version = version
+        publish_msg.ota_cmd.update_target_version = ver
         publish_msg.ota_cmd.upgrade_file_download_addr = addr
         publish_msg.ota_cmd.ota_task_id = 'task-' + str(publish_msg.message_head.msg_c_time) + ''.join(str(random.choice(range(10))) for _ in range(5))
         # publish
@@ -540,24 +542,7 @@ class MqttComm(object):
             self._result = msgtop.ota_cmd_response.ack.status
         logger.console(self._tag + "on_response_ota_cmd <===")
 
-    def __on_request_ota_checksum(self, client, userdata, msgtop):
-        """ MsgOtaCmdCheckSumRequest """
-        logger.console(self._tag + "===> on_request_ota_checksum")
-        # publish_msg = tbox_pb2.MsgTop()
-        # # message_head
-        # self.__fill_message_head(publish_msg, msgtop.message_head.message_id, tbox_pb2.OTA_CMD_CHECK_RESPONSE)
-        # # login_response
-        # publish_msg.ota_cmd_check_response.ack_code.ack_code = tbox_pb2.SUCCESS
-        # publish_msg.ota_cmd_check_response.ack_code.code_desp = "Succeed to request ota checksum"
-        # publish_msg.ota_cmd_check_response.check_sum_result = True
-        # publish_msg.ota_cmd_check_response.ota_task_id = msgtop.ota_cmd_check_request.ota_task_id
-        # # publish
-        # client.publish(MQTT_DEVICE_TOPIC_PREFIX + self._expected_device + MQTT_DEVICE_TOPIC_SUFFIX,
-        #                publish_msg.SerializeToString())
-        # MqttDump.dump(publish_msg)
-        logger.console(self._tag + "on_request_ota_checksum <===")
-
-    def on_response_ota_checksum(self, client, userdata, msgtop):
+    def __on_response_ota_checksum(self, client, userdata, msgtop):
         """ MsgOtaCmdCheckSumResponse """
         logger.console(self._tag + "===> on_response_ota_checksum")
         publish_msg = tbox_pb2.MsgTop()
@@ -566,6 +551,7 @@ class MqttComm(object):
         # login_response
         publish_msg.ota_cmd_check_response.ack.status = True
         publish_msg.ota_cmd_check_response.ack.code = "Succeed to response ota checksum"
+        publish_msg.ota_cmd_check_response.check_sum_result = True if self._ota_checksum == msgtop.ota_cmd_check_request.check_sum_code else False
         publish_msg.ota_cmd_check_response.ota_task_id = msgtop.ota_cmd_check_request.ota_task_id
         # publish
         client.publish(MQTT_DEVICE_TOPIC_PREFIX + self._expected_device + MQTT_DEVICE_TOPIC_SUFFIX,
@@ -583,6 +569,12 @@ class MqttComm(object):
             self._msgtop.ota_result.CopyFrom(msgtop.ota_result)
         MqttDump.dump(msgtop)
         logger.console(self._tag + "on_response_ota_result <===")
+
+    def on_request_ota_result(self, client, userdata, msgtop):
+        """ MsgOtaResult """
+        logger.console(self._tag + "===> on_request_ota_result")
+        # if self._msgtop.ota_result.result
+        logger.console(self._tag + "on_request_ota_result <===")
 
     ################################################################################
     def on_request_diagnosis(self, timeout):
