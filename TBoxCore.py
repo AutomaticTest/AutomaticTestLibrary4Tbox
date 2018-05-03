@@ -29,9 +29,9 @@ from DesignPattern.Singleton import Singleton
 
 # Third-party libraries
 from robot.api import logger
-if Utils.is_windows_os():
-    import psutil
-    import win32com
+# if Utils.is_windows_os():
+#     import psutil
+#     import win32com
 
 
 class TBoxCore(Singleton):
