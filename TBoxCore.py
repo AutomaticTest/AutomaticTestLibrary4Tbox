@@ -60,7 +60,7 @@ class TBoxCore(Singleton):
     @staticmethod
     def on_clean_log():
         if not TBoxCore.is_connected():
-            raise TBoxCoreError("TBox Connect Fault")
+            raise TBoxCoreError("Exception on cleaning log(Please insert the ADB cable)")
         (status, output) = Utils.getstatusoutput("adb shell ls")
         if not status:
             try:
@@ -89,7 +89,7 @@ class TBoxCore(Singleton):
     @staticmethod
     def on_collect_log(path):
         if not TBoxCore.is_connected():
-            raise TBoxCoreError("Exception on collect log")
+            raise TBoxCoreError("Exception on collecting log(Please insert the ADB cable)")
         try:
             os.makedirs(path)
         except OSError, e:
@@ -109,7 +109,7 @@ class TBoxCore(Singleton):
         # return False
         while not self._mqttc.is_connected:
             time.sleep(1)
-        return str(True)
+        return unicode(True)
 
     def on_request_can_config(self, item, data, timeout):
         """
@@ -147,11 +147,17 @@ class TBoxCore(Singleton):
         logger.info(self._tag + "on_request_ota_cmd called")
         return self._mqttc.on_request_ota_cmd(ver, addr, checksum, timeout)
 
+    def on_wait_until_ota_result(self, expected, timeout):
+        """
+        """
+        logger.info(self._tag + "on_wait_until_ota_result called")
+        return self._mqttc.on_wait_until_ota_result(expected, timeout)
+
     def check_vdlog(self):
         if not TBoxCore.is_connected():
-            raise TBoxCoreError("Exception on collect log")
+            raise TBoxCoreError("Exception on querying vdlog file(Please insert the ADB cable)")
+        (status, output) = Utils.getstatusoutput("adb shell ls /data")
         try:
-            (status, output) = Utils.getstatusoutput("adb shell ls /data")
             if not status:
                 vdlog = re.findall('vdlog', output)[0]
                 logger.info(self._tag + "find " + vdlog + " in /data")

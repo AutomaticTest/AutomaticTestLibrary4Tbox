@@ -40,7 +40,7 @@ class MqttDump(object):
             2: "IMEI",
             3: "ICCID",
         }
-        return type_dict[id_type]
+        return type_dict.get(id_type, 'InvalidParam')
 
     @staticmethod
     def __enum_msg_type(msg_type):
@@ -77,7 +77,7 @@ class MqttDump(object):
             104: "DIAGNOSIS_REQ",
             105: "VEHICLE_STATUS_REQ",
         }
-        return type_dict[msg_type]
+        return type_dict.get(msg_type, 'InvalidParam')
 
     @staticmethod
     def __enum_common_ack_code(code):
@@ -88,7 +88,7 @@ class MqttDump(object):
             2: "NOT_LOGIN",
             3: "MESSAGE_PARSE_ERROR",
         }
-        return code_dict[code]
+        return code_dict.get(code, 'InvalidParam')
 
     @staticmethod
     def __enum_config_item(item):
@@ -116,7 +116,7 @@ class MqttDump(object):
             19: "ABNORMAL_MOVE_THRESHOLD_VALUE",
             20: "TRACKING_DATA_FREQUENCY",
         }
-        return item_dict[item]
+        return item_dict.get(item, 'InvalidParam')
 
     @staticmethod
     def __enum_remote_config_error_code(code):
@@ -124,7 +124,7 @@ class MqttDump(object):
         code_dict = {
             0: "UNKNOW",
         }
-        return code_dict[code]
+        return code_dict.get(code, 'InvalidParam')
 
     @staticmethod
     def __enum_control_type(cmd_type):
@@ -138,7 +138,7 @@ class MqttDump(object):
             5: "SEAT",
             6: "TRACK",
         }
-        return type_dict[cmd_type]
+        return type_dict.get(cmd_type, 'InvalidParam')
 
     @staticmethod
     def __enum_windows_type(window_type):
@@ -147,7 +147,7 @@ class MqttDump(object):
             0: "WINDOW",
             1: "ROOF",
         }
-        return type_dict[window_type]
+        return type_dict.get(window_type, 'InvalidParam')
 
     @staticmethod
     def __enum_windows_param(window_param):
@@ -158,7 +158,7 @@ class MqttDump(object):
             2: "RISE",
             3: "FALL",
         }
-        return param_dict[window_param]
+        return param_dict.get(window_param, 'InvalidParam')
 
     @staticmethod
     def __enum_roof_param(roof_param):
@@ -170,7 +170,7 @@ class MqttDump(object):
             3: "RSTOP",
             4: "UP",
         }
-        return param_dict[roof_param]
+        return param_dict.get(roof_param, 'InvalidParam')
 
     @staticmethod
     def __enum_seat_level(level):
@@ -182,7 +182,7 @@ class MqttDump(object):
             3: "LEVEL3",
             4: "LEVEL_INVALID",
         }
-        return level_dict[level]
+        return level_dict.get(level, 'InvalidParam')
 
     @staticmethod
     def __enum_remote_control_execute_result(result):
@@ -191,7 +191,7 @@ class MqttDump(object):
             0: "FAILED",
             1: "SUCCESS",
         }
-        return result_dict[result]
+        return result_dict.get(result, 'InvalidParam')
 
     @staticmethod
     def __enum_ota_cmd_result_code(code):
@@ -202,7 +202,7 @@ class MqttDump(object):
             2: "DOWNLOAD_FILE_FAILED",
             3: "OTA_IN_PROCESS",
         }
-        return code_dict[code]
+        return code_dict.get(code, 'InvalidParam')
 
     @staticmethod
     def __enum_peps_power_mode(mode):
@@ -215,7 +215,7 @@ class MqttDump(object):
             4: "START",
             5: "INVALID"
         }
-        return mode_dict[mode]
+        return mode_dict.get(mode, 'InvalidParam')
 
     @staticmethod
     def __enum_crash_info(info):
@@ -230,7 +230,7 @@ class MqttDump(object):
             6: "PEDESTRIAN",
             7: "MUTI_CRASH",
         }
-        return info_dict[info]
+        return info_dict.get(info, 'InvalidParam')
 
     @staticmethod
     def __enum_common_true_false_unknown(msg):
@@ -240,7 +240,7 @@ class MqttDump(object):
             1: "TRUE",
             2: "UNKNOWN",
         }
-        return msg_dict[msg]
+        return msg_dict.get(msg, 'InvalidParam')
 
     @staticmethod
     def __enum_alarm_signal_type(signal_type):
@@ -253,7 +253,7 @@ class MqttDump(object):
             4: "VEHICLE_CRASH",
             5: "WINDOW_ABNORMAL",
         }
-        return type_dict[signal_type]
+        return type_dict.get(signal_type, 'InvalidParam')
 
     @staticmethod
     def __enum_on_off_state(state):
@@ -263,7 +263,7 @@ class MqttDump(object):
             1: "OFF",
             2: "ON"
         }
-        return state_dict[state]
+        return state_dict.get(state, 'InvalidParam')
 
     @staticmethod
     def __enum_engine_state(state):
@@ -275,7 +275,7 @@ class MqttDump(object):
             3: "CRANK",
             4: "RUNNING"
         }
-        return state_dict[state]
+        return state_dict.get(state, 'InvalidParam')
 
     @staticmethod
     def __enum_gear_position(pos):
@@ -300,7 +300,7 @@ class MqttDump(object):
             16: "Z3",
             17: "Invalid"
         }
-        return pos_dict[pos]
+        return pos_dict.get(pos, 'InvalidParam')
 
     @staticmethod
     def __enum_motor_fire_mode(mode):
@@ -309,7 +309,7 @@ class MqttDump(object):
             0: "IGNITION",
             1: "FLAMEOUT",
         }
-        return mode_dict[mode]
+        return mode_dict.get(mode, 'InvalidParam')
 
     @staticmethod
     def __show_msg_ack(ack):

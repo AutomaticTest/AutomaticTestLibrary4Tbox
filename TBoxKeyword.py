@@ -80,7 +80,7 @@ class TBoxKeyword(object):
         :return: True if succeed to connect MQTT Broker or not
         """
         logger.info(self._tag + "Wait until ready called")
-        return unicode(self._tbox.wait_until_ready())
+        return self._tbox.wait_until_ready()
 
     def request_ota_cmd(self, ver, addr, checksum, timeout=30):
         """ 请求远程升级
@@ -97,6 +97,16 @@ class TBoxKeyword(object):
         """
         logger.info(self._tag + "Request tsp control called")
         return self._tbox.on_request_ota_cmd(ver, addr, checksum, timeout)
+
+    def wait_until_ota_result(self, expected, timeout=30):
+        """ 等待远程升级结果
+
+        :param expected: 预期值
+
+        :return: True if succeed to configuration or not
+        """
+        logger.info(self._tag + "Wait_until_ota_result control called")
+        return self._tbox.on_wait_until_ota_result(expected, timeout)
 
     def request_remote_control(self, item, data, timeout=30):
         """ 请求远程控制

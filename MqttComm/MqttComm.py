@@ -518,6 +518,9 @@ class MqttComm(object):
     def on_request_ota_cmd(self, ver, addr, checksum, timeout):
         """ MsgOtaCmd """
         logger.info(self._tag + "===> on_request_ota_cmd")
+        # initial ota_result.result
+        self._msgtop.ota_result.Clear()
+        self._msgtop.ota_result.result = tbox_pb2.OTA_IN_PROCESS
         self._ota_checksum = checksum
         publish_msg = tbox_pb2.MsgTop()
         # message_head
@@ -556,25 +559,62 @@ class MqttComm(object):
         # publish
         client.publish(MQTT_DEVICE_TOPIC_PREFIX + self._expected_device + MQTT_DEVICE_TOPIC_SUFFIX,
                        publish_msg.SerializeToString())
-        MqttDump.dump(publish_msg)
+        # MqttDump.dump(publish_msg)
         logger.console(self._tag + "on_response_ota_checksum <===")
 
     def __on_response_ota_result(self, client, userdata, msgtop):
         """ MsgOtaResult """
         logger.console(self._tag + "===> on_response_ota_result")
-        if self._msg_id != msgtop.message_head.message_id:
-            logger.warn(self._tag + "on_response_ota_result: Not expected msg_id")
-            return
+        # if self._msg_id != msgtop.message_head.message_id:
+        #     logger.console(self._tag + "on_response_ota_result: Not expected msg_id")
+        #     return
         if msgtop.HasField("ota_result"):
             self._msgtop.ota_result.CopyFrom(msgtop.ota_result)
-        MqttDump.dump(msgtop)
+        # MqttDump.dump(msgtop)
         logger.console(self._tag + "on_response_ota_result <===")
 
-    def on_request_ota_result(self, client, userdata, msgtop):
+    def __on_ota_upgrade_successed(self):
+        if self._msgtop.ota_result.result == tbox_pb2.OTA_IN_PROCESS:
+            return 0
+        elif self._msgtop.ota_result.result == tbox_pb2.UPGRADE_SUCCESSED:
+            return 1
+        else:
+            return 2
+
+    def __on_ota_upgrade_failed(self):
+        if self._msgtop.ota_result.result == tbox_pb2.OTA_IN_PROCESS:
+            return 0
+        elif self._msgtop.ota_result.result == tbox_pb2.UPGRADE_FAILED:
+            return 1
+        else:
+            return 2
+
+    def __on_ota_download_file_failed(self):
+        if self._msgtop.ota_result.result == tbox_pb2.OTA_IN_PROCESS:
+            return 0
+        elif self._msgtop.ota_result.result == tbox_pb2.DOWNLOAD_FILE_FAILED:
+            return 1
+        else:
+            return 2
+
+    def on_wait_until_ota_result(self, expected, timeout):
         """ MsgOtaResult """
         logger.console(self._tag + "===> on_request_ota_result")
-        # if self._msgtop.ota_result.result
+        expected_dict = {
+            # 升级成功
+            'UPGRADE_SUCCESSED': self.__on_ota_upgrade_successed,
+            # 升级失败
+            'UPGRADE_FAILED': self.__on_ota_upgrade_failed,
+            # 文件下载失败
+            'DOWNLOAD_FILE_FAILED': self.__on_ota_download_file_failed,
+        }
+        while True:
+            result = expected_dict[expected]()
+            if result > 0:
+                break
+            time.sleep(1)
         logger.console(self._tag + "on_request_ota_result <===")
+        return unicode(True) if result == 1 else unicode(False)
 
     ################################################################################
     def on_request_diagnosis(self, timeout):
