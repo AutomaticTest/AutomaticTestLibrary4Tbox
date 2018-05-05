@@ -660,41 +660,6 @@ class MqttComm(object):
     ################################################################################
     def on_request_tsp_data(self, item, timeout):
         """
-            ################################################################################
-            'AC_REQ' 空调开关状态
-            'FRONT_DEFROST_REQ' 空调前除霜开关状态
-            'REAR_DEFROST_REQ' 空调后除霜开关状态
-            'AC_TEMPERATURE_REQ' 空调温度
-            'LOCK_DOOR_REQ' 驾驶员左前门锁开关状态
-            'ENGINE_REQ' 发动机状态
-            'WIPER_REQ' 雨刷开关状态
-            'HANDBRAKE_REQ' 手刹状态
-            'FRONT_DEFROST_STS' 前除霜状态
-            'PEPS_POWER_REQ' PEPS电源状态
-            'GEAR_POS_REQ' 档位
-            'LF_TIRE_PRESSURE_REQ' 左前胎压
-            'LR_TIRE_PRESSURE_REQ' 左后胎压
-            'RF_TIRE_PRESSURE_REQ' 右前胎压
-            'RR_TIRE_PRESSURE_REQ' 右后胎压
-            'BATTERY_VOLTAGE_REQ' 蓄电池电压
-            'FUEL_LEVEL_REQ' 剩余油量
-            'REMAIN_MILEAGE_REQ' 剩余里程
-            'BELT_REQ' 是否系安全带
-            'FRONT_FOG_LAMP_REQ' 近光灯状态
-            'REAR_FOG_LAMP_REQ' 远光灯状态
-            'G_VALUE_REQ' G值
-            'LIGHT_INTENSITY_REQ' 光照强度
-            'CURR_FUEL_CONSUMPTION_REQ' 瞬时油耗
-            'CURR_SPEED_REQ' 当前速度
-            'ENGINE_SPEED_REQ' 当前转速
-            'STEERING_ANGLE_REQ' 方向盘转角，左为正，右为负
-            'ACCELERATOR_PEDAL_ANGLE_REQ' 油门脚踏板角度
-            'BRAKE_PEDAL_ANGLE_REQ' 刹车板角度
-            'CLUTCH_PEDAL_ANGLE_REQ' 离合器角度
-            'TOTAL_MILEAGE_REQ' 总里程
-            # 车辆位置
-            # 当前追踪状态
-            'AVERAGE_FUEL_CONSUMPTION_REQ' 平均油耗
         """
         logger.info(self._tag + "on_request_can_data called")
         data_dict = {

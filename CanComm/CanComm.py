@@ -480,7 +480,7 @@ class CanComm(object):
 
     def _on_request_battery_voltage(self, data):
         """ BATTERY_VOLTAGE_REQ 蓄电池电压 """
-        # TBox未上传
+        # CAN协议未定义，TBox未上传
         pass
 
     def _on_request_fuel_level(self, data):
@@ -493,17 +493,17 @@ class CanComm(object):
 
     def _on_request_belt(self, data):
         """ BELT_REQ 是否系安全带 """
-        # TBox未上传
+        # MCU未上传
         pass
 
     def _on_request_front_fog_lamp(self, data):
         """ FRONT_FOG_LAMP_REQ 近光灯状态 """
-        # TBox未上传
+        # MCU未上传
         pass
 
     def _on_request_rear_fog_lamp(self, data):
         """ REAR_FOG_LAMP_REQ 远光灯状态 """
-        # TBox未上传
+        # MCU未上传
         pass
 
     def _on_request_g_value(self, data):
@@ -543,7 +543,7 @@ class CanComm(object):
 
     def _on_request_clutch_pedal_angle(self, data):
         """ CLUTCH_PEDAL_ANGLE_REQ 离合器角度 """
-        # TBox未上传
+        # CAN协议未定义，TBox未上传
         pass
 
     def _on_request_total_mileage(self, data):
