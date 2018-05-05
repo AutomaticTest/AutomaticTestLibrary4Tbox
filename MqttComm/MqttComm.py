@@ -106,6 +106,7 @@ class MqttComm(object):
         }
         self._handle_business_dict = {
             tbox_pb2.LOGIN_REQ:            self.__on_response_login,
+            tbox_pb2.LOGOUT_REQ:           self.__on_response_logout,
             tbox_pb2.HEART_BEAT_REQ:       self.__on_response_heartbeat,
             tbox_pb2.CONFIG_QUERY_REQ:     self.__on_response_config_query,
             tbox_pb2.CONFIG_RESP:          self.__on_response_config,
@@ -293,6 +294,12 @@ class MqttComm(object):
                        publish_msg.SerializeToString())
         MqttDump.dump(publish_msg)
         logger.console(self._tag + "on_response_login <===")
+
+    def __on_response_logout(self, client, userdata, msgtop):
+        """ MsgLoginResp """
+        logger.console(self._tag + "===> on_response_logout")
+        self._is_connected = False
+        logger.console(self._tag + "on_response_logout <===")
 
     ################################################################################
     def __on_response_heartbeat(self, client, userdata, msgtop):
