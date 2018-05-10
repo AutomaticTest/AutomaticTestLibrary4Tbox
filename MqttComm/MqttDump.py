@@ -562,12 +562,12 @@ class MqttDump(object):
     @staticmethod
     def __list_msg_config_response(config_response):
         """远程配置应答 10"""
-        print("====> MsgConfigResponse <====")
-        print("ack:       " + MqttDump.__show_msg_ack(config_response.ack))
+        logging("====> MsgConfigResponse <====")
+        logging("ack:       " + MqttDump.__show_msg_ack(config_response.ack))
         for result in config_response.config_results:
-            print("config_results: " + MqttDump.__show_config_result(result))
-        print("config_old:     " + MqttDump.__show_config_data(config_response.config_old))
-        print("config_new:     " + MqttDump.__show_config_data(config_response.config_new))
+            logging("config_results: " + MqttDump.__show_config_result(result))
+        logging("config_old:     " + MqttDump.__show_config_data(config_response.config_old))
+        logging("config_new:     " + MqttDump.__show_config_data(config_response.config_new))
 
     @staticmethod
     def __list_msg_control_request(control_request):

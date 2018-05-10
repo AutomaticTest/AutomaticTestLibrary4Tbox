@@ -50,5 +50,9 @@ def getstatusoutput(cmd):
     return status, output
 
 
+def logging_print(msg):
+    print(msg)
+
+
 if __name__ == '__main__':
     pass

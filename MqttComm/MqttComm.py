@@ -31,6 +31,7 @@ import paho.mqtt.client as mqtt
 # import Config as CONFIG
 from Protobuf import tbox_pb2
 from MqttDump import MqttDump
+from Utils import logging_print
 from Resource.DFSKVehicleStatus import DoorStatus
 from Resource.DFSKVehicleStatus import WindowStatus
 from Resource.DFSKVehicleStatus import RoofStatus
@@ -39,7 +40,6 @@ from Resource.DFSKVehicleStatus import EngineStatus
 from Resource.DFSKVehicleStatus import TyrePressureStatus
 from Resource.DFSKVehicleStatus import LockStatus
 from Resource.DFSKVehicleStatus import HandbrakeStatus
-from Resource.DFSKVehicleStatus import DefrostStatus
 from Resource.DFSKVehicleStatus import WiperStatus
 from Resource.DFSKVehicleStatus import AcStatus
 from Resource.DFSKVehicleStatus import GearStatus
@@ -81,7 +81,7 @@ class MqttComm(object):
     def __init__(self, expected_device, server):
         # LogTag
         self._tag = self.__class__.__name__ + ' '
-        logger.info(self._tag + "__init__ called")
+        logger.debug(self._tag + "__init__ called")
         # Message head parameter
         self._protocol_version = 0
         self._did_type = tbox_pb2.PDID
@@ -130,10 +130,10 @@ class MqttComm(object):
         self._can_config_data = None
 
     def __del__(self):
-        logger.info(self._tag + "__del__ called")
+        logger.debug(self._tag + "__del__ called")
 
     def on_create(self):
-        logger.info(self._tag + "on_create called")
+        logger.debug(self._tag + "on_create called")
         # MsgTop
         self._msgtop = tbox_pb2.MsgTop()
         # MQTT onCreate
@@ -156,7 +156,7 @@ class MqttComm(object):
             raise MqttCommError("Exception on connect MQTT Server: " + str(e))
 
     def on_destroy(self):
-        logger.info(self._tag + "on_destroy called")
+        logger.debug(self._tag + "on_destroy called")
         # MQTT onDestroy
         if self._mqttc is None:
             return
@@ -165,7 +165,6 @@ class MqttComm(object):
         self._mqttc.unsubscribe(MQTT_BUSINESS_TOPIC)
         self._mqttc.loop_stop(True)
         self._mqttc.disconnect()
-        logger.info(self._tag + "on_destroy end")
 
     @property
     def is_connected(self):
@@ -173,7 +172,7 @@ class MqttComm(object):
         return self._is_connected
 
     def __on_connect(self, client, userdata, flags, rc):
-        logger.console("\n" + self._tag + "Connected with result:" + mqtt.connack_string(rc))
+        logger.console("\n" + self._tag + "Connected with result: " + mqtt.connack_string(rc))
         client.subscribe(MQTT_WILL_TOPIC, qos=1)
         client.subscribe(MQTT_REPORT_TOPIC, qos=1)
         client.subscribe(MQTT_BUSINESS_TOPIC, qos=1)
@@ -185,18 +184,16 @@ class MqttComm(object):
         self._parse_thread.join()
 
     def __parse_thread(self, client, userdata, msg):
-        logger.console((self._tag + "__parse_thread called"))
+        logger.debug((self._tag + "parse_thread called"))
         self._handle_topic_dict[msg.topic](client, userdata, msg)
 
     def __handle_topic_will(self, client, userdata, msg):
-        logger.console(self._tag + "__handle_topic_will called")
-        logger.console(self._tag + msg.payload)
         if self._expected_device == msg.payload:
-            logger.warn("Entry WILL Topic: " + msg.payload)
+            logger.warn("Entry WILL topic: " + msg.payload)
             self._is_connected = False
 
     def __handle_topic_report(self, client, userdata, msg):
-        logger.console(self._tag + "==> handle_topic_report")
+        logger.debug(self._tag + "==> handle_topic_report")
         msgtop = tbox_pb2.MsgTop()
         msgtop.ParseFromString(msg.payload)
         if self.__is_valid_device(msgtop):
@@ -212,10 +209,9 @@ class MqttComm(object):
             handle = self._handle_report_dict.get(msgtop.message_head.msg_type, None)
             if handle is not None:
                 handle(client, userdata, msgtop)
-        logger.console(self._tag + "handle_topic_report <===")
 
     def __handle_topic_business(self, client, userdata, msg):
-        logger.console(self._tag + "===> handle_topic_business")
+        logger.debug(self._tag + "===> handle_topic_business")
         msgtop = tbox_pb2.MsgTop()
         msgtop.ParseFromString(msg.payload)
         if self.__is_valid_device(msgtop):
@@ -231,7 +227,6 @@ class MqttComm(object):
             handle = self._handle_business_dict.get(msgtop.message_head.msg_type, None)
             if handle is not None:
                 handle(client, userdata, msgtop)
-        logger.console(self._tag + "handle_topic_business <===")
 
     def __on_response_datamining(self, client, userdata, msgtop):
         self._msgtop.datamining.CopyFrom(msgtop.datamining)
@@ -255,9 +250,8 @@ class MqttComm(object):
         return self._msg_id
 
     def __is_valid_device(self, msgtop):
-        logger.console(self._tag + "is_valid_device called, DevId:" + msgtop.message_head.device_id)
         if msgtop.message_head.device_id == self._expected_device:
-            logger.console(self._tag + "=====================New Message=====================")
+            logger.console("\n\n=====================New Message=====================")
             return True
         return False
 
@@ -274,7 +268,7 @@ class MqttComm(object):
 
     def __on_response_login(self, client, userdata, msgtop):
         """ MsgLoginResp """
-        logger.console(self._tag + "===> on_response_login")
+        logger.info(self._tag + "===> on_response_login")
         # set parameter
         if not self._is_connected:
             self._protocol_version = msgtop.message_head.protocol_version
@@ -293,18 +287,16 @@ class MqttComm(object):
         client.publish(MQTT_DEVICE_TOPIC_PREFIX + self._expected_device + MQTT_DEVICE_TOPIC_SUFFIX,
                        publish_msg.SerializeToString())
         MqttDump.dump(publish_msg)
-        logger.console(self._tag + "on_response_login <===")
 
     def __on_response_logout(self, client, userdata, msgtop):
         """ MsgLoginResp """
-        logger.console(self._tag + "===> on_response_logout")
+        logger.info(self._tag + "===> on_response_logout")
         self._is_connected = False
-        logger.console(self._tag + "on_response_logout <===")
 
     ################################################################################
     def __on_response_heartbeat(self, client, userdata, msgtop):
         """ MsgHeartBeatResp """
-        logger.console(self._tag + "===> on_response_heartbeat")
+        logger.info(self._tag + "===> on_response_heartbeat")
         publish_msg = tbox_pb2.MsgTop()
         # message_head
         self.__fill_message_head(publish_msg, self._msg_id, tbox_pb2.HEARTBEAT_RESP)
@@ -315,12 +307,11 @@ class MqttComm(object):
         client.publish(MQTT_DEVICE_TOPIC_PREFIX + self._expected_device + MQTT_DEVICE_TOPIC_SUFFIX,
                        publish_msg.SerializeToString())
         MqttDump.dump(publish_msg)
-        logger.console(self._tag + "on_response_heartbeat <===")
 
     ################################################################################
     def __on_response_config_query(self, client, userdata, msgtop):
         """ MsgConfQueryResp """
-        logger.console(self._tag + "===> on_response_config_query")
+        logger.info(self._tag + "===> on_response_config_query")
         publish_msg = tbox_pb2.MsgTop()
         # message_head
         self.__fill_message_head(publish_msg, self._msg_id, tbox_pb2.CONFIG_QUERY_RESP)
@@ -332,7 +323,6 @@ class MqttComm(object):
         client.publish(MQTT_DEVICE_TOPIC_PREFIX + self._expected_device + MQTT_DEVICE_TOPIC_SUFFIX,
                        publish_msg.SerializeToString())
         MqttDump.dump(publish_msg)
-        logger.console(self._tag + "on_response_config_query <===")
 
     ################################################################################
     def _on_request_mqtt_server_addr(self, msgtop, data):
@@ -421,7 +411,7 @@ class MqttComm(object):
 
     def on_request_config(self, item, data, timeout):
         """ MsgConfReq """
-        logger.info(self._tag + "===> on_request_config")
+        logger.debug(self._tag + "===> on_request_config")
         config_item_req_dict = {
             'MQTT_SERVER_ADDR_REQ':                self._on_request_mqtt_server_addr,
             'MQTT_SERVER_TOPIC_REQ':               self._on_request_mqtt_server_topic,
@@ -453,18 +443,19 @@ class MqttComm(object):
         config_item_req_dict[item](publish_msg, data)
         # publish
         self._mqttc.publish(MQTT_DEVICE_TOPIC_PREFIX + self._expected_device + MQTT_DEVICE_TOPIC_SUFFIX, publish_msg.SerializeToString())
-        MqttDump.dump(publish_msg, logger.info)
-        logger.info(self._tag + "on_request_config <===")
+        logging_print("===========Publish Message===========")
+        MqttDump.dump(publish_msg, logging_print)
 
     def __on_response_config(self, client, userdata, msgtop):
         """ MsgConfResp """
-        logger.console(self._tag + "===> on_response_config")
+        logger.info(self._tag + "===> on_response_config")
         if self._msg_id != msgtop.message_head.message_id:
-            logger.warn(self._tag + "on_response_config: Not expected msg_id")
+            logger.error(self._tag + "on_response_config: Not expected msg_id")
             return
         if msgtop.HasField("config_response"):
             self._msgtop.config_response.CopyFrom(msgtop.config_response)
-        logger.console(self._tag + "on_response_config <===")
+            logging_print("===========Subscribe Message===========")
+            MqttDump.dump(msgtop, logging_print)
 
     ################################################################################
     def __set_control_item(self, msgtop, item, data):
@@ -484,7 +475,7 @@ class MqttComm(object):
 
     def on_request_control(self, item, data, timeout):
         """ MsgControlReq """
-        logger.info(self._tag + "===> on_request_control")
+        logger.debug(self._tag + "===> on_request_control")
         convert_control_item_dict = {
             'ENGINE':             tbox_pb2.ENGINE,
             'AIR_CONDITION_CTRL': tbox_pb2.AIR_CONDITION_CTRL,
@@ -502,7 +493,6 @@ class MqttComm(object):
         # publish
         self._mqttc.publish(MQTT_DEVICE_TOPIC_PREFIX + self._expected_device + MQTT_DEVICE_TOPIC_SUFFIX, publish_msg.SerializeToString())
         MqttDump.dump(publish_msg, logger.info)
-        logger.info(self._tag + "on_request_control <===")
         # wait_event
         self._event.wait(int(timeout))
         if not self._event.isSet() or not self._result:
@@ -512,19 +502,18 @@ class MqttComm(object):
 
     def __on_response_control(self, client, userdata, msgtop):
         """ MsgControlResp """
-        logger.console(self._tag + "===> on_response_remote_control")
+        logger.debug(self._tag + "===> on_response_remote_control")
         if self._msg_id != msgtop.message_head.message_id:
             logger.warn(self._tag + "on_response_remote_control: Not expected msg_id")
             return
         if msgtop.HasField("remote_control_response"):
             self._result = msgtop.remote_control_response.excute_result
             self._event.set()
-        logger.console(self._tag + "on_response_remote_control <===")
 
     ################################################################################
     def on_request_ota_cmd(self, ver, addr, checksum, timeout):
         """ MsgOtaCmd """
-        logger.info(self._tag + "===> on_request_ota_cmd")
+        logger.debug(self._tag + "===> on_request_ota_cmd")
         # initial ota_result.result
         self._msgtop.ota_result.Clear()
         self._msgtop.ota_result.result = tbox_pb2.OTA_IN_PROCESS
@@ -540,7 +529,6 @@ class MqttComm(object):
         self._mqttc.publish(MQTT_DEVICE_TOPIC_PREFIX + self._expected_device + MQTT_DEVICE_TOPIC_SUFFIX,
                             publish_msg.SerializeToString())
         MqttDump.dump(publish_msg, logger.info)
-        logger.info(self._tag + "on_request_ota_cmd <===")
 
     def __on_response_ota_cmd(self, client, userdata, msgtop):
         """ MsgOtaCmdResponse """
@@ -550,7 +538,6 @@ class MqttComm(object):
             return
         if msgtop.HasField("config_response"):
             self._result = msgtop.ota_cmd_response.ack.status
-        logger.console(self._tag + "on_response_ota_cmd <===")
 
     def __on_response_ota_checksum(self, client, userdata, msgtop):
         """ MsgOtaCmdCheckSumResponse """
@@ -567,7 +554,6 @@ class MqttComm(object):
         client.publish(MQTT_DEVICE_TOPIC_PREFIX + self._expected_device + MQTT_DEVICE_TOPIC_SUFFIX,
                        publish_msg.SerializeToString())
         # MqttDump.dump(publish_msg)
-        logger.console(self._tag + "on_response_ota_checksum <===")
 
     def __on_response_ota_result(self, client, userdata, msgtop):
         """ MsgOtaResult """
@@ -577,8 +563,6 @@ class MqttComm(object):
         #     return
         if msgtop.HasField("ota_result"):
             self._msgtop.ota_result.CopyFrom(msgtop.ota_result)
-        # MqttDump.dump(msgtop)
-        logger.console(self._tag + "on_response_ota_result <===")
 
     def __on_ota_upgrade_successed(self):
         if self._msgtop.ota_result.result == tbox_pb2.OTA_IN_PROCESS:
@@ -620,7 +604,6 @@ class MqttComm(object):
             if result > 0:
                 break
             time.sleep(1)
-        logger.console(self._tag + "on_request_ota_result <===")
         return unicode(True) if result == 1 else unicode(False)
 
     ################################################################################
@@ -633,7 +616,6 @@ class MqttComm(object):
         # publish
         self._mqttc.publish(MQTT_DEVICE_TOPIC_PREFIX + self._expected_device + MQTT_DEVICE_TOPIC_SUFFIX, publish_msg.SerializeToString())
         MqttDump.dump(publish_msg, logger.info)
-        logger.info(self._tag + "on_request_diagnosis <===")
         # wait_event
         self._event.wait(int(timeout))
         if not self._event.isSet() or not self._result:
@@ -650,7 +632,6 @@ class MqttComm(object):
         if msgtop.HasField("remote_diagnosis_response"):
             self._result = msgtop.diagnosis_response.ack.status
             self._event.set()
-        logger.console(self._tag + "on_response_diagnosis <===")
 
     ################################################################################
     def on_push_message(self, timeout):
@@ -662,13 +643,12 @@ class MqttComm(object):
         # publish
         self._mqttc.publish(MQTT_DEVICE_TOPIC_PREFIX + self._expected_device + MQTT_DEVICE_TOPIC_SUFFIX, publish_msg.SerializeToString())
         MqttDump.dump(publish_msg, logger.info)
-        logger.info(self._tag + "on_push_message <===")
 
     ################################################################################
     def on_request_tsp_data(self, item, timeout):
         """
         """
-        logger.info(self._tag + "on_request_can_data called")
+        logger.debug(self._tag + "on_request_can_data called")
         data_dict = {
             ################################################################################
             # mqtt server IP地址+端口号
@@ -801,6 +781,7 @@ class MqttComm(object):
             # 平均油耗
             'VEHICLE_AVERAGE_FUEL_CONSUMPTION_RESP': str(self._msgtop.vehicle_status.average_fuel_consumption),
         }
+        MqttDump.dump(self._msgtop, logging_print)
         return unicode(data_dict[item])
 
 

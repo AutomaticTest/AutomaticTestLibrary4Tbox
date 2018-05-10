@@ -37,7 +37,7 @@ from robot.api import logger
 class TBoxCore(Singleton):
     def __init__(self, device, server, channel, baudrate):
         self._tag = self.__class__.__name__ + ' '
-        logger.info(self._tag + "__init__ called")
+        logger.debug(self._tag + "__init__ called")
 
         self._expected_device = device
         self._mqttc = MqttComm(device, server)
@@ -47,7 +47,7 @@ class TBoxCore(Singleton):
         logger.info(self._tag + "__del__ called")
 
     def on_create(self):
-        logger.info(self._tag + "on_create called")
+        logger.debug(self._tag + "on_create called")
         self._mqttc.on_create()
         self._pcan.on_create()
 
@@ -114,19 +114,19 @@ class TBoxCore(Singleton):
     def on_request_can_config(self, item, data, timeout):
         """
         """
-        logger.info(self._tag + "on_request_can_config called")
+        logger.debug(self._tag + "on_request_can_config called")
         return self._pcan.on_request(item, data)
 
     def on_request_tsp_data(self, item, timeout):
         """
         """
-        logger.info(self._tag + "on_request_tsp_data called")
+        logger.debug(self._tag + "on_request_tsp_data called")
         return self._mqttc.on_request_tsp_data(item, timeout)
 
     def on_request_tsp_config(self, item, data, timeout):
         """
         """
-        logger.info(self._tag + "on_request_tsp_config called")
+        logger.debug(self._tag + "on_request_tsp_config called")
         return self._mqttc.on_request_config(item, data, timeout)
 
     def on_request_remote_diagnosis(self, timeout):
@@ -160,13 +160,13 @@ class TBoxCore(Singleton):
         try:
             if not status:
                 vdlog = re.findall('vdlog', output)[0]
-                logger.info(self._tag + "find " + vdlog + " in /data")
+                logger.info(self._tag + "vdlog is existed: True")
         except IndexError:
-            logger.info(self._tag + "Do not find vdlog!")
-            logger.info(self._tag + "Create vdlog now...")
+            logger.error(self._tag + "vdlog is existed: False")
+            logger.info(self._tag + "Creating vdlog file...")
             Utils.getstatusoutput('adb shell touch /data/vdlog')
             if not status:
-                logger.info(self._tag + "Create Success")
+                logger.info(self._tag + "Succeed to create vdlog file")
 
 
 class TBoxCoreError(Exception):

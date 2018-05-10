@@ -89,7 +89,7 @@ class CanComm(object):
 
     def __init__(self, channel, baudrate):
         self._tag = self.__class__.__name__ + ' '
-        logger.info(self._tag + "__init__ called")
+        logger.debug(self._tag + "__init__ called")
         # PCAN Setting
         self._pcanbasic = PCANBasic()
         self._channel = CanComm.CHANNELS[channel]
@@ -216,7 +216,7 @@ class CanComm(object):
         }
 
     def on_create(self):
-        logger.info(self._tag + "on_create called")
+        logger.debug(self._tag + "on_create called")
         self._tbox011 = Tbox011()
         self._sas300 = Sas300()
         self._ems302 = Ems302()
@@ -273,9 +273,8 @@ class CanComm(object):
             return sts_return[1]
 
     def on_request(self, item, data):
-        logger.info(self._tag + "==> on_request")
+        logger.debug(self._tag + ": on_request ")
         self._can_matrix_dict[item](data)
-        logger.info(self._tag + "on_request <===")
         return True
 
     # def process_message(self, msg):

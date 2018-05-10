@@ -31,7 +31,7 @@ from TBoxCore import TBoxCore
 class TBoxKeyword(object):
     def __init__(self):
         self._tag = self.__class__.__name__ + ': '
-        logger.console(self._tag + "__init__ called")
+        logger.debug(self._tag + "__init__ called")
         self._tbox = None
 
     def initialize(self, device, server, channel, baudrate):
@@ -139,7 +139,7 @@ class TBoxKeyword(object):
 
         :return: True if succeed to configuration or not
         """
-        logger.info(self._tag + "Request tsp config called")
+        logger.info(self._tag + "Request tsp config(" + item + ")")
         return self._tbox.on_request_tsp_config(item, data, timeout)
 
     def request_can_config(self, item, data, timeout=10):
@@ -153,7 +153,7 @@ class TBoxKeyword(object):
 
         :return: True if succeed to configuration or not
         """
-        logger.info(self._tag + "Request CAN config called")
+        logger.info(self._tag + "Request CAN config(" + item + ")")
         return self._tbox.on_request_can_config(item, data, timeout)
 
     def request_tsp_data(self, item, timeout=10):
@@ -165,7 +165,7 @@ class TBoxKeyword(object):
 
         :return: Specified data
         """
-        logger.info(self._tag + "Request tsp data called")
+        logger.info(self._tag + "Request tsp data(" + item + ")")
         return unicode(self._tbox.on_request_tsp_data(item, timeout))
 
 
