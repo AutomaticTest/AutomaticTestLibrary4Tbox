@@ -389,8 +389,8 @@ class MqttDump(object):
     @staticmethod
     def __show_seat_parameter(seat_param):
         msg = "{" \
-              + "master:" + MqttDump.__enum_seat_level(seat_param.master) \
-              + ", slave:" + MqttDump.__enum_seat_level(seat_param.slave) \
+              + "main:" + MqttDump.__enum_seat_level(seat_param.main) \
+              + ", subordinate:" + MqttDump.__enum_seat_level(seat_param.subordinate) \
               + "}"
         return msg
 
